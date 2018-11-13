@@ -45,5 +45,7 @@ namespace ServiceLayer
             _userRepository.UpdateUser(user);
         }
 
+        //add more methods below
+
     }
 }
