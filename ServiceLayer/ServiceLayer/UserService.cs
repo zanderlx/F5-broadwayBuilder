@@ -37,5 +37,13 @@ namespace ServiceLayer
             _userRepository.UpdateUser(user);
         }
 
+        public void UpdateCity(string username, string city)
+        {
+            var user = _userRepository.GetUser(username);
+            user.City = city;
+
+            _userRepository.UpdateUser(user);
+        }
+
     }
 }
