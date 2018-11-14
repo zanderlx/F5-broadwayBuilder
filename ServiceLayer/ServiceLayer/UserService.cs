@@ -47,5 +47,16 @@ namespace ServiceLayer
 
         //add more methods below
 
+        // Lex
+        public void PurchaseTicket(User user)
+        {
+            _userRepository.PurchaseShow(user);
+        }
+
+        // Lex
+        public void LeaveReview(string username)
+        {
+            _userRepository.MakeReview(username);
+        }
     }
 }

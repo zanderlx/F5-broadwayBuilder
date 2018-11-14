@@ -62,5 +62,20 @@ namespace ServiceLayer
         {
             _users.Remove(username);
         }
+
+        // Add more methods below
+
+        // Lex
+        public void PurchaseShow(User user)
+        {
+            // TODO: Purchase ticket logic
+        }
+
+        // Lex
+        public void MakeReview(string username)
+        {
+            // TODO: Make review logic
+        }
+
     }
 }
