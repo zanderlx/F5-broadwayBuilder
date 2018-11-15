@@ -53,14 +53,20 @@ namespace ServiceLayer
             _users.Add(user.Username, user);
         }
 
+        /*
+         TODO : Restrict user from updating email
+         */
         public void UpdateUser(User user)
         {
             if (!_users.ContainsKey(user.Username))
             {
                 throw new Exception("User not found in database.");
-            };
-
-            _users.Add(user.Username, user);
+            }
+            else
+            {
+                _users[user.Username] = user;
+            }
+            //_users.Add(user.Username, user);
         }
 
         public void DeleteUser(string username)

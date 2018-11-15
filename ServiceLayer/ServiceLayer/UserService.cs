@@ -25,6 +25,8 @@ namespace ServiceLayer
 
         public void CreateUser(User user)
         {
+            string name = user.Username.ToLower();
+            user.Username = name;
             _userRepository.CreateUser(user);
 
         }
