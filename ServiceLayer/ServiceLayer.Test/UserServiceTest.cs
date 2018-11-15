@@ -26,7 +26,7 @@ namespace ServiceLayer.Test
 
             //Asert
             var userFromService = userService.GetUser(username);
-            //Assert.AreEqual(username, userFromService.Username);
+            Assert.AreEqual(username, userFromService.Username);
             Assert.IsNotNull(userFromService);
         }
     }
