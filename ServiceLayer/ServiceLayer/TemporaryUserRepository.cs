@@ -9,11 +9,16 @@ namespace ServiceLayer
 
     /* This TemporaryUserRepo class was created for TESTING/DEMO PURPOSES ONLY
      * The Repostiory Classes are where you do the Create Read Update Delete (CRUD) ops on the database.*/
-    class TemporaryUserRepository
+    public class TemporaryUserRepository
     {
         //used to store created users FOR TESTING/DEMO PURPOSES ONLY
         //Its a mock DB
         private Dictionary<string, User> _users { get; set;}
+
+        public TemporaryUserRepository()
+        {
+            _users = new Dictionary<string, User>();
+        }
 
         //This method is to accomplish the read in the crud ops
         public User GetUser(string username)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-    class UserService
+    public class UserService
     {
         /*private and readonly gives the benefit of not being able to accidentally change the field from another part of that class after it is initialized.
          * readonly limits the field to the only thing that can set it is the constructor...
