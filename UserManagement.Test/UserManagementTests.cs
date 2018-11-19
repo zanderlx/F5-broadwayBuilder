@@ -33,7 +33,7 @@ namespace UserManagement.Test
                 .Setup(m => m.CreateUser(user))
                 .Returns(true);
 
-            var service = new UserService(repository.Object);
+            var service = new Authorization(repository.Object);
 
             // Act
             actual = service.CreateUser(user);
@@ -70,7 +70,7 @@ namespace UserManagement.Test
                 .Setup(m => m.CreateUser(user))
                 .Returns(true);
 
-            var service = new UserService(repository.Object);
+            var service = new Authorization(repository.Object);
 
             // Act
             // Create user the first time

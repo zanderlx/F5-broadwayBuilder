@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Authorization\Authorization.csproj">
+      <Project>{476c50be-dd69-4968-8325-3778766416e9}</Project>
+      <Name>Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserManagement\UserManagement.csproj">
       <Project>{ec0052a4-a91a-427b-a272-a6f6c3a0b7f2}</Project>
       <Name>UserManagement</Name>

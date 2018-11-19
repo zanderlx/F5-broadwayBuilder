@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace UserManagement
 {
-    public class UserService
+    public class Authorization
     {
         private IUserRepository _repository;
 
         // Constructor
-        public UserService(IUserRepository repository)
+        public Authorization(IUserRepository repository)
         {
             _repository = repository;
         }
