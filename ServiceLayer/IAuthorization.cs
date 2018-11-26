@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-    public interface IAuthorizable
+    public interface IAuthorization
     {
         string CheckUserRole(User user);
+
     }
 }

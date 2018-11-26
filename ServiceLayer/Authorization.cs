@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-    public class Authorization
+    public class Authorization : IAuthorization
     {
-        private IAuthorizable _authorization;
-
-        public Authorization(IAuthorizable authorization)
-        {
-            _authorization = authorization;
-        }
-
         // Checks user's role
         public string CheckUserRole(User user)
         {
@@ -25,5 +18,12 @@ namespace ServiceLayer
             else
                 return "GENERAL";
         }
+
+        public string HasPermission(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

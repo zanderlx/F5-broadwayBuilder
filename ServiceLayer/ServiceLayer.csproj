@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization.cs" />
-    <Compile Include="IAuthorizable.cs" />
+    <Compile Include="IAuthorization.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
