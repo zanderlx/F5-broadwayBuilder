@@ -44,25 +44,16 @@ namespace ServiceLayer
             return _repository.DeleteUser(username);
         }
 
-        // TODO: Create more methods that a user uses
-        // OLD METHODS - COMMENTED BECAUSE WANTED TO JUST HAVE CRUD OPS
-        // Uncomment these if you want to use them
-        /*
-        public void UpdatePassword(string username, string password)
+        // Admin Permission - Enable Account
+        public bool EnableAccount(User account)
         {
-            var user = _userRepository.GetUser(username);
-            user.Password = password;
-
-            _userRepository.UpdateUser(user);
+            return true;
         }
 
-        public void UpdateCity(string username, string city)
+        // Admin Permission - Disable Account
+        public bool DisableAccount(User account)
         {
-            var user = _userRepository.GetUser(username);
-            user.City = city;
-
-            _userRepository.UpdateUser(user);
+            return true; 
         }
-        */
     }
 }
