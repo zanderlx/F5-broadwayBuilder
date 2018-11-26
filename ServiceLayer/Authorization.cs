@@ -24,13 +24,6 @@ namespace ServiceLayer
             throw new NotImplementedException();
         }
 
-        //emulating a db
-        private Dictionary<Guid, User> _rolePermissions { get; set; }
-
-        public Authorization()
-        {
-            _rolePermissions = new Dictionary<RoleType, ;
-        }
 
     }
 }
