@@ -24,16 +24,7 @@ namespace ServiceLayer.Test
             var expected = "GENERAL";
             var actual = "";
 
-            // Create a fake Authorizable object using Moq
-            var authorization = new Mock<IAuthorizable>();
-
-            // Set up the auth in order to return exactly
-            // what we expect
-            authorization
-                .Setup(m => m.CheckUserRole(user))
-                .Returns("GENERAL");
-
-            var service = new Authorization(authorization.Object);
+            var service = new Authorization();
 
             // Act
             // Get actual user role
@@ -60,16 +51,8 @@ namespace ServiceLayer.Test
             var expected = "THEATRE_ADMIN";
             var actual = "";
 
-            // Create a fake Authorizable object using Moq
-            var authorization = new Mock<IAuthorizable>();
 
-            // Set up the auth in order to return exactly
-            // what we expect
-            authorization
-                .Setup(m => m.CheckUserRole(user))
-                .Returns("GENERAL");
-
-            var service = new Authorization(authorization.Object);
+            var service = new Authorization();
 
             // Act
             // Get actual user role
