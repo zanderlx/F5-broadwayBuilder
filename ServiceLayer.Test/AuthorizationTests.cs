@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using UserManagement;
 
-namespace Authorization.Test
+namespace ServiceLayer.Test
 {
     [TestClass]
     public class AuthorizationTests

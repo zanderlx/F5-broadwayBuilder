@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C3AF94E-7E5F-4EC8-86F6-658A47DFD9C9}</ProjectGuid>
+    <ProjectGuid>{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserManagement.Test</RootNamespace>
-    <AssemblyName>UserManagement.Test</AssemblyName>
+    <RootNamespace>ServiceLayer.Test</RootNamespace>
+    <AssemblyName>ServiceLayer.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -62,20 +62,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserManagementTests.cs" />
+    <Compile Include="AuthorizationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagementTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Authorization\Authorization.csproj">
-      <Project>{476c50be-dd69-4968-8325-3778766416e9}</Project>
-      <Name>Authorization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserManagement\UserManagement.csproj">
-      <Project>{ec0052a4-a91a-427b-a272-a6f6c3a0b7f2}</Project>
-      <Name>UserManagement</Name>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{606cac9c-7ea8-472e-a26d-719b64e48f5a}</Project>
+      <Name>ServiceLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

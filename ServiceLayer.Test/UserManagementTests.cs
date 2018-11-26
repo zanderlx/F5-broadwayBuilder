@@ -2,7 +2,7 @@
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UserManagement.Test
+namespace ServiceLayer.Test
 {
     [TestClass]
     public class UserManagementTests
@@ -33,7 +33,7 @@ namespace UserManagement.Test
                 .Setup(m => m.CreateUser(user))
                 .Returns(true);
 
-            var service = new Authorization(repository.Object);
+            var service = new UserService(repository.Object);
 
             // Act
             actual = service.CreateUser(user);
@@ -70,7 +70,7 @@ namespace UserManagement.Test
                 .Setup(m => m.CreateUser(user))
                 .Returns(true);
 
-            var service = new Authorization(repository.Object);
+            var service = new UserService(repository.Object);
 
             // Act
             // Create user the first time

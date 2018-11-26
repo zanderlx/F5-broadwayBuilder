@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserManagement
+namespace ServiceLayer
 {
-    public class Authorization
+    public class UserService
     {
         private IUserRepository _repository;
 
         // Constructor
-        public Authorization(IUserRepository repository)
+        public UserService(IUserRepository repository)
         {
             _repository = repository;
         }
