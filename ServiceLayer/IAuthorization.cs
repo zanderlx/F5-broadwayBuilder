@@ -8,7 +8,7 @@ namespace ServiceLayer
 {
     public interface IAuthorization
     {
-        string CheckUserRole(User user);
+        
 
     }
 }

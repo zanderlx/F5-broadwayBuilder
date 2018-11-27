@@ -9,20 +9,22 @@ namespace ServiceLayer
     public class Authorization : IAuthorization
     {
         //Key = RoleType(General,Admin,SysAdmin) Value = List of permissions for that roletype
-        Dictionary<RoleType,List<Permission>> permissions;
+        private Dictionary<RoleType,List<Permission>> permissions;
         public Authorization(Dictionary<RoleType, List<Permission>> authorizedPermissions)
         {
             permissions = authorizedPermissions;
         }
-        // Checks user's role
-        public string CheckUserRole(User user)
+
+        public Dictionary<RoleType, List<Permission>> Permissions
         {
-            if (user.Role.Equals(RoleType.SYS_ADMIN))
-                return "SYS_ADMIN";
-            else if (user.Role.Equals(RoleType.THEATRE_ADMIN))
-                return "THEATRE_ADMIN";
-            else
-                return "GENERAL";
+            get
+            {
+                return permissions;
+            }
+            set
+            {
+                permissions = value;
+            }
         }
 
         /// <summary>
