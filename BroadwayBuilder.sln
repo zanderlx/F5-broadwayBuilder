@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28306.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{606CAC9C-7EA8-472E-A26D-719B64E48F5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer.Test", "ServiceLayer.Test\ServiceLayer.Test.csproj", "{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{606CAC9C-7EA8-472E-A26D-719B64E48F5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606CAC9C-7EA8-472E-A26D-719B64E48F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606CAC9C-7EA8-472E-A26D-719B64E48F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606CAC9C-7EA8-472E-A26D-719B64E48F5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6714AA-3A7B-43B0-AD5B-98CE49912F29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5DCC316E-2F8C-4191-80FB-926DB061F25B}
+	EndGlobalSection
+EndGlobal
