@@ -1,6 +1,8 @@
 ﻿using System;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ServiceLayer.Enums;
+using ServiceLayer.Models;
 
 namespace ServiceLayer.Test
 {

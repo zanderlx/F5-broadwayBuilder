@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ServiceLayer.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer
+namespace ServiceLayer.Models
 {
     public class User
     {
@@ -30,10 +31,5 @@ namespace ServiceLayer
         public RoleType Role { get; set; }
     }
 
-    public enum RoleType
-    {
-        GENERAL,
-        THEATRE_ADMIN,
-        SYS_ADMIN
-    }
+
 }
