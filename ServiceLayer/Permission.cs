@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-    public interface IAuthorization
+    public enum Permission
     {
-        
-
+        Create,
+        Read,
+        Delete,
+        Update
     }
 }
