@@ -19,7 +19,7 @@ namespace ServiceLayer
                 return "GENERAL";
         }
 
-        public string HasPermission(User user)
+        public bool HasPermission(User user)
         {
             throw new NotImplementedException();
         }
