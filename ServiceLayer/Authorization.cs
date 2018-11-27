@@ -8,6 +8,12 @@ namespace ServiceLayer
 {
     public class Authorization : IAuthorization
     {
+        //Key = RoleType(General,Admin,SysAdmin) Value = List of permissions for that roletype
+        Dictionary<RoleType,List<Permission>> permissions;
+        public Authorization(Dictionary<RoleType, List<Permission>> authorizedPermissions)
+        {
+            permissions = authorizedPermissions;
+        }
         // Checks user's role
         public string CheckUserRole(User user)
         {
@@ -19,9 +25,21 @@ namespace ServiceLayer
                 return "GENERAL";
         }
 
-        public bool HasPermission(User user)
+        /// <summary>
+        /// Checks if a user is authorized to perform a action
+        /// </summary>
+        /// <param name="user">User that must be checked if they are authorized</param>
+        /// <param name="CheckIfAuthorized">check if user has this permission</param>
+        /// <returns>true if user has permission, false otherwise</returns>
+        public bool HasPermission(User user, Permission CheckIfAuthorized)
         {
-            throw new NotImplementedException();
+            if (permissions.ContainsKey(user.Role))
+            {
+                List<Permission> RolePermissions = permissions[user.Role];
+                if (RolePermissions.Contains(CheckIfAuthorized))
+                    return true;
+            }
+            return false;
         }
 
 
