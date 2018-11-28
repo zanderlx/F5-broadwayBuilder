@@ -38,9 +38,9 @@ namespace ServiceLayer
         }
 
         // Update User
-        public User UpdateUser(string username)
+        public User UpdateUser(User user)
         {
-            return _repository.UpdateUser(username);
+            return _repository.UpdateUser(user);
         }
 
         // Delete User
@@ -50,13 +50,13 @@ namespace ServiceLayer
         }
 
         // Admin Permission - Enable Account
-        public bool EnableAccount(User account)
+        public bool EnableAccount(string username)
         {
             return true;
         }
 
         // Admin Permission - Disable Account
-        public bool DisableAccount(User account)
+        public bool DisableAccount(string username)
         {
             return true; 
         }
