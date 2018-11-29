@@ -36,7 +36,7 @@ namespace ServiceLayer
 
         // Update User
 
-        //Suggestion - make these there separate methods. UpdatePassword().. UpdateCity()...etc
+        //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
         public User UpdateUser(User user) 
         {
             var curUser = _repository.GetUser(user.Username);
