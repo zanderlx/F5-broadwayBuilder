@@ -85,31 +85,7 @@ namespace ServiceLayer.Test
             Assert.AreNotEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void UserManagement_CheckNullUser_Pass()
-        {
-            // Arrange
-            User user = null;
-            var expected = false;
-            var actual = false;
-
-            // Create a fake IUserRepository object using Moq
-            var repository = new Mock<IUserRepository>();
-
-            // Set up the repo in order to return exactly
-            // what we expect
-            repository
-                .Setup(m => m.CreateUser(user))
-                .Returns(false);
-
-            var service = new UserService(repository.Object);
-
-            // Act
-            actual = service.CreateUser(user);
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+       
 
         // TODO: Create more test cases for UserManagement
         // TODO: Exception thrown from repository

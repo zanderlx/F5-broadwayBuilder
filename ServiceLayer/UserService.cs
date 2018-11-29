@@ -22,13 +22,12 @@ namespace ServiceLayer
         {
             // Convert username (email) to all lowercase
             // This is to prevent same email regardless of letter case
-            if (user != null)
-            {
+            //User will always be valid when this code is called upon
+           
                 string name = user.Username.ToLower();
                 user.Username = name;
                 return _repository.CreateUser(user);
-            }
-            return false;
+           
         }
 
         // Read/Get User
@@ -38,7 +37,7 @@ namespace ServiceLayer
         }
 
         // Update User
-        public User UpdateUser(User user)
+        public User UpdateUser(User user, string password, string city, string stateProvince, string country) 
         {
             return _repository.UpdateUser(user);
         }
