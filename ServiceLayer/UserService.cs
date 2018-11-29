@@ -22,9 +22,13 @@ namespace ServiceLayer
         {
             // Convert username (email) to all lowercase
             // This is to prevent same email regardless of letter case
-            string name = user.Username.ToLower();
-            user.Username = name;
-            return _repository.CreateUser(user);
+            if (user != null)
+            {
+                string name = user.Username.ToLower();
+                user.Username = name;
+                return _repository.CreateUser(user);
+            }
+            return false;
         }
 
         // Read/Get User
@@ -34,9 +38,9 @@ namespace ServiceLayer
         }
 
         // Update User
-        public User UpdateUser(string username)
+        public User UpdateUser(User user)
         {
-            return _repository.UpdateUser(username);
+            return _repository.UpdateUser(user);
         }
 
         // Delete User
@@ -45,25 +49,16 @@ namespace ServiceLayer
             return _repository.DeleteUser(username);
         }
 
-        // TODO: Create more methods that a user uses
-        // OLD METHODS - COMMENTED BECAUSE WANTED TO JUST HAVE CRUD OPS
-        // Uncomment these if you want to use them
-        /*
-        public void UpdatePassword(string username, string password)
+        // Admin Permission - Enable Account
+        public bool EnableAccount(string username)
         {
-            var user = _userRepository.GetUser(username);
-            user.Password = password;
-
-            _userRepository.UpdateUser(user);
+            return true;
         }
 
-        public void UpdateCity(string username, string city)
+        // Admin Permission - Disable Account
+        public bool DisableAccount(string username)
         {
-            var user = _userRepository.GetUser(username);
-            user.City = city;
-
-            _userRepository.UpdateUser(user);
+            return true; 
         }
-        */
     }
 }
