@@ -12,7 +12,7 @@ namespace ServiceLayer.Models
         // Constructor
         public User(string email, string password, DateTime dob, string city, string stateProvince, string country, RoleType role)
         {
-            Username = email;
+            Username = email.ToLower();
             Password = password;
             DateOfBirth = dob;
             City = city;
@@ -22,7 +22,7 @@ namespace ServiceLayer.Models
         }
 
         // Defining Auto-Properties
-        public string Username { get; set; }
+        public string Username { get; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string City { get; set; }

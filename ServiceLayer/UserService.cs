@@ -24,9 +24,7 @@ namespace ServiceLayer
             // This is to prevent same email regardless of letter case
             //User will always be valid when this code is called upon
            
-                string name = user.Username.ToLower();
-                user.Username = name;
-                return _repository.CreateUser(user);
+            return _repository.CreateUser(user);
            
         }
 
@@ -37,8 +35,18 @@ namespace ServiceLayer
         }
 
         // Update User
-        public User UpdateUser(User user, string password, string city, string stateProvince, string country) 
+
+        //Suggestion - make these there separate methods. UpdatePassword().. UpdateCity()...etc
+        public User UpdateUser(User user) 
         {
+            var curUser = _repository.GetUser(user.Username);
+
+            curUser.Role = user.Role; //Make sure it won't run unless the permission is valid
+            curUser.StateProvince = user.Password;
+            curUser.StateProvince = user.StateProvince;
+            curUser.StateProvince = user.Country;
+            curUser.StateProvince = user.City;
+
             return _repository.UpdateUser(user);
         }
 
