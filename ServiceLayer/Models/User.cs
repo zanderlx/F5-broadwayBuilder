@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Enums;
+﻿using DataAccessLayer;
+using DataAccessLayer.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,24 @@ namespace ServiceLayer.Models
         // Constructor
         public User(string email, string password, DateTime dob, string city, string stateProvince, string country, RoleType role)
         {
-            Username = email.ToLower();
+            Username = email.ToLower(); 
             Password = password;
             DateOfBirth = dob;
             City = city;
             StateProvince = stateProvince;
             Country = country;
             Role = role;
+        }
+
+        public User(UserEntity userEntity)
+        {
+            Username = userEntity.Username;
+            Password = userEntity.Password;
+            DateOfBirth = userEntity.DateOfBirth;
+            City = userEntity.City;
+            StateProvince = userEntity.StateProvince;
+            Country = userEntity.Country;
+            Role = userEntity.Role;
         }
 
         // Defining Auto-Properties
