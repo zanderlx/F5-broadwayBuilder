@@ -1,4 +1,4 @@
-﻿using ServiceLayer.Enums;
+﻿using DataAccessLayer.Enums;
 using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Models;
+﻿using DataAccessLayer;
+using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ServiceLayer
 {
     public class UserService
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repository;
 
         // Constructor
         public UserService(IUserRepository repository)
@@ -18,20 +19,31 @@ namespace ServiceLayer
         }
 
         // Create User
+        //User will always be valid due to data validation
         public bool CreateUser(User user)
         {
-            // Convert username (email) to all lowercase
-            // This is to prevent same email regardless of letter case
-            //User will always be valid when this code is called upon
-           
-            return _repository.CreateUser(user);
+            var userEntity = new UserEntity()
+            {
+                Username = user.Username,
+                City = user.City,
+                Country = user.Country,
+                DateOfBirth = user.DateOfBirth,
+                Password = user.Password,
+                Role = user.Role,
+                StateProvince = user.StateProvince
+            };
+
+            return _repository.CreateUser(userEntity);
            
         }
 
         // Read/Get User
         public User GetUser(string username)
         {
-            return _repository.GetUser(username);
+            var userEntity = _repository.GetUser(username);
+            var userReturned = new User(userEntity);
+
+            return userReturned;
         }
 
         // Update User
@@ -41,13 +53,14 @@ namespace ServiceLayer
         {
             var curUser = _repository.GetUser(user.Username);
 
-            curUser.Role = user.Role; //Make sure it won't run unless the permission is valid
+            curUser.Role = user.Role;
             curUser.StateProvince = user.Password;
             curUser.StateProvince = user.StateProvince;
             curUser.StateProvince = user.Country;
             curUser.StateProvince = user.City;
 
-            return _repository.UpdateUser(user);
+            return new User(curUser);
+       
         }
 
         // Delete User
