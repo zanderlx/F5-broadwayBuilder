@@ -34,17 +34,45 @@ namespace DataAccessLayer
 
         public bool DeleteUser(string username)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserEntity UserToDelete = _context.Users.Find(username);
+                if(UserToDelete != null)
+                {
+                    _context.Users.Remove(UserToDelete);
+                    _context.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
         }
 
         public UserEntity GetUser(string username)
         {
-            throw new NotImplementedException();
+            return _context.Users.Find(username);
         }
 
-        public UserEntity UpdateUser(UserEntity user)
+        public bool UpdateUser(UserEntity user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (user != null)
+                {
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+            
         }
     }
 }
