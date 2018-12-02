@@ -54,13 +54,16 @@ namespace ServiceLayer
             var curUser = _repository.GetUser(user.Username);
 
             curUser.Role = user.Role;
-            curUser.StateProvince = user.Password;
+            curUser.Password = user.Password;
             curUser.StateProvince = user.StateProvince;
-            curUser.StateProvince = user.Country;
-            curUser.StateProvince = user.City;
+            curUser.Country = user.Country;
+            curUser.City = user.City;
+            curUser.DateOfBirth = user.DateOfBirth;
 
-            return new User(curUser);
-       
+            if(curUser!=null && _repository.UpdateUser(curUser))
+                return new User(curUser);
+            return null;
+
         }
 
         // Delete User

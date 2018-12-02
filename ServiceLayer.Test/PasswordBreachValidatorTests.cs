@@ -56,6 +56,67 @@ namespace ServiceLayer.Test
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GetPrefixOfHash_Pass()
+        {
+            // Arrange
+            string hash = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8".ToUpper();
+
+            // The expected SHA-1 hash for the plaintext
+            var expected = "5BAA6";
+            var actual = "";
+
+            // Act
+            actual = PasswordBreachValidator.GetHashPrefix(hash);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetHashSuffix_Pass()
+        {
+            // Arrange
+            string hash = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8".ToUpper();
+
+            // The expected SHA-1 hash for the plaintext
+            var expected = "1e4c9b93f3f0682250b6cf8331b7ee68fd8".ToUpper();
+            var actual = "";
+
+            // Act
+            actual = PasswordBreachValidator.GetHashSuffix(hash);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void BreachFrequencyRange_NumberLessThanRange_Pass()
+        {
+            //Arrange 
+            int secure = 1;
+
+            //Act
+            var expected = true;
+            var actual = PasswordBreachValidator.ValidateBreachFrequencyRange(secure);
+
+            //Assert 
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void BreachFrequencyRange_NumberGreaterThanRange_Pass()
+        {
+            //Arrange 
+            int secure = 3;
+
+            //Act
+            var expected = false;
+            var actual = PasswordBreachValidator.ValidateBreachFrequencyRange(secure);
+
+            //Assert 
+            Assert.AreEqual(expected, actual);
+        }
 
     }
 }
