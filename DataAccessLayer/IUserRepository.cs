@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         bool CreateUser(UserEntity user);
         UserEntity GetUser(string username);
-        UserEntity UpdateUser(UserEntity user);
+        bool UpdateUser(UserEntity user);
         bool DeleteUser(string username);
 
     }

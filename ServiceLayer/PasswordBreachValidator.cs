@@ -38,7 +38,7 @@ namespace ServiceLayer
             // Obtain the hashed plaintext excluding the first 5 chars
             string HashSuffix = GetHashSuffix(SHA1HashedPlaintext);
             // The resulted value from checking the API if the hashed plaintext exists
-            string ResultHash = "Lorem ipsum";
+            string ResultHash = null;
 
             try
             {
@@ -53,7 +53,7 @@ namespace ServiceLayer
                 int startingIndex = ResponseAsString.IndexOf(HashSuffix);
 
                 // If the hash suffix is not found in the API response, the password is secure... return -1
-                if (startingIndex == -1) return "-1";
+                if (startingIndex == -1) return ResultHash;
 
                 // If the target hash suffix is found, get its location via substring
                 string TargetHash = ResponseAsString.Substring(startingIndex, ResponseAsString.Length - startingIndex);
@@ -96,6 +96,9 @@ namespace ServiceLayer
         {
             // Retrieves the full API response
             string FullAPIResponse = ConsumePasswordAPI(plaintext);
+            //Check if password was found in the api
+            if (String.IsNullOrEmpty(FullAPIResponse))
+                return -1;
             // The starting index we want... start at ":"
             int start = FullAPIResponse.IndexOf(":") + 1;
             // The ending index we want to retrieve the remainder of the string

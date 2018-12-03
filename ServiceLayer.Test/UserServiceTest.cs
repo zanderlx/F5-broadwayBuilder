@@ -73,14 +73,14 @@ namespace ServiceLayer.Test
         }
 
         [TestMethod]
-        public void UpdateUser_Pass()
+        public void UpdateUser_Pass()//NEEDS TO BE UPDATED
         {
             //Arrange
             var context = new BroadwayBuilderContext();
             var repository = new UserRepository(context);
             var userService = new UserService(repository);
 
-            var username = "fakejakejohnson@gmail.com";
+            var username = "abixcastro@gmail.com";
             var password = "h@rDt0GeU$$P@$$word!!!";
             var dob = new DateTime(1992, 12, 7);
             var city = "Irvine";
@@ -93,11 +93,73 @@ namespace ServiceLayer.Test
           
 
             var expected = user;
-            var actual = 0;
+            //var actual = null;
+
+            //Act
+            var actual = userService.UpdateUser(user);
+
+            //Assert
+            Assert.AreEqual(expected.City, actual.City);
 
         }
 
-       
+        [TestMethod]
+        public void DeleteUser_Pass()
+        {
+            // Arrange
+            var context = new BroadwayBuilderContext();
+            var repository = new UserRepository(context);
+            var userService = new UserService(repository);
+            
+            var username = "abixcastro@gmail.com";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
+            var stateProvince = "California";
+            var country = "United States";
+            var role = RoleType.GENERAL;
+
+            var user = new User(username, password, dob, city, stateProvince, country, role);
+
+            var expected = true;
+            var actual = false;
+
+            //Act
+            actual = userService.DeleteUser(user.Username);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DeleteUserAgain_Pass()
+        {
+            // Arrange
+            var context = new BroadwayBuilderContext();
+            var repository = new UserRepository(context);
+            var userService = new UserService(repository);
+
+            var username = "abixcastro@gmail.com";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
+            var stateProvince = "California";
+            var country = "United States";
+            var role = RoleType.GENERAL;
+
+            var user = new User(username, password, dob, city, stateProvince, country, role);
+
+            var expected = false;
+            var actual = false;
+
+            //Act
+            actual = userService.DeleteUser(user.Username);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+
 
         // TODO: Create more test cases for UserManagement
         // TODO: Exception thrown from repository

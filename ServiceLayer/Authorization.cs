@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Enums;
+using ServiceLayer.Enums;
 using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
