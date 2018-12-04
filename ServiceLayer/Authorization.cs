@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Enums;
+﻿using DataAccessLayer.Enums;
+using ServiceLayer.Enums;
 using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,18 @@ namespace ServiceLayer
 {
     public class Authorization : IAuthorization
     {
-        //Key = RoleType(General,Admin,SysAdmin) Value = List of permissions for that roletype
-        private Dictionary<RoleType,List<Permission>> permissions;
-        public Authorization(Dictionary<RoleType, List<Permission>> authorizedPermissions)
+        //DbContext would be declared
+        List<Permission> permissions;//This stays
+        public Authorization(List<Permission> authorizedPermissions)//Would pass in DbContext instead of List if we were to use DB
         {
-            permissions = authorizedPermissions;
+            //Initialize the DbContext
+            permissions = authorizedPermissions;//call the DbContext to get the permissions and store them into the List
         }
 
-        public Dictionary<RoleType, List<Permission>> Permissions
+        /// <summary>
+        /// getter and setter for List of Permissions
+        /// </summary>
+        public List<Permission> Permissions
         {
             get
             {
@@ -38,11 +43,9 @@ namespace ServiceLayer
         /// <returns>true if user has permission, false otherwise</returns>
         public bool HasPermission(User user, Permission CheckIfAuthorized)
         {
-            if (permissions.ContainsKey(user.Role))
+            if (permissions.Contains(CheckIfAuthorized))
             {
-                List<Permission> RolePermissions = permissions[user.Role];
-                if (RolePermissions.Contains(CheckIfAuthorized))
-                    return true;
+                return true;
             }
             return false;
         }

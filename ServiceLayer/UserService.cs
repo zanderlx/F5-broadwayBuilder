@@ -1,4 +1,5 @@
-﻿using ServiceLayer.Models;
+﻿using DataAccessLayer;
+using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ServiceLayer
 {
     public class UserService
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repository;
 
         // Constructor
         public UserService(IUserRepository repository)
@@ -18,29 +19,51 @@ namespace ServiceLayer
         }
 
         // Create User
+        //User will always be valid due to data validation
         public bool CreateUser(User user)
         {
-            // Convert username (email) to all lowercase
-            // This is to prevent same email regardless of letter case
-            if (user != null)
+            var userEntity = new UserEntity()
             {
-                string name = user.Username.ToLower();
-                user.Username = name;
-                return _repository.CreateUser(user);
-            }
-            return false;
+                Username = user.Username,
+                City = user.City,
+                Country = user.Country,
+                DateOfBirth = user.DateOfBirth,
+                Password = user.Password,
+                Role = user.Role,
+                StateProvince = user.StateProvince
+            };
+
+            return _repository.CreateUser(userEntity);
+           
         }
 
         // Read/Get User
         public User GetUser(string username)
         {
-            return _repository.GetUser(username);
+            var userEntity = _repository.GetUser(username);
+            var userReturned = new User(userEntity);
+
+            return userReturned;
         }
 
         // Update User
-        public User UpdateUser(string username)
+
+        //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
+        public User UpdateUser(User user) 
         {
-            return _repository.UpdateUser(username);
+            var curUser = _repository.GetUser(user.Username);
+
+            curUser.Role = user.Role;
+            curUser.Password = user.Password;
+            curUser.StateProvince = user.StateProvince;
+            curUser.Country = user.Country;
+            curUser.City = user.City;
+            curUser.DateOfBirth = user.DateOfBirth;
+
+            if(curUser!=null && _repository.UpdateUser(curUser))
+                return new User(curUser);
+            return null;
+
         }
 
         // Delete User
@@ -50,13 +73,13 @@ namespace ServiceLayer
         }
 
         // Admin Permission - Enable Account
-        public bool EnableAccount(User account)
+        public bool EnableAccount(string username)
         {
             return true;
         }
 
         // Admin Permission - Disable Account
-        public bool DisableAccount(User account)
+        public bool DisableAccount(string username)
         {
             return true; 
         }
