@@ -16,6 +16,6 @@ namespace DataAccessLayer
 
         //Creating property on db context
         //Allows to access table in db
-        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

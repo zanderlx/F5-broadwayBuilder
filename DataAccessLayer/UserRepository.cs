@@ -17,7 +17,7 @@ namespace DataAccessLayer
             this._context = context;
         }
 
-        public bool CreateUser(UserEntity user)
+        public bool CreateUser(User user)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace DataAccessLayer
         {
             try
             {
-                UserEntity UserToDelete = _context.Users.Find(username);
+                User UserToDelete = _context.Users.Find(username);
                 if(UserToDelete != null)
                 {
                     _context.Users.Remove(UserToDelete);
@@ -59,12 +59,12 @@ namespace DataAccessLayer
             }
         }
 
-        public UserEntity GetUser(string username)
+        public User GetUser(string username)
         {
             return _context.Users.Find(username);
         }
 
-        public bool UpdateUser(UserEntity user)
+        public bool UpdateUser(User user)
         {
             try
             {
