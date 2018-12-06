@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-    public interface IAuthorization
+    public interface IAuthorizationService
     {
         
 

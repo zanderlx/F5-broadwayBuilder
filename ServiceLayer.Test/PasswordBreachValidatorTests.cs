@@ -28,12 +28,28 @@ namespace ServiceLayer.Test
         {
             // Arrange
             var plaintext = "password";
-            var hash = PasswordBreachValidator.SHA1_ReturnHash(plaintext);
-            var expected = PasswordBreachValidator.GetHashSuffix(hash) + ":" + PasswordBreachValidator.GetNumberOfBreaches(plaintext);
-            var actual = "";
+            var numberOfBreaches = PasswordBreachValidator.GetNumberOfBreaches(plaintext);
+            var expected = true;
+            var actual = false;
 
             // Act
-            actual = PasswordBreachValidator.ConsumePasswordAPI(plaintext);
+            if (numberOfBreaches > 0) actual = true;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void ConsumePasswordAPI_PasswordIsSecure_Pass()
+        {
+            // Arrange
+            var plaintext = "Th!sP@assw0rd1sS3cuRed";
+            var numberOfBreaches = PasswordBreachValidator.GetNumberOfBreaches(plaintext);
+            var expected = true;
+            var actual = false;
+
+            // Act
+            if (numberOfBreaches < 0) actual = true;
 
             // Assert
             Assert.AreEqual(expected, actual);

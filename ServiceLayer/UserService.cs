@@ -13,9 +13,9 @@ namespace ServiceLayer
         private readonly IUserRepository _repository;
 
         // Constructor
-        public UserService(IUserRepository repository)
+        public UserService(BroadwayBuilderContext Context)
         {
-            _repository = repository;
+            _repository = new UserRepository(Context);
         }
 
         // Create User
