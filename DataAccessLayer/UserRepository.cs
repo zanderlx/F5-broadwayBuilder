@@ -14,7 +14,7 @@ namespace DataAccessLayer
 
         public UserRepository(BroadwayBuilderContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public bool CreateUser(UserEntity user)
@@ -22,9 +22,13 @@ namespace DataAccessLayer
             try
             {
                 _context.Users.Add(user);
-                _context.SaveChanges();
+                int affectedRows = _context.SaveChanges();
+                if (affectedRows > 0)
+                {
+                    return true;
+                }
 
-                return true;
+                return false;
             }
             catch(DbUpdateException)
             {
@@ -40,8 +44,11 @@ namespace DataAccessLayer
                 if(UserToDelete != null)
                 {
                     _context.Users.Remove(UserToDelete);
-                    _context.SaveChanges();
-                    return true;
+                    int affectedRows = _context.SaveChanges();
+                    if (affectedRows > 0)
+                    {
+                        return true;
+                    }
                 }
 
                 return false;
@@ -63,8 +70,11 @@ namespace DataAccessLayer
             {
                 if (user != null)
                 {
-                    _context.SaveChanges();
-                    return true;
+                    int affectedRows = _context.SaveChanges();
+                    if (affectedRows > 0)
+                    {
+                        return true;
+                    }
                 }
                 return false;
             }

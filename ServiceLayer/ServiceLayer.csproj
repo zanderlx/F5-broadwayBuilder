@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization.cs" />
-    <Compile Include="IAuthorization.cs" />
+    <Compile Include="AuthorizationService.cs" />
+    <Compile Include="IAuthorizationService.cs" />
     <Compile Include="Enums\Permission.cs" />
     <Compile Include="PasswordBreachValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
