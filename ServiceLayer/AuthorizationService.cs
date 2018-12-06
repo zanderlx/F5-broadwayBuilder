@@ -1,7 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Enums;
 using ServiceLayer.Enums;
-using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace ServiceLayer
         //DbContext would be declared
         List<Permission> permissions;//This stays
         private readonly PermissionRepository permissionRepository;
-        public AuthorizationService(BroadwayBuilderContext Dbcontext, UserEntity user)//Would pass in DbContext instead of List if we were to use DB
+        public AuthorizationService(BroadwayBuilderContext Dbcontext, User user)//Would pass in DbContext instead of List if we were to use DB
         {
             //Initialize the DbContext
             this.permissionRepository = new PermissionRepository(Dbcontext);
