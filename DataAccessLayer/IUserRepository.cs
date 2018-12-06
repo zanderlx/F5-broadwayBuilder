@@ -9,9 +9,9 @@ namespace DataAccessLayer
     public interface IUserRepository
 
     {
-        bool CreateUser(UserEntity user);
-        UserEntity GetUser(string username);
-        bool UpdateUser(UserEntity user);
+        bool CreateUser(User user);
+        User GetUser(string username);
+        bool UpdateUser(User user);
         bool DeleteUser(string username);
 
     }

@@ -1,19 +1,21 @@
-﻿using DataAccessLayer;
-using DataAccessLayer.Enums;
+﻿using DataAccessLayer.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Models
+namespace DataAccessLayer
 {
+    [Table("Users")]
     public class User
     {
         // Constructor
         public User(string email, string password, DateTime dob, string city, string stateProvince, string country, RoleType role)
         {
-            Username = email.ToLower(); 
+            Username = email.ToLower();
             Password = password;
             DateOfBirth = dob;
             City = city;
@@ -22,19 +24,14 @@ namespace ServiceLayer.Models
             Role = role;
         }
 
-        public User(UserEntity userEntity)
+        // Constructor
+        public User()
         {
-            Username = userEntity.Username;
-            Password = userEntity.Password;
-            DateOfBirth = userEntity.DateOfBirth;
-            City = userEntity.City;
-            StateProvince = userEntity.StateProvince;
-            Country = userEntity.Country;
-            Role = userEntity.Role;
+
         }
 
-        // Defining Auto-Properties
-        public string Username { get; }
+        [Key]
+        public string Username { get; set; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string City { get; set; }
@@ -42,6 +39,4 @@ namespace ServiceLayer.Models
         public string Country { get; set; }
         public RoleType Role { get; set; }
     }
-
-
 }

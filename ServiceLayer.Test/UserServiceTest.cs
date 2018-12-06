@@ -2,7 +2,6 @@
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer.Enums;
-using ServiceLayer.Models;
 using DataAccessLayer;
 
 namespace ServiceLayer.Test
@@ -28,8 +27,8 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var context = new BroadwayBuilderContext();
-            var repository = new UserRepository(context);
-            var service = new UserService(repository);
+
+            var service = new UserService(context);
 
             // Act
             actual = service.CreateUser(user);
@@ -58,8 +57,8 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var context = new BroadwayBuilderContext();
-            var repository = new UserRepository(context);
-            var service = new UserService(repository);
+            //var repository = new UserRepository(context);
+            var service = new UserService(context);
 
             // Act
             // Create user the first time
@@ -77,8 +76,8 @@ namespace ServiceLayer.Test
         {
             //Arrange
             var context = new BroadwayBuilderContext();
-            var repository = new UserRepository(context);
-            var userService = new UserService(repository);
+            //var repository = new UserRepository(context);
+            var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
             var password = "h@rDt0GeU$$P@$$word!!!";
@@ -99,7 +98,13 @@ namespace ServiceLayer.Test
             var actual = userService.UpdateUser(user);
 
             //Assert
+            Assert.AreEqual(expected.Username, actual.Username);
+            Assert.AreEqual(expected.Password, actual.Password);
+            Assert.AreEqual(expected.Role, actual.Role);
+            Assert.AreEqual(expected.Country, actual.Country);
             Assert.AreEqual(expected.City, actual.City);
+            Assert.AreEqual(expected.StateProvince, actual.StateProvince);
+            Assert.AreEqual(expected.DateOfBirth, actual.DateOfBirth);
 
         }
 
@@ -108,8 +113,8 @@ namespace ServiceLayer.Test
         {
             // Arrange
             var context = new BroadwayBuilderContext();
-            var repository = new UserRepository(context);
-            var userService = new UserService(repository);
+            //var repository = new UserRepository(context);
+            var userService = new UserService(context);
             
             var username = "abixcastro@gmail.com";
             var password = "abc123@@@!!!";
@@ -136,8 +141,8 @@ namespace ServiceLayer.Test
         {
             // Arrange
             var context = new BroadwayBuilderContext();
-            var repository = new UserRepository(context);
-            var userService = new UserService(repository);
+            //var repository = new UserRepository(context);
+            var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
             var password = "abc123@@@!!!";
