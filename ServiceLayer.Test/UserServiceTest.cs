@@ -2,7 +2,6 @@
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer.Enums;
-using ServiceLayer.Models;
 using DataAccessLayer;
 
 namespace ServiceLayer.Test
@@ -28,6 +27,7 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var context = new BroadwayBuilderContext();
+
             var service = new UserService(context);
 
             // Act

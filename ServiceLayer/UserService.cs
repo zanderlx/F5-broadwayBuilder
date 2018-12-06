@@ -1,5 +1,4 @@
 ﻿using DataAccessLayer;
-using ServiceLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,34 +21,24 @@ namespace ServiceLayer
         //User will always be valid due to data validation
         public bool CreateUser(User user)
         {
-            var userEntity = new UserEntity()
-            {
-                Username = user.Username,
-                City = user.City,
-                Country = user.Country,
-                DateOfBirth = user.DateOfBirth,
-                Password = user.Password,
-                Role = user.Role,
-                StateProvince = user.StateProvince
-            };
 
-            return _repository.CreateUser(userEntity);
-           
+            return _repository.CreateUser(user);
+
         }
 
         // Read/Get User
         public User GetUser(string username)
         {
             var userEntity = _repository.GetUser(username);
-            var userReturned = new User(userEntity);
+            //var userReturned = new UserEntity(user);
 
-            return userReturned;
+            return userEntity;
         }
 
         // Update User
 
         //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
-        public User UpdateUser(User user) 
+        public User UpdateUser(User user)
         {
             var curUser = _repository.GetUser(user.Username);
 
@@ -60,8 +49,8 @@ namespace ServiceLayer
             curUser.City = user.City;
             curUser.DateOfBirth = user.DateOfBirth;
 
-            if(curUser!=null && _repository.UpdateUser(curUser))
-                return new User(curUser);
+            if (curUser != null && _repository.UpdateUser(curUser))
+                return curUser;
             return null;
 
         }
@@ -81,7 +70,7 @@ namespace ServiceLayer
         // Admin Permission - Disable Account
         public bool DisableAccount(string username)
         {
-            return true; 
+            return true;
         }
     }
 }
