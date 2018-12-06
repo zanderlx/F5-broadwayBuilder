@@ -38,5 +38,7 @@ namespace DataAccessLayer
         public string StateProvince { get; set; }
         public string Country { get; set; }
         public RoleType Role { get; set; }
+
+        //public virtual ICollection<Permission> Permissionss { get; set; }
     }
 }
