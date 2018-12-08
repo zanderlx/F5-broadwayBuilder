@@ -13,6 +13,8 @@ namespace DataAccessLayer
         User GetUser(string username);
         bool UpdateUser(User user);
         bool DeleteUser(string username);
+        //bool AddPermissionToUser(Permission permission, User user);
+        //bool DeletePermissionFromUser(Permission permission, User user);
 
     }
 }

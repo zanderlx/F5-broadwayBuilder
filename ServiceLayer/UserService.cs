@@ -41,16 +41,18 @@ namespace ServiceLayer
         public User UpdateUser(User user)
         {
             var curUser = _repository.GetUser(user.Username);
+            if (curUser != null)
+            {
+                curUser.Role = user.Role;
+                curUser.Password = user.Password;
+                curUser.StateProvince = user.StateProvince;
+                curUser.Country = user.Country;
+                curUser.City = user.City;
+                curUser.DateOfBirth = user.DateOfBirth;
 
-            curUser.Role = user.Role;
-            curUser.Password = user.Password;
-            curUser.StateProvince = user.StateProvince;
-            curUser.Country = user.Country;
-            curUser.City = user.City;
-            curUser.DateOfBirth = user.DateOfBirth;
-
-            if (curUser != null && _repository.UpdateUser(curUser))
-                return curUser;
+                if (_repository.UpdateUser(curUser))
+                    return curUser;
+            }
             return null;
 
         }
@@ -72,5 +74,15 @@ namespace ServiceLayer
         {
             return true;
         }
+
+        //public bool AddPermission(User user, Permission permission)
+        //{
+        //    return _repository.AddPermissionToUser(permission, user);
+        //}
+
+        //public bool DeletePermission(User user, Permission permission)
+        //{
+        //    return _repository.AddPermissionToUser(permission, user);
+        //}
     }
 }

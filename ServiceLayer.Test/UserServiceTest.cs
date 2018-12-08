@@ -34,7 +34,9 @@ namespace ServiceLayer.Test
             actual = service.CreateUser(user);
 
             // Assert
+            service.DeleteUser(user.Username);
             Assert.AreEqual(expected, actual);
+            //service.DeleteUser(user.Username);
         }
 
         [TestMethod]
@@ -68,7 +70,9 @@ namespace ServiceLayer.Test
             actual = service.CreateUser(user);
 
             // Assert
+            service.DeleteUser(user.Username);
             Assert.AreEqual(expected, actual);
+            //service.DeleteUser(user.Username);
         }
 
         [TestMethod]
@@ -80,16 +84,21 @@ namespace ServiceLayer.Test
             var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
-            var password = "h@rDt0GeU$$P@$$word!!!";
-            var dob = new DateTime(1992, 12, 7);
-            var city = "Irvine";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
             var role = RoleType.GENERAL;
+            
 
             User user = new User(username, password, dob, city, stateProvince, country, role);
 
-          
+            userService.CreateUser(user);
+            user.Password = "h@rDt0GeU$$P@$$word!!!";
+            user.DateOfBirth= new DateTime(1992, 12, 7);
+            user.City= "Irvine";
+
 
             var expected = user;
             //var actual = null;
@@ -98,6 +107,7 @@ namespace ServiceLayer.Test
             var actual = userService.UpdateUser(user);
 
             //Assert
+            userService.DeleteUser(user.Username);
             Assert.AreEqual(expected.Username, actual.Username);
             Assert.AreEqual(expected.Password, actual.Password);
             Assert.AreEqual(expected.Role, actual.Role);
@@ -106,7 +116,54 @@ namespace ServiceLayer.Test
             Assert.AreEqual(expected.StateProvince, actual.StateProvince);
             Assert.AreEqual(expected.DateOfBirth, actual.DateOfBirth);
 
+
+            //userService.DeleteUser(user.Username);
+
         }
+
+        //[TestMethod]
+        //public void UpdateUserPrimaryKey_Pass()//NEEDS TO BE UPDATED
+        //{
+        //    ////Arrange
+        //    var context = new BroadwayBuilderContext();
+        //    ////var repository = new UserRepository(context);
+        //    var userService = new UserService(context);
+
+        //    var username = "abixcastro@gmail.com";
+        //    var password = "abc123@@@!!!";
+        //    var dob = new DateTime(1994, 1, 7);
+        //    var city = "San Diego";
+        //    var stateProvince = "California";
+        //    var country = "United States";
+        //    var role = RoleType.GENERAL;
+
+
+        //    User user = new User(username, password, dob, city, stateProvince, country, role);
+
+        //    userService.CreateUser(user);
+        //    user.Username = "fakeemail@gmail.com";
+
+
+        //    var expected = false;
+        //    var actual = true; ;
+
+        //    //Act
+        //    var updatedUser = userService.UpdateUser(user);
+
+        //    if (updatedUser == null)
+        //    {
+        //        actual = false;
+        //    }
+
+        //    //Assert
+        //    Assert.AreEqual(expected, actual);
+
+        //    user.Username = "abixcastro@gmail.com";
+        //    userService.DeleteUser(user.Username);
+        //    //userService.DeleteUser("abixcastro@gmail.com");
+        //    //userService.DeleteUser("fakeemail@gmail.com");
+
+        //}
 
         [TestMethod]
         public void DeleteUser_Pass()
@@ -125,6 +182,8 @@ namespace ServiceLayer.Test
             var role = RoleType.GENERAL;
 
             var user = new User(username, password, dob, city, stateProvince, country, role);
+
+            userService.CreateUser(user);
 
             var expected = true;
             var actual = false;
@@ -154,6 +213,9 @@ namespace ServiceLayer.Test
 
             var user = new User(username, password, dob, city, stateProvince, country, role);
 
+            userService.CreateUser(user);
+            userService.DeleteUser(user.Username);
+
             var expected = false;
             var actual = false;
 
@@ -166,9 +228,5 @@ namespace ServiceLayer.Test
 
 
 
-        // TODO: Create more test cases for UserManagement
-        // TODO: Exception thrown from repository
-        // TODO: UpdateUser() Test
-        // 
     }
 }
