@@ -34,8 +34,9 @@ namespace ServiceLayer.Test
             actual = service.CreateUser(user);
 
             // Assert
-            Assert.AreEqual(expected, actual);
             service.DeleteUser(user.Username);
+            Assert.AreEqual(expected, actual);
+            //service.DeleteUser(user.Username);
         }
 
         [TestMethod]
@@ -69,8 +70,9 @@ namespace ServiceLayer.Test
             actual = service.CreateUser(user);
 
             // Assert
-            Assert.AreEqual(expected, actual);
             service.DeleteUser(user.Username);
+            Assert.AreEqual(expected, actual);
+            //service.DeleteUser(user.Username);
         }
 
         [TestMethod]
@@ -105,6 +107,7 @@ namespace ServiceLayer.Test
             var actual = userService.UpdateUser(user);
 
             //Assert
+            userService.DeleteUser(user.Username);
             Assert.AreEqual(expected.Username, actual.Username);
             Assert.AreEqual(expected.Password, actual.Password);
             Assert.AreEqual(expected.Role, actual.Role);
@@ -114,7 +117,7 @@ namespace ServiceLayer.Test
             Assert.AreEqual(expected.DateOfBirth, actual.DateOfBirth);
 
 
-            userService.DeleteUser(user.Username);
+            //userService.DeleteUser(user.Username);
 
         }
 
@@ -225,9 +228,5 @@ namespace ServiceLayer.Test
 
 
 
-        // TODO: Create more test cases for UserManagement
-        // TODO: Exception thrown from repository
-        // TODO: UpdateUser() Test
-        // 
     }
 }

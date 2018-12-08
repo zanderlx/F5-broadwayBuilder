@@ -74,5 +74,15 @@ namespace ServiceLayer
         {
             return true;
         }
+
+        //public bool AddPermission(User user, Permission permission)
+        //{
+        //    return _repository.AddPermissionToUser(permission, user);
+        //}
+
+        //public bool DeletePermission(User user, Permission permission)
+        //{
+        //    return _repository.AddPermissionToUser(permission, user);
+        //}
     }
 }

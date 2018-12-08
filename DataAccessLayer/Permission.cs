@@ -11,9 +11,13 @@ namespace DataAccessLayer
     [Table("Permissions")]
     public class Permission
     {
+        public Permission(string permission)
+        {
+            PermissionTitle = permission.ToLower();
+        }
         [Key]
         public string PermissionTitle { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        //public virtual ICollection<User> Users { get; set; }
     }
 }

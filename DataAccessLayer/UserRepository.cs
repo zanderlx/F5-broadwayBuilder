@@ -84,5 +84,53 @@ namespace DataAccessLayer
             }
             
         }
+
+        //TODO
+        //public bool AddPermissionToUser(Permission permission,User user)
+        //{
+        //    try
+        //    {
+        //        User usertoAddPermission = _context.Users.Find(user.Username);
+        //        if (usertoAddPermission != null)
+        //        {
+        //            usertoAddPermission.Permissionss.Add(permission);
+        //            int affectedRows = _context.SaveChanges();
+        //            if (affectedRows > 0)
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //        return false;
+
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        //public bool DeletePermissionFromUser(Permission permission, User user)
+        //{
+        //    try
+        //    {
+        //        User usertoAddPermission = _context.Users.Find(user.Username);
+        //        Permission permissiontoDelete = _context.Permissions.Find(permission.PermissionTitle);
+        //        if (usertoAddPermission != null)
+        //        {
+        //            usertoAddPermission.Permissionss.Remove(permissiontoDelete);
+        //            int affectedRows = _context.SaveChanges();
+        //            if (affectedRows > 0)
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //        return false;
+
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }
