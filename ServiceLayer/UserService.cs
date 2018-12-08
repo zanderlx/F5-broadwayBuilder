@@ -9,30 +9,27 @@ namespace ServiceLayer
 {
     public class UserService
     {
-        private readonly IUserRepository _repository;
+        private readonly BroadwayBuilderContext _context;
 
         // Constructor
         public UserService(BroadwayBuilderContext Context)
         {
-            _repository = new UserRepository(Context);
+            this._context = Context;
         }
 
         // Create User
         //User will always be valid due to data validation
-        public bool CreateUser(User user)
+        public void CreateUser(User user)
         {
 
-            return _repository.CreateUser(user);
+            _context.Users.Add(user);
 
         }
 
         // Read/Get User
         public User GetUser(string username)
         {
-            var userEntity = _repository.GetUser(username);
-            //var userReturned = new UserEntity(user);
-
-            return userEntity;
+            return _context.Users.Find(username);
         }
 
         // Update User
@@ -40,27 +37,29 @@ namespace ServiceLayer
         //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
         public User UpdateUser(User user)
         {
-            var curUser = _repository.GetUser(user.Username);
-            if (curUser != null)
+            User userToUpdate = _context.Users.Find(user.Username);
+            if (userToUpdate != null)
             {
-                curUser.Role = user.Role;
-                curUser.Password = user.Password;
-                curUser.StateProvince = user.StateProvince;
-                curUser.Country = user.Country;
-                curUser.City = user.City;
-                curUser.DateOfBirth = user.DateOfBirth;
-
-                if (_repository.UpdateUser(curUser))
-                    return curUser;
+                userToUpdate.Role = user.Role;
+                userToUpdate.Password = user.Password;
+                userToUpdate.StateProvince = user.StateProvince;
+                userToUpdate.Country = user.Country;
+                userToUpdate.City = user.City;
+                userToUpdate.DateOfBirth = user.DateOfBirth;
+                
             }
-            return null;
+            return userToUpdate;
 
         }
 
         // Delete User
-        public bool DeleteUser(string username)
+        public void DeleteUser(User user)
         {
-            return _repository.DeleteUser(username);
+            User UserToDelete = _context.Users.Find(user.Username);
+            if (UserToDelete != null)
+            {
+                _context.Users.Remove(UserToDelete);
+            }
         }
 
         // Admin Permission - Enable Account
