@@ -9,35 +9,52 @@ namespace ServiceLayer
 {
     public class UserService
     {
-        private readonly BroadwayBuilderContext _context;
+ 
+        /// <summary>
+        /// Readonly limits the field to the only thing that can set it is its constructor.
+        /// Private and readonly gives the benefit of not
+        /// accidentally changing the field from another part of that class after it is initialized.
+        /// </summary>
+        private readonly BroadwayBuilderContext _dbContext;
 
-        // Constructor
+
         public UserService(BroadwayBuilderContext Context)
         {
-            this._context = Context;
+            this._dbContext = Context;
         }
 
-        // Create User
-        //User will always be valid due to data validation
+        /// <summary>
+        /// CreateUser is a method in the UserService class.
+        /// Safe to Assume User will always be valid due to data validation
+        /// </summary>
+        /// <param name="user"></param>
         public void CreateUser(User user)
         {
 
-            _context.Users.Add(user);
+            _dbContext.Users.Add(user);
 
         }
 
-        // Read/Get User
+        /// <summary>
+        /// GetUser is a method in the UserSerivce class.
+        /// <para>Get User by username</para>
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public User GetUser(string username)
         {
-            return _context.Users.Find(username);
+            return _dbContext.Users.Find(username);
         }
 
-        // Update User
-
-        //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
+        /// <summary>
+        /// UpdateUser is a method in the UserService class. 
+        /// <para>update users properties</para>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public User UpdateUser(User user)
         {
-            User userToUpdate = _context.Users.Find(user.Username);
+            User userToUpdate = _dbContext.Users.Find(user.Username);
             if (userToUpdate != null)
             {
                 userToUpdate.Role = user.Role;
@@ -45,6 +62,8 @@ namespace ServiceLayer
                 userToUpdate.StateProvince = user.StateProvince;
                 userToUpdate.Country = user.Country;
                 userToUpdate.City = user.City;
+                // TODO: Remove this line:
+                // Should not be able to update date of birth
                 userToUpdate.DateOfBirth = user.DateOfBirth;
                 
             }
@@ -53,31 +72,40 @@ namespace ServiceLayer
         }
 
         // Delete User
+        // Note: DeleteUser(User user) already has the user. Why find again?
         public void DeleteUser(User user)
         {
-            User UserToDelete = _context.Users.Find(user.Username);
+            User UserToDelete = _dbContext.Users.Find(user.Username);
             if (UserToDelete != null)
             {
-                _context.Users.Remove(UserToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
         public void DeleteUser(string user)
         {
-            User UserToDelete = _context.Users.Find(user);
+            User UserToDelete = _dbContext.Users.Find(user);
             if (UserToDelete != null)
             {
-                _context.Users.Remove(UserToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
-        // Admin Permission - Enable Account
+        /// <summary>
+        /// EnableAccount is a method in the UserService class.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public bool EnableAccount(string username)
         {
             return true;
         }
 
-        // Admin Permission - Disable Account
+        /// <summary>
+        /// DisableAccount is a method in the UserService class.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public bool DisableAccount(string username)
         {
             return true;
