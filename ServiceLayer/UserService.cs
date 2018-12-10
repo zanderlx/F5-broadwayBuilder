@@ -62,6 +62,15 @@ namespace ServiceLayer
             }
         }
 
+        public void DeleteUser(string user)
+        {
+            User UserToDelete = _context.Users.Find(user);
+            if (UserToDelete != null)
+            {
+                _context.Users.Remove(UserToDelete);
+            }
+        }
+
         // Admin Permission - Enable Account
         public bool EnableAccount(string username)
         {
