@@ -11,18 +11,25 @@ namespace DataAccessLayer
     [Table("Roles")]
     public class Role
     {
-        public Role(string role)
-        {
-            RoleType = role;
-        }
-
+        // The default constructor for creating a role
         public Role()
         {
-
+            roleType = null;
         }
-        [Key]
-        public string RoleType { get; set; } 
 
-        public ICollection<User> User { get; set; }
+        /// <summary>
+        /// The overloaded constructor for creating a role
+        /// </summary>
+        /// <param name="role">The role that we are creating</param>
+        public Role(string role)
+        {
+            roleType = role;
+        }
+
+        [Key]
+        public string roleType { get; set; } 
+
+        // The collection of users associated to a role
+        public ICollection<User> user { get; set; }
     }
 }

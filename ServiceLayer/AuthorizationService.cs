@@ -12,16 +12,16 @@ namespace ServiceLayer
 {
     public class AuthorizationService : IAuthorizationService
     {
-        //DbContext would be declared
-        //List<string> permissions;//This stays
+        // DbContext would be declared
+        // List<string> permissions;//This stays
         private readonly IPermissionRepository permissionRepository;
 
         // Would pass in DbContext instead of List if we were to use DB
         public AuthorizationService(IPermissionRepository permissionRepository)
         {
-            //Initialize the DbContext
+            // Initialize the DbContext
             this.permissionRepository = permissionRepository;
-            //permissions = authorizedPermissions;//call the DbContext to get the permissions and store them into the List
+            // permissions = authorizedPermissions;//call the DbContext to get the permissions and store them into the List
         }
         
 

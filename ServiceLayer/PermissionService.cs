@@ -22,22 +22,22 @@ namespace ServiceLayer
         public void CreatePermission(Permission permission)
         {
 
-            _dbContext.Permissions.Add(permission);
+            _dbContext.permissions.Add(permission);
 
         }
 
         public Permission GetUser(string permission)
         {
-            return _dbContext.Permissions.Find(permission);
+            return _dbContext.permissions.Find(permission);
         }
 
         public void DeletePermission(Permission permission)
         {
 
-            Permission permissionToDelete = _dbContext.Permissions.Find(permission.PermissionTitle);
+            Permission permissionToDelete = _dbContext.permissions.Find(permission.permissionTitle);
             if (permissionToDelete != null)
             {
-                _dbContext.Permissions.Remove(permissionToDelete);
+                _dbContext.permissions.Remove(permissionToDelete);
             }
 
         }
