@@ -13,7 +13,7 @@ namespace DataAccessLayer
     public class User
     {
         // Constructor
-        public User(string email, string password, DateTime dob, string city, string stateProvince, string country, RoleType role)
+        public User(string email, string password, DateTime dob, string city, string stateProvince, string country, string role,bool isEnable)
         {
             Username = email.ToLower();
             Password = password;
@@ -21,7 +21,8 @@ namespace DataAccessLayer
             City = city;
             StateProvince = stateProvince;
             Country = country;
-            Role = role;
+            RoleType = role;
+            isEnabled = isEnable;
         }
 
         // Constructor
@@ -32,13 +33,23 @@ namespace DataAccessLayer
 
         [Key]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
+        [DataType(DataType.Date)]
+        [Required]
         public DateTime DateOfBirth { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string StateProvince { get; set; }
+        [Required]
         public string Country { get; set; }
-        public RoleType Role { get; set; }
+        [Required]
+        public bool isEnabled { get; set; }
 
-        //public virtual ICollection<Permission> Permissionss { get; set; }
+        public string RoleType { get; set; }
+        public Role Role { get; set; }
+
+        public virtual ICollection<Permission> Permissionss { get; set; }
     }
 }

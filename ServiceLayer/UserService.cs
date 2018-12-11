@@ -96,9 +96,13 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public bool EnableAccount(string username)
+        public void EnableAccount(User user)
         {
-            return true;
+            User UserToEnable = _dbContext.Users.Find(user.Username);
+            if (UserToEnable != null)
+            {
+                UserToEnable.isEnabled = true;
+            }
         }
 
         /// <summary>
@@ -106,19 +110,35 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public bool DisableAccount(string username)
+        public void DisableAccount(User user)
         {
-            return true;
+            User UserToDisable = _dbContext.Users.Find(user.Username);
+            if (UserToDisable != null)
+            {
+                UserToDisable.isEnabled = false;
+            }
         }
 
-        //public bool AddPermission(User user, Permission permission)
-        //{
-        //    return _repository.AddPermissionToUser(permission, user);
-        //}
+        public void AddUserPermission(User user, Permission permission)
+        {
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
-        //public bool DeletePermission(User user, Permission permission)
-        //{
-        //    return _repository.AddPermissionToUser(permission, user);
-        //}
+            if(UserToAddPermission!=null && PermissionToAdd!=null)
+            {
+                UserToAddPermission.Permissionss.Add(PermissionToAdd);
+            }
+        }
+
+        public void DeleteUserPermission(User user, Permission permission)
+        {
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
+
+            if (UserToAddPermission != null && PermissionToAdd != null)
+            {
+                UserToAddPermission.Permissionss.Remove(PermissionToAdd);
+            }
+        }
     }
 }
