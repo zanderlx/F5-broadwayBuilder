@@ -17,6 +17,7 @@ namespace DataAccessLayer
         //Creating property on db context
         //Allows to access table in db
         public DbSet<User> Users { get; set; }
-        //public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }
