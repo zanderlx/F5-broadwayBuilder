@@ -103,14 +103,14 @@ namespace ServiceLayer
         /// Enables an account of the user.
         /// </summary>
         /// <param name="user">The user whos account we want to enable</param>
-        public void EnableAccount(User user)
+        public User EnableAccount(User user)
         {
             User UserToEnable = _dbContext.Users.Find(user.username);
-            // If the user found is not null, enable the user's account
             if (UserToEnable != null)
             {
                 UserToEnable.isEnabled = true;
             }
+            return UserToEnable;
         }
 
         /// <summary>
@@ -118,14 +118,14 @@ namespace ServiceLayer
         /// Disables the user account using the dbContext
         /// </summary>
         /// <param name="user">The user that we want to disable</param>
-        public void DisableAccount(User user)
+        public User DisableAccount(User user)
         {
             User UserToDisable = _dbContext.Users.Find(user.username);
-            // If the user found is not null, disable the user's account
             if (UserToDisable != null)
             {
                 UserToDisable.isEnabled = false;
             }
+            return UserToDisable;
         }
 
         /// <summary>
