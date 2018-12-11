@@ -1,8 +1,8 @@
 ﻿using System;
+using DataAccessLayer;
+using DataAccessLayer.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using ServiceLayer.Enums;
-using ServiceLayer.Models;
 
 namespace ServiceLayer.Test
 {
@@ -10,7 +10,7 @@ namespace ServiceLayer.Test
     public class AuthorizationTests
     {
         [TestMethod]
-        public void Authorization_CheckUserRoleGeneral_Pass()
+        public void AuthorizationService_UserHasPermission_Pass()
         {
             // Arrange
             var username = "abixcastro@gmail.com";
@@ -19,25 +19,36 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            User user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+            var permission = new Permission("CreateUser");
 
-            var expected = "GENERAL";
-            var actual = "";
+            BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
 
-            var service = new Authorization();
+            var expected = true;
+            var actual = false;
+            
 
-            // Act
-            // Get actual user role
-            actual = service.CheckUserRole(user);
+            var test = new Mock<IPermissionRepository>();
+            test
+                .Setup(m => m.UserHasPermission(user, permission))
+                .Returns(true);
 
-            // Assert
+            var service = new AuthorizationService(test.Object);
+
+            //Act 
+            actual = service.HasPermission(user,permission);
+
+            //Assert
             Assert.AreEqual(expected, actual);
+
+            
         }
 
         [TestMethod]
-        public void Authorization_CheckUserRoleAdmin_Pass()
+        public void AuthorizationService_UserDoesNotHavePermission_Pass()
         {
             // Arrange
             var username = "abixcastro@gmail.com";
@@ -46,22 +57,32 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            User user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+            var permission = new Permission("CreateUser");
 
-            var expected = "THEATRE_ADMIN";
-            var actual = "";
+            BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
+
+            var expected = false;
+            var actual = true;
 
 
-            var service = new Authorization();
+            var test = new Mock<IPermissionRepository>();
+            test
+                .Setup(m => m.UserHasPermission(user, permission))
+                .Returns(false);
 
-            // Act
-            // Get actual user role
-            actual = service.CheckUserRole(user);
+            var service = new AuthorizationService(test.Object);
 
-            // Assert
-            Assert.AreNotEqual(expected, actual);
+            //Act 
+            actual = service.HasPermission(user, permission);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+
         }
     }
 }
