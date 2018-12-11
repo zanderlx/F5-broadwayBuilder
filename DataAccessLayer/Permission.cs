@@ -11,12 +11,17 @@ namespace DataAccessLayer
     [Table("Permissions")]
     public class Permission
     {
+        [Key]
+        public string PermissionTitle { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
+
         /// <summary>
         /// The default constructor that will add a null permission
         /// </summary>
         public Permission()
         {
-            permissionTitle = null;
+            PermissionTitle = null;
         }
 
         /// <summary>
@@ -25,12 +30,7 @@ namespace DataAccessLayer
         /// <param name="permission"></param>
         public Permission(string permission)
         {
-            permissionTitle = permission.ToLower();
+            PermissionTitle = permission.ToLower();
         }
-
-        [Key]
-        public string permissionTitle { get; set; }
-
-        public virtual ICollection<User> users { get; set; }
     }
 }

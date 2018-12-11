@@ -11,12 +11,12 @@ namespace ServiceLayer
     /// </summary>
     public class PasswordValidatorService
     {
-        public string _hashedPlaintext { get; private set; }
-        public string _hashPrefix { get; private set; }
-        public string _hashSuffix { get; private set; }
-        public string _apiResponse { get; private set; }
-        public string _hashResponse { get; private set; }
-        public int _numberOfBreaches { get; private set; }
+        public string _HashedPlaintext { get; private set; }
+        public string _HashPrefix { get; private set; }
+        public string _HashSuffix { get; private set; }
+        public string _APIResponse { get; private set; }
+        public string _HashResponse { get; private set; }
+        public int _NumberOfBreaches { get; private set; }
 
         /// <summary>
         /// The constructor for performing the various methods
@@ -26,22 +26,22 @@ namespace ServiceLayer
         public PasswordValidatorService(string plaintext)
         {
             // Hashes the plaintext into SHA-1
-            _hashedPlaintext = SecurityService.ReturnSHA1Hash(plaintext);
+            _HashedPlaintext = SecurityService.ReturnSHA1Hash(plaintext);
 
             // Retrieves the prefix (first 5 chars) of the hashed plaintext
-            _hashPrefix = GetHashPrefix(_hashedPlaintext);
+            _HashPrefix = GetHashPrefix(_HashedPlaintext);
 
             // Retrieves the suffix (the hashed plaintext exluding the first 5 chars)
-            _hashSuffix = GetHashSuffix(_hashedPlaintext);
+            _HashSuffix = GetHashSuffix(_HashedPlaintext);
 
             // The full response of the "Have I Been Pwned" API
-            _apiResponse = ConsumePasswordAPI(_hashPrefix).Result;
+            _APIResponse = ConsumePasswordAPI(_HashPrefix).Result;
 
             // The hash we are looking for in the API
-            _hashResponse = FindSpecificHash(_apiResponse);
+            _HashResponse = FindSpecificHash(_APIResponse);
 
             // The number of times the password being used has been breached
-            _numberOfBreaches = GetNumberOfBreaches();
+            _NumberOfBreaches = GetNumberOfBreaches();
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace ServiceLayer
         private string FindSpecificHash(string apiResponse)
         {
             // The location in the response HashList of the suffix that corresponds to the password we want
-            int startingIndex = apiResponse.IndexOf(_hashSuffix);
+            int startingIndex = apiResponse.IndexOf(_HashSuffix);
 
             // If the hash suffix is not found in the API response, the password is secure therefore return null
             if (startingIndex == -1)
@@ -111,7 +111,7 @@ namespace ServiceLayer
             }
 
             // If the target hash suffix is found, get its location via substring
-            string targetHash = apiResponse.Substring(startingIndex, _apiResponse.Length - startingIndex);
+            string targetHash = apiResponse.Substring(startingIndex, _APIResponse.Length - startingIndex);
 
             // Obtains the index of a new line delimiter
             int indexOfNewLine = targetHash.IndexOf(Environment.NewLine);
@@ -138,19 +138,19 @@ namespace ServiceLayer
         private int GetNumberOfBreaches()
         {
             //Check if password was found in the api
-            if (string.IsNullOrEmpty(_hashResponse))
+            if (string.IsNullOrEmpty(_HashResponse))
             {
                 // Return -1 if there were no breaches for the password
                 return -1;
             }
             // The starting index we want... start at ":"
-            int start = _hashResponse.IndexOf(":") + 1;
+            int start = _HashResponse.IndexOf(":") + 1;
 
             // The ending index we want to retrieve the remainder of the string
-            int end = _hashResponse.Length - start;
+            int end = _HashResponse.Length - start;
 
             // Parses the breach frequency of the plaintext into an int and returns it
-            return Int32.Parse(_hashResponse.Substring(start, end));
+            return Int32.Parse(_HashResponse.Substring(start, end));
         }
 
         /// <summary>

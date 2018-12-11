@@ -10,7 +10,7 @@ namespace ServiceLayer
     public class RoleService
     {
         // Declared a readonly context for usage of the database
-        private readonly BroadwayBuilderContext _dbContext;
+        private readonly BroadwayBuilderContext _DbContext;
 
         /// <summary>
         /// The RoleService constructor that enables us to Create, Get, and Delete a role
@@ -18,7 +18,7 @@ namespace ServiceLayer
         /// <param name="dbContext"></param>
         public RoleService(BroadwayBuilderContext dbContext)
         {
-            this._dbContext = dbContext;
+            this._DbContext = dbContext;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace ServiceLayer
         /// <param name="role">The new role we want to create</param>
         public void CreateRole(Role role)
         {
-            _dbContext.roles.Add(role);
+            _DbContext.Roles.Add(role);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace ServiceLayer
         /// <returns></returns>
         public Role GetRole(string role)
         {
-            return _dbContext.roles.Find(role);
+            return _DbContext.Roles.Find(role);
         }
 
         /// <summary>
@@ -49,10 +49,10 @@ namespace ServiceLayer
         /// <param name="role">The role that we want to delete</param>
         public void DeleteRole(Role role)
         {
-            Role roleToDelete = _dbContext.roles.Find(role.roleType);
+            Role roleToDelete = _DbContext.Roles.Find(role.RoleType);
             if (roleToDelete != null)
             {
-                _dbContext.roles.Remove(roleToDelete);
+                _DbContext.Roles.Remove(roleToDelete);
             }
         }
     }
