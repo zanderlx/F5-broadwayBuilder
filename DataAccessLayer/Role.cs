@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    [Table("Permissions")]
-    public class Permission
+    [Table("Roles")]
+    public class Role
     {
-        public Permission(string permission)
+        public Role(string role)
         {
-            PermissionTitle = permission.ToLower();
+            RoleType = role;
         }
-        public Permission()
+
+        public Role()
         {
 
         }
         [Key]
-        public string PermissionTitle { get; set; }
+        public string RoleType { get; set; } 
 
-        public virtual ICollection<User> Users { get; set; }
+        public ICollection<User> User { get; set; }
     }
 }

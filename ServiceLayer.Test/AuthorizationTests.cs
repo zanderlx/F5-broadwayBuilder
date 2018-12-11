@@ -19,9 +19,10 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            var user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
             var permission = new Permission("CreateUser");
 
             BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
@@ -56,9 +57,10 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            var user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
             var permission = new Permission("CreateUser");
 
             BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
