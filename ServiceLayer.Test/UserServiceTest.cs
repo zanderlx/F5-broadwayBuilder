@@ -117,9 +117,9 @@ namespace ServiceLayer.Test
 
             userService.CreateUser(user);
             context.SaveChanges();
-            user.Password = "h@rDt0GeU$$P@$$word!!!";
-            user.DateOfBirth = new DateTime(1992, 12, 7);
-            user.City = "Irvine";
+            user.password = "h@rDt0GeU$$P@$$word!!!";
+            user.dateOfBirth = new DateTime(1992, 12, 7);
+            user.city = "Irvine";
 
 
             var expected = user;
@@ -132,13 +132,13 @@ namespace ServiceLayer.Test
             context.SaveChanges();
 
             //Assert
-            Assert.AreEqual(expected.Username, actual.Username);
-            Assert.AreEqual(expected.Password, actual.Password);
+            Assert.AreEqual(expected.username, actual.username);
+            Assert.AreEqual(expected.password, actual.password);
             Assert.AreEqual(expected.Role, actual.Role);
-            Assert.AreEqual(expected.Country, actual.Country);
-            Assert.AreEqual(expected.City, actual.City);
-            Assert.AreEqual(expected.StateProvince, actual.StateProvince);
-            Assert.AreEqual(expected.DateOfBirth, actual.DateOfBirth);
+            Assert.AreEqual(expected.country, actual.country);
+            Assert.AreEqual(expected.city, actual.city);
+            Assert.AreEqual(expected.stateProvince, actual.stateProvince);
+            Assert.AreEqual(expected.dateOfBirth, actual.dateOfBirth);
 
         }
 
@@ -170,14 +170,14 @@ namespace ServiceLayer.Test
             //Act
             try
             {
-                user.Username = "fakeemail@gmail.com";
+                user.username = "fakeemail@gmail.com";
                 context.SaveChanges();
             }
             catch (Exception)
             {
                 actual = false;
             }
-            user.Username = "abixcastro@gmail.com";
+            user.username = "abixcastro@gmail.com";
             userService.DeleteUser(user);
             context.SaveChanges();
 

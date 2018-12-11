@@ -15,7 +15,9 @@ namespace ServiceLayer
         //DbContext would be declared
         //List<string> permissions;//This stays
         private readonly IPermissionRepository permissionRepository;
-        public AuthorizationService(IPermissionRepository permissionRepository)//Would pass in DbContext instead of List if we were to use DB
+
+        // Would pass in DbContext instead of List if we were to use DB
+        public AuthorizationService(IPermissionRepository permissionRepository)
         {
             //Initialize the DbContext
             this.permissionRepository = permissionRepository;
@@ -24,14 +26,14 @@ namespace ServiceLayer
         
 
         /// <summary>
-        /// Checks if a user is authorized to perform a action
+        /// Checks if a user is authorized to perform a action by checking if they have the permission needed
         /// </summary>
         /// <param name="user">User that must be checked if they are authorized</param>
-        /// <param name="CheckIfAuthorized">check if user has this permission</param>
+        /// <param name="checkIfAuthorized">check if user has this permission</param>
         /// <returns>true if user has permission, false otherwise</returns>
-        public bool HasPermission(User user, Permission CheckIfAuthorized)
+        public bool HasPermission(User user, Permission checkIfAuthorized)
         {
-            if (permissionRepository.UserHasPermission(user,CheckIfAuthorized))
+            if (permissionRepository.UserHasPermission(user, checkIfAuthorized))
             {
                 return true;
             }
