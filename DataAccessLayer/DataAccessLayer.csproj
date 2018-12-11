@@ -49,12 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\RoleType.cs" />
-    <Compile Include="IUserRepository.cs" />
+    <Compile Include="IPermissionRepository.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="PermissionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BroadwayBuilderContext.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

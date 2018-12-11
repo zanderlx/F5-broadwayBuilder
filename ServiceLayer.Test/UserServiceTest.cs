@@ -19,26 +19,39 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            var user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role,enable);
+            var NewRole = new Role("general");
 
             var expected = true;
             var actual = false;
 
             var context = new BroadwayBuilderContext();
 
-            var service = new UserService(context);
+            var userService = new UserService(context);
+            var roleService = new RoleService(context);
+
 
             // Act
-            actual = service.CreateUser(user);
+            roleService.CreateRole(NewRole);
+            context.SaveChanges();
+            userService.CreateUser(user);
+            var affectedRows = context.SaveChanges();
+
+            if (affectedRows > 0)
+                actual = true;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            userService.DeleteUser(user);
+            roleService.DeleteRole(NewRole);
+            context.SaveChanges();
+            //Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void UserService_CreateUserAgain_Pass() //CreateUser_duplicateUsername_ThrowException()
+        public void UserService_CreateUserAgain_Pass()
         {
             // Arrange
             var username = "abixcastro@gmail.com";
@@ -47,14 +60,15 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            User user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
 
             // Expected should not pass because
             // you cannot create the same user again
             var expected = false;
-            var actual = false;
+            var actual = true;
 
             var context = new BroadwayBuilderContext();
             //var repository = new UserRepository(context);
@@ -62,40 +76,60 @@ namespace ServiceLayer.Test
 
             // Act
             // Create user the first time
-            var createUserFirstTime = service.CreateUser(user);
-
+            service.CreateUser(user);
+            context.SaveChanges();
             // Create user again
-            actual = service.CreateUser(user);
+            service.CreateUser(user);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                actual = false;
+            }
 
             // Assert
+            context = new BroadwayBuilderContext();
+            service = new UserService(context);
+            service.DeleteUser(user);
+            context.SaveChanges();
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void UpdateUser_Pass()//NEEDS TO BE UPDATED
+        public void UpdateUser_Pass()
         {
             //Arrange
             var context = new BroadwayBuilderContext();
-            //var repository = new UserRepository(context);
             var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
-            var password = "h@rDt0GeU$$P@$$word!!!";
-            var dob = new DateTime(1992, 12, 7);
-            var city = "Irvine";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            User user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
 
-          
+            userService.CreateUser(user);
+            context.SaveChanges();
+            user.Password = "h@rDt0GeU$$P@$$word!!!";
+            user.DateOfBirth = new DateTime(1992, 12, 7);
+            user.City = "Irvine";
+
 
             var expected = user;
-            //var actual = null;
 
             //Act
             var actual = userService.UpdateUser(user);
+            context.SaveChanges();
+
+            userService.DeleteUser(user);
+            context.SaveChanges();
 
             //Assert
             Assert.AreEqual(expected.Username, actual.Username);
@@ -109,29 +143,78 @@ namespace ServiceLayer.Test
         }
 
         [TestMethod]
-        public void DeleteUser_Pass()
+        public void UpdateUserPrimaryKey_Pass()//NEEDS TO BE UPDATED
         {
-            // Arrange
+            ////Arrange
             var context = new BroadwayBuilderContext();
-            //var repository = new UserRepository(context);
             var userService = new UserService(context);
-            
+
             var username = "abixcastro@gmail.com";
             var password = "abc123@@@!!!";
             var dob = new DateTime(1994, 1, 7);
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            var user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+
+            userService.CreateUser(user);
+            context.SaveChanges();
+
+
+            var expected = false;
+            var actual = true; ;
+
+            //Act
+            try
+            {
+                user.Username = "fakeemail@gmail.com";
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                actual = false;
+            }
+            user.Username = "abixcastro@gmail.com";
+            userService.DeleteUser(user);
+            context.SaveChanges();
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DeleteUser_Pass()
+        {
+            // Arrange
+            var context = new BroadwayBuilderContext();
+            //var repository = new UserRepository(context);
+            var userService = new UserService(context);
+
+            var username = "abixcastro@gmail.com";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
+            var country = "United States";
+            var stateProvince = "California";
+            var role = "general";
+            var enable = true;
+
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+
+            userService.CreateUser(user);
+            context.SaveChanges();
 
             var expected = true;
             var actual = false;
 
             //Act
-            actual = userService.DeleteUser(user.Username);
-
+            userService.DeleteUser(user);
+            var save = context.SaveChanges();
+            if (save > 0)
+                actual = true;
             //Assert
             Assert.AreEqual(expected, actual);
         }
@@ -150,15 +233,26 @@ namespace ServiceLayer.Test
             var city = "San Diego";
             var stateProvince = "California";
             var country = "United States";
-            var role = RoleType.GENERAL;
+            var role = "general";
+            var enable = true;
 
-            var user = new User(username, password, dob, city, stateProvince, country, role);
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+
+            userService.CreateUser(user);
+            context.SaveChanges();
+            userService.DeleteUser(user);
+            context.SaveChanges();
 
             var expected = false;
-            var actual = false;
+            var actual = true;
 
             //Act
-            actual = userService.DeleteUser(user.Username);
+            userService.DeleteUser(user);
+            var save = context.SaveChanges();
+            if (save == 0)
+            {
+                actual = false;
+            }
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -166,9 +260,5 @@ namespace ServiceLayer.Test
 
 
 
-        // TODO: Create more test cases for UserManagement
-        // TODO: Exception thrown from repository
-        // TODO: UpdateUser() Test
-        // 
     }
 }

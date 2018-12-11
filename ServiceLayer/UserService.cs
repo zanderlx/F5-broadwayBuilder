@@ -9,68 +9,136 @@ namespace ServiceLayer
 {
     public class UserService
     {
-        private readonly IUserRepository _repository;
+ 
+        /// <summary>
+        /// Readonly limits the field to the only thing that can set it is its constructor.
+        /// Private and readonly gives the benefit of not
+        /// accidentally changing the field from another part of that class after it is initialized.
+        /// </summary>
+        private readonly BroadwayBuilderContext _dbContext;
 
-        // Constructor
+
         public UserService(BroadwayBuilderContext Context)
         {
-            _repository = new UserRepository(Context);
+            this._dbContext = Context;
         }
 
-        // Create User
-        //User will always be valid due to data validation
-        public bool CreateUser(User user)
+        /// <summary>
+        /// CreateUser is a method in the UserService class.
+        /// Safe to Assume User will always be valid due to data validation
+        /// </summary>
+        /// <param name="user"></param>
+        public void CreateUser(User user)
         {
 
-            return _repository.CreateUser(user);
+            _dbContext.Users.Add(user);
 
         }
 
-        // Read/Get User
+        /// <summary>
+        /// GetUser is a method in the UserSerivce class.
+        /// <para>Get User by username</para>
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public User GetUser(string username)
         {
-            var userEntity = _repository.GetUser(username);
-            //var userReturned = new UserEntity(user);
-
-            return userEntity;
+            return _dbContext.Users.Find(username);
         }
 
-        // Update User
-
-        //Suggestion - make these their own separate methods. UpdatePassword().. UpdateCity()...etc
+        /// <summary>
+        /// UpdateUser is a method in the UserService class. 
+        /// <para>update users properties</para>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public User UpdateUser(User user)
         {
-            var curUser = _repository.GetUser(user.Username);
-
-            curUser.Role = user.Role;
-            curUser.Password = user.Password;
-            curUser.StateProvince = user.StateProvince;
-            curUser.Country = user.Country;
-            curUser.City = user.City;
-            curUser.DateOfBirth = user.DateOfBirth;
-
-            if (curUser != null && _repository.UpdateUser(curUser))
-                return curUser;
-            return null;
+            User userToUpdate = _dbContext.Users.Find(user.Username);
+            if (userToUpdate != null)
+            {
+                userToUpdate.Role = user.Role;
+                userToUpdate.Password = user.Password;
+                userToUpdate.StateProvince = user.StateProvince;
+                userToUpdate.Country = user.Country;
+                userToUpdate.City = user.City;
+                // TODO: Remove this line:
+                // Should not be able to update date of birth
+                userToUpdate.DateOfBirth = user.DateOfBirth;
+                
+            }
+            return userToUpdate;
 
         }
 
         // Delete User
-        public bool DeleteUser(string username)
+        // Note: DeleteUser(User user) already has the user. Why find again?
+        public void DeleteUser(User user)
         {
-            return _repository.DeleteUser(username);
+            User UserToDelete = _dbContext.Users.Find(user.Username);
+            if (UserToDelete != null)
+            {
+                _dbContext.Users.Remove(UserToDelete);
+            }
         }
 
-        // Admin Permission - Enable Account
-        public bool EnableAccount(string username)
+        public void DeleteUser(string user)
         {
-            return true;
+            User UserToDelete = _dbContext.Users.Find(user);
+            if (UserToDelete != null)
+            {
+                _dbContext.Users.Remove(UserToDelete);
+            }
         }
 
-        // Admin Permission - Disable Account
-        public bool DisableAccount(string username)
+        /// <summary>
+        /// EnableAccount is a method in the UserService class.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public void EnableAccount(User user)
         {
-            return true;
+            User UserToEnable = _dbContext.Users.Find(user.Username);
+            if (UserToEnable != null)
+            {
+                UserToEnable.isEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// DisableAccount is a method in the UserService class.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public void DisableAccount(User user)
+        {
+            User UserToDisable = _dbContext.Users.Find(user.Username);
+            if (UserToDisable != null)
+            {
+                UserToDisable.isEnabled = false;
+            }
+        }
+
+        public void AddUserPermission(User user, Permission permission)
+        {
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
+
+            if(UserToAddPermission!=null && PermissionToAdd!=null)
+            {
+                UserToAddPermission.Permissionss.Add(PermissionToAdd);
+            }
+        }
+
+        public void DeleteUserPermission(User user, Permission permission)
+        {
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
+
+            if (UserToAddPermission != null && PermissionToAdd != null)
+            {
+                UserToAddPermission.Permissionss.Remove(PermissionToAdd);
+            }
         }
     }
 }
