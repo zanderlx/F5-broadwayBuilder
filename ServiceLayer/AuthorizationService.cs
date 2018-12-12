@@ -12,30 +12,47 @@ namespace ServiceLayer
 {
     public class AuthorizationService : IAuthorizationService
     {
-        //DbContext would be declared
-        //List<string> permissions;//This stays
-        private readonly IPermissionRepository permissionRepository;
-        public AuthorizationService(IPermissionRepository permissionRepository)//Would pass in DbContext instead of List if we were to use DB
+        
+        private readonly BroadwayBuilderContext _dbContext;
+
+        
+        public AuthorizationService(BroadwayBuilderContext dbcontext)
         {
             //Initialize the DbContext
-            this.permissionRepository = permissionRepository;
-            //permissions = authorizedPermissions;//call the DbContext to get the permissions and store them into the List
+            this._dbContext = dbcontext;
         }
         
 
         /// <summary>
-        /// Checks if a user is authorized to perform a action
+        /// Checks if a user is authorized to perform a action by checking if they have the permission needed
         /// </summary>
         /// <param name="user">User that must be checked if they are authorized</param>
-        /// <param name="CheckIfAuthorized">check if user has this permission</param>
+        /// <param name="checkIfAuthorized">check if user has this permission</param>
         /// <returns>true if user has permission, false otherwise</returns>
-        public bool HasPermission(User user, Permission CheckIfAuthorized)
+        public bool HasPermission(User user, Permission checkIfAuthorized)
         {
-            if (permissionRepository.UserHasPermission(user,CheckIfAuthorized))
+            User getUser = _dbContext.Users.Find(user.Username);
+            if (getUser != null)
             {
-                return true;
+                Permission getUserPermission = getUser.Permissions.Where(s=>s.PermissionTitle==checkIfAuthorized.PermissionTitle).FirstOrDefault<Permission>();
+                if (getUserPermission != null)
+                    return true;
             }
             return false;
+
+        }
+
+        public bool HasPermission(string username, string permissionTitle)
+        {
+            User getUser = _dbContext.Users.Find(username);
+            if (getUser != null)
+            {
+                Permission getUserPermission = getUser.Permissions.Where(s => s.PermissionTitle == permissionTitle).FirstOrDefault<Permission>();
+                if (getUserPermission != null)
+                    return true;
+            }
+            return false;
+
         }
 
 

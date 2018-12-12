@@ -47,7 +47,7 @@ namespace ServiceLayer.Test
             // Arrange
             var plaintext = "Th!sP@assw0rd1sS3cuRed";
             PasswordValidatorService ValidatePassword = new PasswordValidatorService(plaintext);
-            var numberOfBreaches = ValidatePassword._numberOfBreaches;
+            var numberOfBreaches = ValidatePassword._NumberOfBreaches;
             var expected = true;
             var actual = false;
 
@@ -67,7 +67,7 @@ namespace ServiceLayer.Test
             var expected = false;
             var actual = false;
 
-            int numberOfBreaches = ValidatePassword._numberOfBreaches;
+            int numberOfBreaches = ValidatePassword._NumberOfBreaches;
 
             // Act
             actual = ValidatePassword.ValidateBreachFrequencyRange(numberOfBreaches);
@@ -89,7 +89,7 @@ namespace ServiceLayer.Test
             var actual = "";
 
             // Act
-            actual = ValidatePassword._hashPrefix;
+            actual = ValidatePassword._HashPrefix;
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -108,7 +108,7 @@ namespace ServiceLayer.Test
             var actual = "";
 
             // Act
-            actual = ValidatePassword._hashSuffix;
+            actual = ValidatePassword._HashSuffix;
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -124,7 +124,7 @@ namespace ServiceLayer.Test
             var actual = "";
 
             // Act
-            actual = pw._hashPrefix;
+            actual = pw._HashPrefix;
 
             // Assert
             Assert.AreEqual(expected, actual);
