@@ -9,35 +9,32 @@ namespace ServiceLayer
 {
     public class PermissionService
     {
-        private readonly IPermissionRepository _repository;
-        private readonly BroadwayBuilderContext _dbContext;
+        private readonly IPermissionRepository _Repository;
+        private readonly BroadwayBuilderContext _DbContext;
 
-        // Constructor
-        public PermissionService(BroadwayBuilderContext Context)
+        public PermissionService(BroadwayBuilderContext context)
         {
-            this._dbContext = Context;
-            _repository = new PermissionRepository(Context);
+            this._DbContext = context;
+            _Repository = new PermissionRepository(context);
         }
 
         public void CreatePermission(Permission permission)
         {
-
-            _dbContext.Permissions.Add(permission);
-
+            _DbContext.Permissions.Add(permission);
         }
 
         public Permission GetUser(string permission)
         {
-            return _dbContext.Permissions.Find(permission);
+            return _DbContext.Permissions.Find(permission);
         }
 
         public void DeletePermission(Permission permission)
         {
+            Permission permissionToDelete = _DbContext.Permissions.Find(permission.PermissionTitle);
 
-            Permission permissionToDelete = _dbContext.Permissions.Find(permission.PermissionTitle);
             if (permissionToDelete != null)
             {
-                _dbContext.Permissions.Remove(permissionToDelete);
+                _DbContext.Permissions.Remove(permissionToDelete);
             }
 
         }

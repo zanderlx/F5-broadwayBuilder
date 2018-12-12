@@ -47,7 +47,7 @@ namespace ServiceLayer.Test
             userService.DeleteUser(user);
             roleService.DeleteRole(NewRole);
             context.SaveChanges();
-            //Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -177,6 +177,7 @@ namespace ServiceLayer.Test
             {
                 actual = false;
             }
+
             user.Username = "abixcastro@gmail.com";
             userService.DeleteUser(user);
             context.SaveChanges();
@@ -190,7 +191,6 @@ namespace ServiceLayer.Test
         {
             // Arrange
             var context = new BroadwayBuilderContext();
-            //var repository = new UserRepository(context);
             var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
@@ -202,6 +202,7 @@ namespace ServiceLayer.Test
             var role = "general";
             var enable = true;
 
+            // Creates a new user instance with example data
             var user = new User(username, password, dob, city, stateProvince, country, role, enable);
 
             userService.CreateUser(user);
@@ -224,7 +225,6 @@ namespace ServiceLayer.Test
         {
             // Arrange
             var context = new BroadwayBuilderContext();
-            //var repository = new UserRepository(context);
             var userService = new UserService(context);
 
             var username = "abixcastro@gmail.com";
@@ -236,10 +236,12 @@ namespace ServiceLayer.Test
             var role = "general";
             var enable = true;
 
+            // Creates a new user instance with example data
             var user = new User(username, password, dob, city, stateProvince, country, role, enable);
 
             userService.CreateUser(user);
             context.SaveChanges();
+
             userService.DeleteUser(user);
             context.SaveChanges();
 
@@ -257,8 +259,5 @@ namespace ServiceLayer.Test
             //Assert
             Assert.AreEqual(expected, actual);
         }
-
-
-
     }
 }
