@@ -15,14 +15,17 @@ namespace DataAccessLayer
         {
             RoleType = role;
         }
-
+        /// <summary>
+        /// The overloaded constructor for creating a role
+        /// </summary>
+        /// <param name="role">The role that we are creating</param>
         public Role()
         {
 
         }
         [Key]
-        public string RoleType { get; set; } 
-
+        public string RoleType { get; set; }
+        // The collection of users associated to a role
         public ICollection<User> User { get; set; }
     }
 }
