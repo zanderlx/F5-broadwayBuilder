@@ -24,6 +24,8 @@ namespace ServiceLayer.Test
 
             var user = new User(username, password, dob, city, stateProvince, country, role, enable);
             var permission = new Permission("CreateUser");
+            user.Permissions.Add(permission);
+            var NewRole = new Role("general");
 
             BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
 
@@ -31,58 +33,34 @@ namespace ServiceLayer.Test
             var actual = false;
             
 
-            var test = new Mock<IPermissionRepository>();
-            test
-                .Setup(m => m.UserHasPermission(user, permission))
-                .Returns(true);
+            var service = new AuthorizationService(broadwayBuilderContext);
+            var userService = new UserService(broadwayBuilderContext);
+            var roleService = new RoleService(broadwayBuilderContext);
+            var permissionService = new PermissionService(broadwayBuilderContext);
 
-            var service = new AuthorizationService(test.Object);
+            permissionService.CreatePermission(permission);
+            broadwayBuilderContext.SaveChanges();
+            roleService.CreateRole(NewRole);
+            broadwayBuilderContext.SaveChanges();
+            userService.CreateUser(user);
+            broadwayBuilderContext.SaveChanges();
 
-            //Act 
+            // Act 
             actual = service.HasPermission(user,permission);
 
-            //Assert
+            
+            userService.DeleteUserPermission(user, permission);
+            userService.DeleteUser(user);
+            roleService.DeleteRole(NewRole);
+            permissionService.DeletePermission(permission);
+            broadwayBuilderContext.SaveChanges();
+
+            // Assert
             Assert.AreEqual(expected, actual);
 
             
         }
 
-        [TestMethod]
-        public void AuthorizationService_UserDoesNotHavePermission_Pass()
-        {
-            // Arrange
-            var username = "abixcastro@gmail.com";
-            var password = "abc123@@@!!!";
-            var dob = new DateTime(1994, 1, 7);
-            var city = "San Diego";
-            var stateProvince = "California";
-            var country = "United States";
-            var role = "general";
-            var enable = true;
-
-            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
-            var permission = new Permission("CreateUser");
-
-            BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
-
-            var expected = false;
-            var actual = true;
-
-
-            var test = new Mock<IPermissionRepository>();
-            test
-                .Setup(m => m.UserHasPermission(user, permission))
-                .Returns(false);
-
-            var service = new AuthorizationService(test.Object);
-
-            //Act 
-            actual = service.HasPermission(user, permission);
-
-            //Assert
-            Assert.AreEqual(expected, actual);
-
-
-        }
+        
     }
 }

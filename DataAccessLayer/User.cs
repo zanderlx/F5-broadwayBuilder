@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,14 +15,14 @@ namespace DataAccessLayer
         /// </summary>
         public User()
         {
-            this.username = null;
-            this.password = null;
-            this.dateOfBirth = new DateTime();
-            this.city = null;
-            this.stateProvince = null;
-            this.country = null;
-            this.roleType = null;
-            this.isEnabled = false;
+            this.Username = null;
+            this.Password = null;
+            this.DateOfBirth = new DateTime();
+            this.City = null;
+            this.StateProvince = null;
+            this.Country = null;
+            this.RoleType = null;
+            this.IsEnabled = false;
         }
 
         /// <summary>
@@ -37,44 +38,45 @@ namespace DataAccessLayer
         /// <param name="isEnabled">The status that the user account can have</param>
         public User(string email, string password, DateTime dob, string city, string stateProvince, string country, string role, bool isEnabled)
         {
-            this.username = email.ToLower();
-            this.password = password;
-            this.dateOfBirth = dob;
-            this.city = city;
-            this.stateProvince = stateProvince;
-            this.country = country;
-            this.roleType = role;
-            this.isEnabled = isEnabled;
+            this.Username = email.ToLower();
+            this.Password = password;
+            this.DateOfBirth = dob;
+            this.City = city;
+            this.StateProvince = stateProvince;
+            this.Country = country;
+            this.RoleType = role;
+            this.IsEnabled = isEnabled;
+            Permissions = new Collection<Permission>();
         }
 
         [Key]
-        public string username { get; set; }
+        public string Username { get; set; }
 
         [Required]
-        public string password { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime dateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
-        public string city { get; set; }
+        public string City { get; set; }
 
         [Required]
-        public string stateProvince { get; set; }
+        public string StateProvince { get; set; }
 
         [Required]
-        public string country { get; set; }
+        public string Country { get; set; }
 
         [Required]
-        public bool isEnabled { get; set; }
+        public bool IsEnabled { get; set; }
 
         [Required]
-        public string roleType { get; set; }
+        public string RoleType { get; set; }
 
         [Required]
-        public Role role { get; set; }
+        public Role Role { get; set; }
 
-        public virtual ICollection<Permission> permissions { get; set; }
+        public virtual ICollection<Permission> Permissions { get; set; }
     }
 }
