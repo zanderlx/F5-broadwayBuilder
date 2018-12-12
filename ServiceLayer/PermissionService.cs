@@ -35,7 +35,7 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="role">The role we want to retrieve</param>
         /// <returns></returns>
-        public Permission GetUser(string permission)
+        public Permission GetPermission(string permission)
         {
             return _dbContext.Permissions.Find(permission);
         }
