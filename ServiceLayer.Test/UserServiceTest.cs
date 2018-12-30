@@ -121,7 +121,6 @@ namespace ServiceLayer.Test
             user.DateOfBirth = new DateTime(1992, 12, 7);
             user.City = "Irvine";
 
-
             var expected = user;
 
             //Act
@@ -177,7 +176,6 @@ namespace ServiceLayer.Test
             {
                 actual = false;
             }
-
             user.Username = "abixcastro@gmail.com";
             userService.DeleteUser(user);
             context.SaveChanges();
@@ -259,5 +257,90 @@ namespace ServiceLayer.Test
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void EnableUser_Pass()
+        {
+            //Arrange
+            var context = new BroadwayBuilderContext();
+            var roleService = new RoleService(context);
+            var userService = new UserService(context);
+
+            var username = "abixcastro@gmail.com";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
+            var stateProvince = "California";
+            var country = "United States";
+            var role = "general";
+            var enable = false;
+
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+            var NewRole = new Role("general");
+
+            roleService.CreateRole(NewRole);
+            context.SaveChanges();
+
+            userService.CreateUser(user);
+            context.SaveChanges();
+
+            var expected = true;
+            var actual = false;
+
+            //Act
+            User EnabledUser = userService.EnableAccount(user);
+            context.SaveChanges();
+            actual = EnabledUser.IsEnabled;
+
+            userService.DeleteUser(user);
+            roleService.DeleteRole(NewRole);
+            context.SaveChanges();
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void DisableUser_Pass()
+        {
+            //Arrange
+            var context = new BroadwayBuilderContext();
+            var roleService = new RoleService(context);
+            var userService = new UserService(context);
+
+            var username = "abixcastro@gmail.com";
+            var password = "abc123@@@!!!";
+            var dob = new DateTime(1994, 1, 7);
+            var city = "San Diego";
+            var stateProvince = "California";
+            var country = "United States";
+            var role = "general";
+            var enable = true;
+
+            var user = new User(username, password, dob, city, stateProvince, country, role, enable);
+            var NewRole = new Role("general");
+
+            roleService.CreateRole(NewRole);
+            context.SaveChanges();
+
+            userService.CreateUser(user);
+            context.SaveChanges();
+
+            var expected = false;
+            var actual = true;
+
+            //Act
+            User DisabledUser = userService.DisableAccount(user);
+            context.SaveChanges();
+            actual = DisabledUser.IsEnabled;
+
+            userService.DeleteUser(user);
+            roleService.DeleteRole(NewRole);
+            context.SaveChanges();
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
     }
 }

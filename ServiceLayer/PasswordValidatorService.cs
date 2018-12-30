@@ -14,7 +14,7 @@ namespace ServiceLayer
         public string _HashedPlaintext { get; private set; }
         public string _HashPrefix { get; private set; }
         public string _HashSuffix { get; private set; }
-        public string _APIResponse { get; private set; }
+        public string _ApiResponse { get; private set; }
         public string _HashResponse { get; private set; }
         public int _NumberOfBreaches { get; private set; }
 
@@ -35,10 +35,10 @@ namespace ServiceLayer
             _HashSuffix = GetHashSuffix(_HashedPlaintext);
 
             // The full response of the "Have I Been Pwned" API
-            _APIResponse = ConsumePasswordAPI(_HashPrefix).Result;
+            _ApiResponse = ConsumePasswordAPI(_HashPrefix).Result;
 
             // The hash we are looking for in the API
-            _HashResponse = FindSpecificHash(_APIResponse);
+            _HashResponse = FindSpecificHash(_ApiResponse);
 
             // The number of times the password being used has been breached
             _NumberOfBreaches = GetNumberOfBreaches();
@@ -111,7 +111,7 @@ namespace ServiceLayer
             }
 
             // If the target hash suffix is found, get its location via substring
-            string targetHash = apiResponse.Substring(startingIndex, _APIResponse.Length - startingIndex);
+            string targetHash = apiResponse.Substring(startingIndex, _ApiResponse.Length - startingIndex);
 
             // Obtains the index of a new line delimiter
             int indexOfNewLine = targetHash.IndexOf(Environment.NewLine);

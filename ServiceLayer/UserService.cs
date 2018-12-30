@@ -58,7 +58,7 @@ namespace ServiceLayer
         /// <returns>The updated user</returns>
         public User UpdateUser(User user)
         {
-            User userToUpdate = _DbContext.Users.Find(user.Username);
+            User userToUpdate = _dbContext.Users.Find(user.Username);
             // If the user found is not null, update the user attributes
             if (userToUpdate != null)
             {
@@ -78,7 +78,7 @@ namespace ServiceLayer
         /// <param name="user">The user we want to delete</param>
         public void DeleteUser(User user)
         {
-            User UserToDelete = _DbContext.Users.Find(user.Username);
+            User UserToDelete = _dbContext.Users.Find(user.Username);
             // If the user found is not null, delete the user
             if (UserToDelete != null)
             {
@@ -86,7 +86,7 @@ namespace ServiceLayer
             }
         }
 
-        // TODO: Why do we have another DeleteUser with arugment string
+        
         public void DeleteUser(string user)
         {
             User userToDelete = _DbContext.Users.Find(user);
@@ -104,8 +104,7 @@ namespace ServiceLayer
         /// <param name="user">The user whos account we want to enable</param>
         public void EnableAccount(User user)
         {
-            User UserToEnable = _DbContext.Users.Find(user.Username);
-            // If the user found is not null, enable the user's account
+            User UserToEnable = _dbContext.Users.Find(user.Username);
             if (UserToEnable != null)
             {
                 UserToEnable.IsEnabled = true;
@@ -119,11 +118,10 @@ namespace ServiceLayer
         /// <param name="user">The user that we want to disable</param>
         public void DisableAccount(User user)
         {
-            User userToDisable = _DbContext.Users.Find(user.Username);
-            // If the user found is not null, disable the user's account
-            if (userToDisable != null)
+            User UserToDisable = _dbContext.Users.Find(user.Username);
+            if (UserToDisable != null)
             {
-                userToDisable.IsEnabled = false;
+                UserToDisable.IsEnabled = false;
             }
         }
 
@@ -135,13 +133,13 @@ namespace ServiceLayer
         /// <param name="permission">The permission we will be adding to a user</param>
         public void AddUserPermission(User user, Permission permission)
         {
-            User userToAddPermission = _DbContext.Users.Find(user.Username);
-            Permission permissionToAdd = _DbContext.Permissions.Find(permission.PermissionTitle);
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
             // If the user and the permission found is not null, add the permission to the user
             if (userToAddPermission != null && permissionToAdd != null)
             {
-                userToAddPermission.Permissions.Add(permissionToAdd);
+                UserToAddPermission.Permissions.Add(permission);
             }
         }
 
@@ -153,8 +151,8 @@ namespace ServiceLayer
         /// <param name="permission">The permission to be removed from the user</param>
         public void DeleteUserPermission(User user, Permission permission)
         {
-            User userToAddPermission = _DbContext.Users.Find(user.Username);
-            Permission permissionToAdd = _DbContext.Permissions.Find(permission.PermissionTitle);
+            User userToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission permissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
             // If the user and the permission found is not null, remove the permission from the user
             if (userToAddPermission != null && permissionToAdd != null)
