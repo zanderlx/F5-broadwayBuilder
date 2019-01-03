@@ -11,8 +11,7 @@ namespace ServiceLayer
     {
         private readonly BroadwayBuilderContext _dbContext;
 
-        // Constructor
-        public PermissionService(BroadwayBuilderContext Context)
+        public PermissionService(BroadwayBuilderContext context)
         {
             this._dbContext = Context;
         }
@@ -24,9 +23,7 @@ namespace ServiceLayer
         /// <param name="role">The new role we want to create</param>
         public void CreatePermission(Permission permission)
         {
-
-            _dbContext.Permissions.Add(permission);
-
+            _DbContext.Permissions.Add(permission);
         }
 
         /// <summary>
@@ -37,7 +34,7 @@ namespace ServiceLayer
         /// <returns></returns>
         public Permission GetPermission(string permission)
         {
-            return _dbContext.Permissions.Find(permission);
+            return _DbContext.Permissions.Find(permission);
         }
 
         /// <summary>
@@ -47,11 +44,11 @@ namespace ServiceLayer
         /// <param name="role">The role that we want to delete</param>
         public void DeletePermission(Permission permission)
         {
+            Permission permissionToDelete = _DbContext.Permissions.Find(permission.PermissionTitle);
 
-            Permission permissionToDelete = _dbContext.Permissions.Find(permission.PermissionTitle);
             if (permissionToDelete != null)
             {
-                _dbContext.Permissions.Remove(permissionToDelete);
+                _DbContext.Permissions.Remove(permissionToDelete);
             }
 
         }
