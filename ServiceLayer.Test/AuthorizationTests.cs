@@ -38,6 +38,7 @@ namespace ServiceLayer.Test
             var roleService = new RoleService(broadwayBuilderContext);
             var permissionService = new PermissionService(broadwayBuilderContext);
 
+            //Adding data into tables
             permissionService.CreatePermission(permission);
             broadwayBuilderContext.SaveChanges();
             roleService.CreateRole(NewRole);
