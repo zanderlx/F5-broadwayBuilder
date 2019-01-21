@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer.Test", "Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{7903295B-E964-4668-A569-D61C6697D2C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BroadwayBuilder.Api", "BroadwayBuilder.Api\BroadwayBuilder.Api.csproj", "{A664303D-7978-4EEE-AF3B-0426E0BA5653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7903295B-E964-4668-A569-D61C6697D2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7903295B-E964-4668-A569-D61C6697D2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7903295B-E964-4668-A569-D61C6697D2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A664303D-7978-4EEE-AF3B-0426E0BA5653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A664303D-7978-4EEE-AF3B-0426E0BA5653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A664303D-7978-4EEE-AF3B-0426E0BA5653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A664303D-7978-4EEE-AF3B-0426E0BA5653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
