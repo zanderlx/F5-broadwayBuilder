@@ -21,7 +21,7 @@ namespace DataAccessLayer
         /// <param name="role">The role that we are creating</param>
         public Role()
         {
-            RoleType = null;
+
         }
         [Key]
         public string RoleType { get; set; }
