@@ -18,7 +18,7 @@ namespace ServiceLayer
         /// Private and readonly gives the benefit of not accidentally changing the
         /// field from another part of that class after it is initialized.
         /// </summary>
-        private readonly BroadwayBuilderContext _DbContext;
+        private readonly BroadwayBuilderContext _dbContext;
 
         /// <summary>
         /// Initializes the BroadwayBuilderContext to an instance of the context passed as an argument
@@ -26,7 +26,7 @@ namespace ServiceLayer
         /// <param name="context"></param>
         public UserService(BroadwayBuilderContext context)
         {
-            this._DbContext = context;
+            this._dbContext = context;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace ServiceLayer
         /// <param name="user">The user that we want to create</param>
         public void CreateUser(User user)
         {
-            _DbContext.Users.Add(user);
+            _dbContext.Users.Add(user);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace ServiceLayer
         /// <returns>The user that was obtained using the username</returns>
         public User GetUser(string username)
         {
-            return _DbContext.Users.Find(username);
+            return _dbContext.Users.Find(username);
         }
 
         /// <summary>
@@ -69,6 +69,7 @@ namespace ServiceLayer
                 userToUpdate.Role = user.Role;
             }
             return userToUpdate;
+
         }
 
         /// <summary>
@@ -82,18 +83,18 @@ namespace ServiceLayer
             // If the user found is not null, delete the user
             if (UserToDelete != null)
             {
-                _DbContext.Users.Remove(UserToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
         
         public void DeleteUser(string user)
         {
-            User userToDelete = _DbContext.Users.Find(user);
+            User UserToDelete = _dbContext.Users.Find(user);
             // If the user found is not null, delete the user
-            if (userToDelete != null)
+            if (UserToDelete != null)
             {
-                _DbContext.Users.Remove(userToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
@@ -102,13 +103,14 @@ namespace ServiceLayer
         /// Enables an account of the user.
         /// </summary>
         /// <param name="user">The user whos account we want to enable</param>
-        public void EnableAccount(User user)
+        public User EnableAccount(User user)
         {
             User UserToEnable = _dbContext.Users.Find(user.Username);
             if (UserToEnable != null)
             {
                 UserToEnable.IsEnabled = true;
             }
+            return UserToEnable;
         }
 
         /// <summary>
@@ -116,13 +118,14 @@ namespace ServiceLayer
         /// Disables the user account using the dbContext
         /// </summary>
         /// <param name="user">The user that we want to disable</param>
-        public void DisableAccount(User user)
+        public User DisableAccount(User user)
         {
             User UserToDisable = _dbContext.Users.Find(user.Username);
             if (UserToDisable != null)
             {
                 UserToDisable.IsEnabled = false;
             }
+            return UserToDisable;
         }
 
         /// <summary>
@@ -137,7 +140,7 @@ namespace ServiceLayer
             Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
             // If the user and the permission found is not null, add the permission to the user
-            if (userToAddPermission != null && permissionToAdd != null)
+            if (UserToAddPermission != null && PermissionToAdd != null)
             {
                 UserToAddPermission.Permissions.Add(permission);
             }
