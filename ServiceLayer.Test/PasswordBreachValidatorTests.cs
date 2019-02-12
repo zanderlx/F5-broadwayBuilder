@@ -24,22 +24,6 @@ namespace ServiceLayer.Test
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void ConsumePasswordAPI_PasswordIsInsecure_Pass()
-        {
-            // Arrange
-            string plaintext = "password";
-            PasswordValidatorService ValidatePassword = new PasswordValidatorService(plaintext);
-            //int numberOfBreaches = ValidatePassword._numberOfBreaches;
-            //var expected = true;
-            //var actual = false;
-
-            //// Act
-            //if (numberOfBreaches > 0) actual = true;
-
-            //// Assert
-            //Assert.AreEqual(expected, actual);
-        }
 
         [TestMethod]
         public void ConsumePasswordAPI_PasswordIsSecure_Pass()

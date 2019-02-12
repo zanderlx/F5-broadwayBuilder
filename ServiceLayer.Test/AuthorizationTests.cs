@@ -24,7 +24,6 @@ namespace ServiceLayer.Test
 
             var user = new User(username, password, dob, city, stateProvince, country, role, enable);
             var permission = new Permission("CreateUser");
-            user.Permissions.Add(permission);
             var NewRole = new Role("general");
 
             BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
@@ -38,6 +37,7 @@ namespace ServiceLayer.Test
             var roleService = new RoleService(broadwayBuilderContext);
             var permissionService = new PermissionService(broadwayBuilderContext);
 
+            //Adding data into tables
             permissionService.CreatePermission(permission);
             broadwayBuilderContext.SaveChanges();
             roleService.CreateRole(NewRole);
