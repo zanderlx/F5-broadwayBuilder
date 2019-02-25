@@ -11,12 +11,12 @@ namespace BroadwayBuilder.Api
     public class UserController : ApiController
     {
 
-        [Route("RegisterUser")]
-        [HttpPost]
+        [Route("HelloWorld")]
+        [HttpGet]
 
-        public string RegisterUser()
+        public string HelloWorld()
         {
-            return "testing";
+            return "Hello World";
         }
     }
 }
