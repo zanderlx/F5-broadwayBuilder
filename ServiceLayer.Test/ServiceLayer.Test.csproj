@@ -70,7 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationTests.cs" />
+    <Compile Include="PermissionServiceTest.cs" />
+    <Compile Include="ProductionServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleServiceTest.cs" />
     <Compile Include="UserServiceTest.cs" />
     <Compile Include="PasswordBreachValidatorTests.cs" />
   </ItemGroup>

@@ -12,16 +12,14 @@ namespace ServiceLayer
 {
     public class AuthorizationService : IAuthorizationService
     {
-        // DbContext would be declared
-        // List<string> permissions;//This stays
-        private readonly IPermissionRepository permissionRepository;
+        
+        private readonly BroadwayBuilderContext _dbContext;
 
-        // Would pass in DbContext instead of List if we were to use DB
-        public AuthorizationService(IPermissionRepository permissionRepository)
+        
+        public AuthorizationService(BroadwayBuilderContext dbcontext)
         {
-            // Initialize the DbContext
-            this.permissionRepository = permissionRepository;
-            // permissions = authorizedPermissions;//call the DbContext to get the permissions and store them into the List
+            //Initialize the DbContext
+            this._dbContext = dbcontext;
         }
         
 
@@ -33,11 +31,28 @@ namespace ServiceLayer
         /// <returns>true if user has permission, false otherwise</returns>
         public bool HasPermission(User user, Permission checkIfAuthorized)
         {
-            if (permissionRepository.UserHasPermission(user, checkIfAuthorized))
+            User getUser = _dbContext.Users.Find(user.Username);
+            if (getUser != null)
             {
-                return true;
+                Permission getUserPermission = getUser.Permissions.Where(s=>s.PermissionTitle==checkIfAuthorized.PermissionTitle).FirstOrDefault<Permission>();
+                if (getUserPermission != null)
+                    return true;
             }
             return false;
+
+        }
+
+        public bool HasPermission(string username, string permissionTitle)
+        {
+            User getUser = _dbContext.Users.Find(username);
+            if (getUser != null)
+            {
+                Permission getUserPermission = getUser.Permissions.Where(s => s.PermissionTitle == permissionTitle).FirstOrDefault<Permission>();
+                if (getUserPermission != null)
+                    return true;
+            }
+            return false;
+
         }
 
 

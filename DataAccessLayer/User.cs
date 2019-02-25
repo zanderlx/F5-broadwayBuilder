@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,36 +9,6 @@ namespace DataAccessLayer
     [Table("Users")]
     public class User
     {
-        [Key]
-        public string Username { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        public string City { get; set; }
-
-        [Required]
-        public string StateProvince { get; set; }
-
-        [Required]
-        public string Country { get; set; }
-
-        [Required]
-        public bool IsEnabled { get; set; }
-
-        [Required]
-        public string RoleType { get; set; }
-
-        [Required]
-        public Role Role { get; set; }
-
-        public virtual ICollection<Permission> Permissions { get; set; }
-
         /// <summary>
         /// The defauly constructor that the User instance needs to work.
         /// Sets all the variables to be null.
@@ -75,6 +46,37 @@ namespace DataAccessLayer
             this.Country = country;
             this.RoleType = role;
             this.IsEnabled = isEnabled;
+            Permissions = new Collection<Permission>();
         }
+
+        [Key]
+        public string Username { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string StateProvince { get; set; }
+
+        [Required]
+        public string Country { get; set; }
+
+        [Required]
+        public bool IsEnabled { get; set; }
+
+        [Required]
+        public string RoleType { get; set; }
+
+        [Required]
+        public Role Role { get; set; }
+
+        public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

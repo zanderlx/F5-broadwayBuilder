@@ -18,7 +18,7 @@ namespace ServiceLayer
         /// Private and readonly gives the benefit of not accidentally changing the
         /// field from another part of that class after it is initialized.
         /// </summary>
-        private readonly BroadwayBuilderContext _DbContext;
+        private readonly BroadwayBuilderContext _dbContext;
 
         /// <summary>
         /// Initializes the BroadwayBuilderContext to an instance of the context passed as an argument
@@ -26,7 +26,7 @@ namespace ServiceLayer
         /// <param name="context"></param>
         public UserService(BroadwayBuilderContext context)
         {
-            this._DbContext = context;
+            this._dbContext = context;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace ServiceLayer
         /// <param name="user">The user that we want to create</param>
         public void CreateUser(User user)
         {
-            _DbContext.Users.Add(user);
+            _dbContext.Users.Add(user);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace ServiceLayer
         /// <returns>The user that was obtained using the username</returns>
         public User GetUser(string username)
         {
-            return _DbContext.Users.Find(username);
+            return _dbContext.Users.Find(username);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ServiceLayer
         /// <returns>The updated user</returns>
         public User UpdateUser(User user)
         {
-            User userToUpdate = _DbContext.Users.Find(user.Username);
+            User userToUpdate = _dbContext.Users.Find(user.Username);
             // If the user found is not null, update the user attributes
             if (userToUpdate != null)
             {
@@ -69,6 +69,7 @@ namespace ServiceLayer
                 userToUpdate.Role = user.Role;
             }
             return userToUpdate;
+
         }
 
         /// <summary>
@@ -78,22 +79,22 @@ namespace ServiceLayer
         /// <param name="user">The user we want to delete</param>
         public void DeleteUser(User user)
         {
-            User UserToDelete = _DbContext.Users.Find(user.Username);
+            User UserToDelete = _dbContext.Users.Find(user.Username);
             // If the user found is not null, delete the user
             if (UserToDelete != null)
             {
-                _DbContext.Users.Remove(UserToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
-        // TODO: Why do we have another DeleteUser with arugment string
+        
         public void DeleteUser(string user)
         {
-            User userToDelete = _DbContext.Users.Find(user);
+            User UserToDelete = _dbContext.Users.Find(user);
             // If the user found is not null, delete the user
-            if (userToDelete != null)
+            if (UserToDelete != null)
             {
-                _DbContext.Users.Remove(userToDelete);
+                _dbContext.Users.Remove(UserToDelete);
             }
         }
 
@@ -102,14 +103,14 @@ namespace ServiceLayer
         /// Enables an account of the user.
         /// </summary>
         /// <param name="user">The user whos account we want to enable</param>
-        public void EnableAccount(User user)
+        public User EnableAccount(User user)
         {
-            User UserToEnable = _DbContext.Users.Find(user.Username);
-            // If the user found is not null, enable the user's account
+            User UserToEnable = _dbContext.Users.Find(user.Username);
             if (UserToEnable != null)
             {
                 UserToEnable.IsEnabled = true;
             }
+            return UserToEnable;
         }
 
         /// <summary>
@@ -117,14 +118,14 @@ namespace ServiceLayer
         /// Disables the user account using the dbContext
         /// </summary>
         /// <param name="user">The user that we want to disable</param>
-        public void DisableAccount(User user)
+        public User DisableAccount(User user)
         {
-            User userToDisable = _DbContext.Users.Find(user.Username);
-            // If the user found is not null, disable the user's account
-            if (userToDisable != null)
+            User UserToDisable = _dbContext.Users.Find(user.Username);
+            if (UserToDisable != null)
             {
-                userToDisable.IsEnabled = false;
+                UserToDisable.IsEnabled = false;
             }
+            return UserToDisable;
         }
 
         /// <summary>
@@ -135,13 +136,13 @@ namespace ServiceLayer
         /// <param name="permission">The permission we will be adding to a user</param>
         public void AddUserPermission(User user, Permission permission)
         {
-            User userToAddPermission = _DbContext.Users.Find(user.Username);
-            Permission permissionToAdd = _DbContext.Permissions.Find(permission.PermissionTitle);
+            User UserToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
             // If the user and the permission found is not null, add the permission to the user
-            if (userToAddPermission != null && permissionToAdd != null)
+            if (UserToAddPermission != null && PermissionToAdd != null)
             {
-                userToAddPermission.Permissions.Add(permissionToAdd);
+                UserToAddPermission.Permissions.Add(permission);
             }
         }
 
@@ -153,8 +154,8 @@ namespace ServiceLayer
         /// <param name="permission">The permission to be removed from the user</param>
         public void DeleteUserPermission(User user, Permission permission)
         {
-            User userToAddPermission = _DbContext.Users.Find(user.Username);
-            Permission permissionToAdd = _DbContext.Permissions.Find(permission.PermissionTitle);
+            User userToAddPermission = _dbContext.Users.Find(user.Username);
+            Permission permissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
 
             // If the user and the permission found is not null, remove the permission from the user
             if (userToAddPermission != null && permissionToAdd != null)
