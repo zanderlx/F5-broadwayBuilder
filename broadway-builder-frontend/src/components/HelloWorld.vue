@@ -19,8 +19,8 @@ export default {
   },
   mounted() {
     axios
-      .get('http://localhost:64512/helloworld')
-      .then(response => (this.info=response))
+      .get('http://api.broadwaybuilder.xyz/helloworld')
+      .then(response => (this.info=response.data))
   }
 }
 </script>
