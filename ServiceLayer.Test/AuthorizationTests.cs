@@ -24,6 +24,7 @@ namespace ServiceLayer.Test
 
             var user = new User(username, password, dob, city, stateProvince, country, role, enable);
             var permission = new Permission("CreateUser");
+            user.Permissions.Add(permission);
             var NewRole = new Role("general");
 
             BroadwayBuilderContext broadwayBuilderContext = new BroadwayBuilderContext();
@@ -48,7 +49,7 @@ namespace ServiceLayer.Test
             // Act 
             actual = service.HasPermission(user,permission);
 
-            
+
             userService.DeleteUserPermission(user, permission);
             userService.DeleteUser(user);
             roleService.DeleteRole(NewRole);
