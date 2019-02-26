@@ -55,7 +55,6 @@
     <Compile Include="BroadwayBuilderContext.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Theater.cs" />
-    <Compile Include="TheaterService.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
