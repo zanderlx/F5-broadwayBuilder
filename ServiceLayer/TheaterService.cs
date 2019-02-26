@@ -1,4 +1,4 @@
-using DataAccessLayer;
+﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,13 @@ namespace ServiceLayer
 {
     public class TheaterService
     {
-        private readonly BroadwayBuiderContext _dbContext;
+        private readonly BroadwayBuilderContext _dbContext;
 
         public TheaterService(BroadwayBuilderContext context)
         {
             this._dbContext = context;
         }
-        
+
         public void CreateTheater(Theater theater)
         {
 
