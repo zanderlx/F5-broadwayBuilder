@@ -34,7 +34,7 @@ namespace DataAccessLayer
 
         public virtual ICollection<Production> Production { get; set; }
         public virtual ICollection<UserPermission> userPermissions { get; set; }
-        public virtual ICollection<HelpWanted> helpWanteds { get; set; }
+        public virtual ICollection<TheaterJobPosting> theaterJobPostings { get; set; }
 
         public Theater(string theaterName, string companyName, string streetAddress, string city,
             string state, string country, string phoneNumber)

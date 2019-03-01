@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class HelpWanted
+    public class TheaterJobPosting
     {
         [Key]
         [Column(Order = 1)]
@@ -31,7 +31,7 @@ namespace DataAccessLayer
         public string Requirements { get; set; }
         public Theater theater { get; set; }
 
-        public HelpWanted( Guid theaterID, DateTime dateTime,string position, string description, string title, string hour, string requirement)
+        public TheaterJobPosting( Guid theaterID, DateTime dateTime,string position, string description, string title, string hour, string requirement)
         {
             this.HelpWantedID = Guid.NewGuid();
             this.TheaterID = theaterID;
@@ -42,7 +42,7 @@ namespace DataAccessLayer
             this.Hours = hour;
             this.Requirements = requirement;
         }
-        public HelpWanted()
+        public TheaterJobPosting()
         {
             this.Position = "";
             this.Description = "";
