@@ -20,15 +20,35 @@ namespace DataAccessLayer
         [Required]
         public DateTime DateCreated { get; set; }
         [Required]
-        public string JobTitle { get; set; }
+        public string Position { get; set; }
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Hours { get; set; }
+        [Required]
+        public string Requirements { get; set; }
         public Theater theater { get; set; }
 
-        public HelpWanted( Guid theaterID, DateTime dateTime,string jobTitle)
+        public HelpWanted( Guid theaterID, DateTime dateTime,string position, string description, string title, string hour, string requirement)
         {
             this.HelpWantedID = Guid.NewGuid();
             this.TheaterID = theaterID;
             this.DateCreated = dateTime;
-            this.JobTitle = jobTitle;
+            this.Position = position;
+            this.Description = description;
+            this.Title = title;
+            this.Hours = hour;
+            this.Requirements = requirement;
+        }
+        public HelpWanted()
+        {
+            this.Position = "";
+            this.Description = "";
+            this.Title = "";
+            this.Hours = "";
+            this.Requirements = "";
         }
     }
 }
