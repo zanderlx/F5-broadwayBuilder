@@ -11,17 +11,22 @@ namespace ServiceLayer
     {
         private readonly BroadwayBuilderContext _dbContext;
 
+        public ProductionJobService(BroadwayBuilderContext dbContext)
+        {
+            this._dbContext = dbContext;
+        }
+
         public void CreateProductionJob(ProductionJobPosting productionJob)
         {
             _dbContext.ProductionJobPostings.Add(productionJob);
         }
 
-        public ProductionJobPosting GetTheaterJob(ProductionJobPosting productionJob)
+        public ProductionJobPosting GetProductionJob(ProductionJobPosting productionJob)
         {
             return _dbContext.ProductionJobPostings.Find(productionJob.HelpWantedID);
         }
 
-        public void UpdateTheaterJob(TheaterJobPosting updatedProductionJob, TheaterJobPosting originalProductionJob)
+        public void UpdateProductionJob(TheaterJobPosting updatedProductionJob, TheaterJobPosting originalProductionJob)
         {
             if (originalProductionJob != null)
             {
@@ -33,7 +38,7 @@ namespace ServiceLayer
             }
         }
 
-        public void DeleteTheaterJob(ProductionJobPosting jobToRemove)
+        public void DeleteProductionJob(ProductionJobPosting jobToRemove)
         {
             if (jobToRemove != null)
             {
