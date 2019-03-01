@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         public BroadwayBuilderContext(): base("name=BroadwayBuilder")
         {
-
+            Database.SetInitializer<BroadwayBuilderContext>(new DropCreateDatabaseIfModelChanges<BroadwayBuilderContext>());
         }
 
         //Creating property on db context
@@ -21,5 +21,8 @@ namespace DataAccessLayer
         public DbSet<Role> Roles { get; set; }
         public DbSet<Production> Productions { get; set; }
         public DbSet<Theater> Theaters { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<HelpWanted> HelpWanteds { get; set; }
     }
 }

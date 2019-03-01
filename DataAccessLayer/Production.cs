@@ -12,9 +12,10 @@ namespace DataAccessLayer
     public class Production
     {
 
-        public Production(Guid productionId, string productionName, string directorFirstName, string directorLastName, string productionCity, string productionState, string productionCountry)
+        public Production(Guid theaterId, string productionName, string directorFirstName, string directorLastName, string productionCity, string productionState, string productionCountry)
         {
-            ProductionID = productionId;
+            ProductionID = Guid.NewGuid();
+            this.TheaterID = theaterId;
             ProductionName = productionName;
             DirectorFirstName = directorFirstName;
             DirectorLastName = directorLastName;
@@ -25,6 +26,7 @@ namespace DataAccessLayer
         }
 
         [Key]
+        [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ProductionID { get; set; }
         public string ProductionName { get; set; }
@@ -33,9 +35,9 @@ namespace DataAccessLayer
         public string ProductionCity { get; set; }
         public string ProductionState { get; set; }
         public string ProductionCountry { get; set; }
-
-        //[ForeignKey("TheaterID")]
-        //public Theater Theater { get; set; }
-       
+        [Key]
+        [Column(Order = 2)]
+        public Guid TheaterID { get; set; }
+        public Theater theater { get; set; }
     }
 }

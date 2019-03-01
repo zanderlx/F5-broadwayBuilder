@@ -24,7 +24,7 @@ namespace ServiceLayer
         /// <param name="role">The new role we want to create</param>
         public void CreatePermission(Permission permission)
         {
-
+            permission.DateCreated = DateTime.Now;
             _dbContext.Permissions.Add(permission);
 
         }
@@ -35,7 +35,7 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="role">The role we want to retrieve</param>
         /// <returns></returns>
-        public Permission GetPermission(string permission)
+        public Permission GetPermission(Guid permission)
         {
             return _dbContext.Permissions.Find(permission);
         }
@@ -48,7 +48,7 @@ namespace ServiceLayer
         public void DeletePermission(Permission permission)
         {
 
-            Permission permissionToDelete = _dbContext.Permissions.Find(permission.PermissionTitle);
+            Permission permissionToDelete = _dbContext.Permissions.Find(permission.PermissionID);
             if (permissionToDelete != null)
             {
                 _dbContext.Permissions.Remove(permissionToDelete);

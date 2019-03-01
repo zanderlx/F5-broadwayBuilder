@@ -23,7 +23,7 @@ namespace ServiceLayer
 
         public void DeleteProduction(Production production)
         {
-            Production productionToDelete = _dbContext.Productions.Find(production.ProductionID);
+            Production productionToDelete = _dbContext.Productions.Find(production.ProductionID,production.TheaterID);
             // If the production found is not null, delete the production
             if (productionToDelete != null)
             {
