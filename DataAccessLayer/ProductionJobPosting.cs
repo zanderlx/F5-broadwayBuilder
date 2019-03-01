@@ -16,7 +16,7 @@ namespace DataAccessLayer
 
     namespace DataAccessLayer
     {
-        public class ProductionHelp
+        public class ProductionJobPosting
         {
             [Key]
             [Column(Order = 1)]
@@ -42,7 +42,7 @@ namespace DataAccessLayer
             public string Requirements { get; set; }
             public Production Production { get; set; }
 
-            public ProductionHelp(Guid productionId, Guid theaterID, DateTime dateTime, string position, string description, string title, string hour, string requirement)
+            public ProductionJobPosting(Guid productionId, Guid theaterID, DateTime dateTime, string position, string description, string title, string hour, string requirement)
             {
                 this.ProductionID = productionId;
                 this.HelpWantedID = Guid.NewGuid();
@@ -54,7 +54,8 @@ namespace DataAccessLayer
                 this.Hours = hour;
                 this.Requirements = requirement;
             }
-            public ProductionHelp()
+
+            public ProductionJobPosting()
             {
                 this.Position = "";
                 this.Description = "";
