@@ -11,6 +11,11 @@ namespace ServiceLayer
     {
         private readonly BroadwayBuilderContext _dbContext;
 
+        public TheaterJobService(BroadwayBuilderContext dbContext)
+        {
+            this._dbContext = dbContext;
+        }
+
         public void CreateTheaterJob(TheaterJobPosting theaterJob)
         {
             _dbContext.TheaterJobPostings.Add(theaterJob);
