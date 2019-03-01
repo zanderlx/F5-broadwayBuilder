@@ -49,10 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\RoleType.cs" />
-    <Compile Include="HelpWanted.cs" />
+    <Compile Include="TheaterJobPosting.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Production.cs" />
-    <Compile Include="ProductionHelp.cs" />
+    <Compile Include="ProductionJobPosting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BroadwayBuilderContext.cs" />
     <Compile Include="Role.cs" />

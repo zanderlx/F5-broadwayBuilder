@@ -41,6 +41,6 @@ namespace DataAccessLayer
         public Guid TheaterID { get; set; }
         public Theater theater { get; set; }
 
-        public virtual ICollection<ProductionHelp> ProductionHelps { get; set; }
+        public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
     }
 }
