@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DataAccessLayer.DataAccessLayer;
 
 namespace DataAccessLayer
 {
@@ -39,5 +40,7 @@ namespace DataAccessLayer
         [Column(Order = 2)]
         public Guid TheaterID { get; set; }
         public Theater theater { get; set; }
+
+        public virtual ICollection<ProductionHelp> ProductionHelps { get; set; }
     }
 }
