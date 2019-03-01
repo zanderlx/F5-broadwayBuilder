@@ -19,6 +19,8 @@ namespace DataAccessLayer
         [Required]
         public string CompanyName { get; set; }
         [Required]
+        public DateTime DateCreated { get; set; }
+        [Required]
         public string StreetAddress { get; set; }
         [Required]
         public string City { get; set; }
@@ -28,15 +30,16 @@ namespace DataAccessLayer
         public string Country { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-        [Required]
-        public string Email { get; set; }
+        
 
-        public ICollection<Production> Production { get; set; }
+        public virtual ICollection<Production> Production { get; set; }
+        public virtual ICollection<UserPermission> userPermissions { get; set; }
+        public virtual ICollection<HelpWanted> helpWanteds { get; set; }
 
-        public Theater(Guid theaterID, string theaterName, string companyName, string streetAddress, string city,
-            string state, string country, string phoneNumber, string email)
+        public Theater(string theaterName, string companyName, string streetAddress, string city,
+            string state, string country, string phoneNumber)
             {
-                this.TheaterID = theaterID;
+                TheaterID = Guid.NewGuid();
                 this.TheaterName = theaterName;
                 this.CompanyName = companyName;
                 this.StreetAddress = streetAddress;
@@ -44,7 +47,6 @@ namespace DataAccessLayer
                 this.State = state;
                 this.Country = country;
                 this.PhoneNumber = phoneNumber;
-                this.Email = email;
             }            
     }
 }

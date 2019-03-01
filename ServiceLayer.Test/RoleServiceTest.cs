@@ -11,7 +11,7 @@ namespace ServiceLayer.Test
         public void RoleService_CreateRole_Pass()
         {
             // Arrange
-            var NewRole = new Role("GENERAL");
+            var NewRole = new Role("GENERAL",true);
 
             bool expected = true;
             bool actual = false;
@@ -43,7 +43,7 @@ namespace ServiceLayer.Test
 
             string role = "ADMIN";
 
-            var NewRole = new Role(role);
+            var NewRole = new Role(role,true);
 
             var expected = NewRole;
 
@@ -54,7 +54,7 @@ namespace ServiceLayer.Test
             roleService.CreateRole(NewRole);
             context.SaveChanges();
 
-            var actual = roleService.GetRole(role);
+            var actual = roleService.GetRole(NewRole.RoleID);
 
             roleService.DeleteRole(NewRole);
             context.SaveChanges();
@@ -69,7 +69,7 @@ namespace ServiceLayer.Test
         public void RoleService_DeleteRole_Pass()
         {
             // Arrange
-            var NewRole = new Role("GENERAL");
+            var NewRole = new Role("GENERAL",true);
 
             bool expected = true;
             bool actual = false;

@@ -16,13 +16,14 @@ namespace DataAccessLayer
         public User()
         {
             this.Username = null;
-            this.Password = null;
+            this.FirstName = null;
+            this.LastName = null;
             this.DateOfBirth = new DateTime();
             this.City = null;
             this.StateProvince = null;
             this.Country = null;
-            this.RoleType = null;
-            this.IsEnabled = false;
+            this.Age = 0;
+            this.isEnabled = false;
         }
 
         /// <summary>
@@ -36,24 +37,31 @@ namespace DataAccessLayer
         /// <param name="country">The country that the user lives at</param>
         /// <param name="role">The role that the user will have</param>
         /// <param name="isEnabled">The status that the user account can have</param>
-        public User(string email, string password, DateTime dob, string city, string stateProvince, string country, string role, bool isEnabled)
+        public User(string email, string firstName, string lastName, int age, DateTime dob, string city, string stateProvince, string country, bool isEnabled)
         {
             this.Username = email.ToLower();
-            this.Password = password;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Age = age;
             this.DateOfBirth = dob;
             this.City = city;
             this.StateProvince = stateProvince;
             this.Country = country;
-            this.RoleType = role;
-            this.IsEnabled = isEnabled;
-            Permissions = new Collection<Permission>();
+            this.isEnabled = isEnabled;
         }
 
         [Key]
+        [Required]
         public string Username { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        [Required]
+        public int Age { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -69,14 +77,8 @@ namespace DataAccessLayer
         public string Country { get; set; }
 
         [Required]
-        public bool IsEnabled { get; set; }
-
-        [Required]
-        public string RoleType { get; set; }
-
-        [Required]
-        public Role Role { get; set; }
-
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public bool isEnabled { get; set; }
+        
+        public virtual ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

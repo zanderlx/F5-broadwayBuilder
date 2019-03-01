@@ -25,7 +25,7 @@ namespace ServiceLayer.Test
 
             var aString = "Rate Show";
 
-            var permission = new Permission(aString);
+            var permission = new Permission(aString,true);
 
 
 
@@ -76,7 +76,7 @@ namespace ServiceLayer.Test
 
             var aString = "RateShow";
 
-            var permission = new Permission(aString);
+            var permission = new Permission(aString,true);
 
             var context = new BroadwayBuilderContext();
 
@@ -97,7 +97,7 @@ namespace ServiceLayer.Test
 
 
 
-            Permission getPermission = permissionService.GetPermission(aString);
+            Permission getPermission = permissionService.GetPermission(permission.PermissionID);
 
             if (getPermission != null)
 
@@ -126,7 +126,7 @@ namespace ServiceLayer.Test
 
             var aString = "Rate Show";
 
-            var permission = new Permission(aString);
+            var permission = new Permission(aString,true);
 
 
 

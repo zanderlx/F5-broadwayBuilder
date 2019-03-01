@@ -62,11 +62,12 @@ namespace ServiceLayer
             // If the user found is not null, update the user attributes
             if (userToUpdate != null)
             {
-                userToUpdate.Password = user.Password;
+                userToUpdate.FirstName = user.FirstName;
+                userToUpdate.LastName = user.LastName;
                 userToUpdate.StateProvince = user.StateProvince;
                 userToUpdate.Country = user.Country;
                 userToUpdate.City = user.City;
-                userToUpdate.Role = user.Role;
+                userToUpdate.isEnabled = user.isEnabled;
             }
             return userToUpdate;
 
@@ -108,7 +109,7 @@ namespace ServiceLayer
             User UserToEnable = _dbContext.Users.Find(user.Username);
             if (UserToEnable != null)
             {
-                UserToEnable.IsEnabled = true;
+                UserToEnable.isEnabled = true;
             }
             return UserToEnable;
         }
@@ -123,7 +124,7 @@ namespace ServiceLayer
             User UserToDisable = _dbContext.Users.Find(user.Username);
             if (UserToDisable != null)
             {
-                UserToDisable.IsEnabled = false;
+                UserToDisable.isEnabled = false;
             }
             return UserToDisable;
         }
@@ -134,16 +135,14 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="user">The user who we will be adding a permission to</param>
         /// <param name="permission">The permission we will be adding to a user</param>
-        public void AddUserPermission(User user, Permission permission)
+        public void AddUserPermission(User user, Permission permission,Theater theater)
         {
-            User UserToAddPermission = _dbContext.Users.Find(user.Username);
-            Permission PermissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
+            _dbContext.UserPermissions.Add(new UserPermission(user.Username, permission.PermissionID, theater.TheaterID, true));
+        }
 
-            // If the user and the permission found is not null, add the permission to the user
-            if (UserToAddPermission != null && PermissionToAdd != null)
-            {
-                UserToAddPermission.Permissions.Add(permission);
-            }
+        public UserPermission GetUserPermission(User user, Permission permission, Theater theater)
+        {
+            return _dbContext.UserPermissions.Find(user.Username, permission.PermissionID, theater.TheaterID); 
         }
 
         /// <summary>
@@ -152,15 +151,12 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="user">The user whos permission we want to remove</param>
         /// <param name="permission">The permission to be removed from the user</param>
-        public void DeleteUserPermission(User user, Permission permission)
+        public void DeleteUserPermission(UserPermission userPermission)
         {
-            User userToAddPermission = _dbContext.Users.Find(user.Username);
-            Permission permissionToAdd = _dbContext.Permissions.Find(permission.PermissionTitle);
-
-            // If the user and the permission found is not null, remove the permission from the user
-            if (userToAddPermission != null && permissionToAdd != null)
+            UserPermission permissionToDelete = _dbContext.UserPermissions.Find(userPermission.UserName,userPermission.PermissionID,userPermission.TheaterID);
+            if (permissionToDelete != null)
             {
-                userToAddPermission.Permissions.Remove(permissionToAdd);
+                _dbContext.UserPermissions.Remove(permissionToDelete);
             }
         }
     }

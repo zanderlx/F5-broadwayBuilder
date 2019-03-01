@@ -10,8 +10,13 @@ namespace ServiceLayer.Test
         [TestMethod]
         public void ProductionService_CreateProduction_Pass()
         {
+            var context = new BroadwayBuilderContext();
+            var theaterService = new TheaterService(context);
             // Arrange
-            var productionId = Guid.NewGuid();
+            var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
+            theaterService.CreateTheater(theater);
+            context.SaveChanges();
+            //var productionId = Guid.NewGuid();
             var productionName = "The Lion King";
             var directorFirstName = "Jane";
             var directorLastName = "Doe";
@@ -20,12 +25,10 @@ namespace ServiceLayer.Test
             var productionCountry = "United States";
 
 
-            var production = new Production(productionId, productionName, directorFirstName, directorLastName, productionCity, productionState, productionCountry);
+            var production = new Production(theater.TheaterID, productionName, directorFirstName, directorLastName, productionCity, productionState, productionCountry);
 
             var expected = true;
             var actual = false;
-
-            var context = new BroadwayBuilderContext();
 
             var productionService = new ProductionService(context);
 
@@ -38,8 +41,10 @@ namespace ServiceLayer.Test
                 actual = true;
 
             // Assert
-            //productionService.DeleteProduction(production);
-            //context.SaveChanges();
+            productionService.DeleteProduction(production);
+            context.SaveChanges();
+            theaterService.DeleteTheater(theater);
+            context.SaveChanges();
             Assert.AreEqual(expected, actual);
 
 

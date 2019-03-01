@@ -18,7 +18,17 @@ namespace ServiceLayer
 
         public void CreateTheater(Theater theater)
         {
-
+            theater.DateCreated = DateTime.Now;
+            _dbContext.Theaters.Add(theater);
+        }
+        public void DeleteTheater(Theater theater)
+        {
+            Theater theaterToDelete = _dbContext.Theaters.Find(theater.TheaterID);
+            
+            if (theaterToDelete != null)
+            {
+                _dbContext.Theaters.Remove(theaterToDelete);
+            }
         }
     }
 }
