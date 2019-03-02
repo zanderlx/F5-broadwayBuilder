@@ -13,13 +13,38 @@ namespace ServiceLayer
 
         public ProductionService(BroadwayBuilderContext dbcontext)
         {
-            this._dbContext = dbcontext;
+            _dbContext = dbcontext;
         }
 
         public void CreateProduction(Production production)
         {
             _dbContext.Productions.Add(production);
         }
+
+        public Production GetProduction(Guid productionId)
+        {
+            return _dbContext.Productions.Find(productionId);
+        }
+
+        public Production UpdateProduction(Production production)
+        {
+            Production currentProduction = _dbContext.Productions.Find(production.ProductionID);
+
+            if (currentProduction != null)
+            {
+                currentProduction.ProductionName = production.ProductionName;
+                currentProduction.DirectorFirstName = production.DirectorFirstName;
+                currentProduction.DirectorLastName = production.DirectorLastName;
+                currentProduction.Street = production.Street;
+                currentProduction.City = production.City;
+                currentProduction.StateProvince = production.StateProvince;
+                currentProduction.Country = production.Country;
+                currentProduction.Zipcode = production.Zipcode;
+            }
+
+            return currentProduction;
+        }
+
 
         public void DeleteProduction(Production production)
         {
@@ -31,6 +56,6 @@ namespace ServiceLayer
             }
         }
 
-        // TODO: Incomplete service - Must finish adding other methods
+        
     }
 }
