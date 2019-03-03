@@ -18,6 +18,7 @@ namespace ServiceLayer
 
         public void CreateProductionJob(ProductionJobPosting productionJob)
         {
+            productionJob.DateCreated = DateTime.Now;
             _dbContext.ProductionJobPostings.Add(productionJob);
         }
 
@@ -40,7 +41,8 @@ namespace ServiceLayer
 
         public void DeleteProductionJob(ProductionJobPosting jobToRemove)
         {
-            if (jobToRemove != null)
+            ProductionJobPosting productionJob = _dbContext.ProductionJobPostings.Find(jobToRemove.HelpWantedID);
+            if (productionJob != null)
             {
                 _dbContext.ProductionJobPostings.Remove(jobToRemove);
             }

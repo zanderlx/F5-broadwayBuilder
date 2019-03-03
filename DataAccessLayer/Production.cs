@@ -13,7 +13,7 @@ namespace DataAccessLayer
     public class Production
     {
         [Key]
-        [Column(Order = 1)]
+        //[Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ProductionID { get; set; }
         public string ProductionName { get; set; }
@@ -25,8 +25,8 @@ namespace DataAccessLayer
         public string Country { get; set; }
         public string Zipcode { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        //[Key]
+        //[Column(Order = 2)]
         public Guid TheaterID { get; set; }
         public Theater theater { get; set; }
 
