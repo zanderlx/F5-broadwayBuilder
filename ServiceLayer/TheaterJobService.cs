@@ -18,6 +18,7 @@ namespace ServiceLayer
 
         public void CreateTheaterJob(TheaterJobPosting theaterJob)
         {
+            theaterJob.DateCreated = DateTime.Now;
             _dbContext.TheaterJobPostings.Add(theaterJob);
         }
 
@@ -38,8 +39,9 @@ namespace ServiceLayer
             }
         }
 
-        public void DeleteTheaterJob(TheaterJobPosting jobToRemove)
+        public void DeleteTheaterJob(TheaterJobPosting theaterJob)
         {
+            TheaterJobPosting jobToRemove = _dbContext.TheaterJobPostings.Find(theaterJob.HelpWantedID);
             if (jobToRemove != null)
             {
                 _dbContext.TheaterJobPostings.Remove(jobToRemove);
