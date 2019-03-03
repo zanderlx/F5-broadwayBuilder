@@ -24,10 +24,12 @@ namespace BroadwayBuilder.Api.Controllers
                 //get the content, headers, etc the full request of the current http request
                 var httpRequest = HttpContext.Current.Request;
 
+                // Todo: Check if length of httpRequest.Files == 1 to ensure only 1 file is uploaded
+
                 foreach (string filename in httpRequest.Files)
                 {   
                     var putFile = httpRequest.Files[filename];
-                    if (putFile != null && putFile.ContentLength > 0)
+                    if (putFile != null && putFile.ContentLength > 0) //validates if file exists ContentLengh is # of bytes
                     {
 
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
