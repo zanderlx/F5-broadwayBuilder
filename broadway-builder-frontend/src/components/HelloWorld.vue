@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://broadwaybuilder.xyz/helloworld")
+      .get("http://api.broadwaybuilder.xyz/helloworld")
       .then(response => (this.info = response.data))
   }
 }
