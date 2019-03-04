@@ -16,7 +16,11 @@ export default {
   },
   mounted() {
     axios
+<<<<<<< HEAD
       .get("http://api.broadwaybuilder.xyz/helloworld")
+=======
+      .get("http://broadwaybuilder.xyz/helloworld")
+>>>>>>> e431edf614ad686310ab408a39857bcb0b5b2838
       .then(response => (this.info = response.data))
   }
 }
