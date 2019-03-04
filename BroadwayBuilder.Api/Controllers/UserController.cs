@@ -6,7 +6,7 @@ using System.Threading.Tasks; // For doing async (async Task<>) await
 using System.Net.Http;
 using System.Web.Http;
 
-namespace BroadwayBuilder.Api
+namespace BroadwayBuilder.Api 
 {
     public class UserController : ApiController
     {
