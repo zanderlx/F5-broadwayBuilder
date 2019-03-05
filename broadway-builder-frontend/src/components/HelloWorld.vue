@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ info }}</h1>
+    <div class="control">
+      <h1>Search</h1>
+      <input class="input is-medium is-rounded" type="text" placeholder="Theatre, company, city, etc..">
+    </div>
   </div>
 </template>
 
@@ -38,4 +42,11 @@ li {
 a {
   color: #42b983;
 }
+
+h1{
+  font-size: 2em;}
+.control 
+  {
+    padding: 10em;
+  }
 </style>
