@@ -3,9 +3,8 @@
 <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item">
-      <img src="@/assets/download.png">
+      <router-link to="/"><img src="@/assets/download.png"></router-link>
     </a>
-    <div class="MainTitle">Broadway Builder</div>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -17,19 +16,31 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item">
-        Home
+        <router-link to="/">Broadway Builder</router-link>
       </a>
-
-      <a class="navbar-item" to="/about">
-        About
-      </a>
+      
     </div>
 
     <div class="navbar-end">
+            <a class="navbar-item">
+        <router-link to="/">Home</router-link>
+      </a>
+
+      <a class="navbar-item">
+        <router-link to="/about">Theatres</router-link>
+      </a>
+
+      <a class="navbar-item">
+        Account
+      </a>
+
+      <a class="navbar-item">
+        Contact Us
+      </a>
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-light">
-            Login / Sign up
+            Login / Register
           </a>
         </div>
       </div>
@@ -57,14 +68,15 @@ nav
 
 .navbar-menu
   font-weight: normal
+  align: right
 
-.MainTitle
-  line-height: 55px
+a
+  color: #FFF
+
+a:hover 
+   color: white
+
 
 .buttons
   text-shadow: 0px 0px white
-
-router-link
-  color: white
-
 </style>
