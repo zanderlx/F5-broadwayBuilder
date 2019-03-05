@@ -28,6 +28,11 @@ export default new Router({
       path: '/contactus',
       name: 'contactus',
       component: () => import('./views/ContactUs.vue')
+    },
+    {
+      path: '/theater/{theaterid}/helpwanted',
+      name: 'helpwanted',
+      component: () => import('./views/HelpWanted/UserHelpWanted.vue')
     }
   ]
 })
