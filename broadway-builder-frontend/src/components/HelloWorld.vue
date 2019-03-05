@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="HelloWorld">
     <h1>{{ info }}</h1>
     <div class="control">
       <h1>Search</h1>
@@ -31,22 +31,26 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
 
-h1{
-  font-size: 2em;}
-.control 
-  {
-    padding: 10em;
-  }
+h1 {
+  font-size: 2em;
+}
+
+.control {
+  padding: 10em;
+}
 </style>
