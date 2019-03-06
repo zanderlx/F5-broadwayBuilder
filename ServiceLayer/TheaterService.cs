@@ -24,7 +24,7 @@ namespace ServiceLayer
         public void DeleteTheater(Theater theater)
         {
             Theater theaterToDelete = _dbContext.Theaters.Find(theater.TheaterID);
-            
+
             if (theaterToDelete != null)
             {
                 _dbContext.Theaters.Remove(theaterToDelete);
