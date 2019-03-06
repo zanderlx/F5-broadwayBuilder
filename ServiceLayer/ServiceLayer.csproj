@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="SecurityService.cs" />
-    <Compile Include="TheaterService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
