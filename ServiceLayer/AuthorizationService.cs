@@ -29,27 +29,23 @@ namespace ServiceLayer
         /// <param name="user">User that must be checked if they are authorized</param>
         /// <param name="checkIfAuthorized">check if user has this permission</param>
         /// <returns>true if user has permission, false otherwise</returns>
-        public bool HasPermission(User user, Permission checkIfAuthorized)
+        public bool HasPermission(User user, Permission checkIfAuthorized,Theater theater)
         {
-            User getUser = _dbContext.Users.Find(user.Username);
-            if (getUser != null)
+            UserPermission userPermission = _dbContext.UserPermissions.Find(user.Username, checkIfAuthorized.PermissionID, theater.TheaterID);
+            if (userPermission != null)
             {
-                Permission getUserPermission = getUser.Permissions.Where(s=>s.PermissionTitle==checkIfAuthorized.PermissionTitle).FirstOrDefault<Permission>();
-                if (getUserPermission != null)
-                    return true;
+                return true;
             }
             return false;
 
         }
 
-        public bool HasPermission(string username, string permissionTitle)
+        public bool HasPermission(string username, Permission checkIfAuthorized, Theater theater)
         {
-            User getUser = _dbContext.Users.Find(username);
-            if (getUser != null)
+            UserPermission userPermission = _dbContext.UserPermissions.Find(username, checkIfAuthorized.PermissionID, theater.TheaterID);
+            if (userPermission != null)
             {
-                Permission getUserPermission = getUser.Permissions.Where(s => s.PermissionTitle == permissionTitle).FirstOrDefault<Permission>();
-                if (getUserPermission != null)
-                    return true;
+                return true;
             }
             return false;
 

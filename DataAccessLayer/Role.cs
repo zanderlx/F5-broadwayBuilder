@@ -11,9 +11,11 @@ namespace DataAccessLayer
     [Table("Roles")]
     public class Role
     {
-        public Role(string role)
+        public Role(string role, bool disabled)
         {
-            RoleType = role;
+            RoleID = Guid.NewGuid();
+            RoleName = role;
+            this.isEnabled = disabled;
         }
         /// <summary>
         /// The overloaded constructor for creating a role
@@ -23,9 +25,22 @@ namespace DataAccessLayer
         {
 
         }
+
         [Key]
-        public string RoleType { get; set; }
-        // The collection of users associated to a role
-        public ICollection<User> User { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid RoleID { get; set; }
+
+        [Required]
+        public string RoleName { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DateCreated { get; set; }
+
+        [Required]
+        public bool isEnabled { get; set; }
+
+        
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }

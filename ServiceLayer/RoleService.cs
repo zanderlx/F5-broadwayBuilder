@@ -23,6 +23,7 @@ namespace ServiceLayer
         /// <param name="role">The new role we want to create</param>
         public void CreateRole(Role role)
         {
+            role.DateCreated = DateTime.Now;
             _dbContext.Roles.Add(role);
         }
 
@@ -32,7 +33,7 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="role">The role we want to retrieve</param>
         /// <returns></returns>
-        public Role GetRole(string role)
+        public Role GetRole(Guid role)
         {
             return _dbContext.Roles.Find(role);
         }
@@ -45,7 +46,7 @@ namespace ServiceLayer
         public void DeleteRole(Role role)
         {
 
-            Role RoleToDelete = _dbContext.Roles.Find(role.RoleType);
+            Role RoleToDelete = _dbContext.Roles.Find(role.RoleID);
             if (RoleToDelete != null)
             {
                 _dbContext.Roles.Remove(RoleToDelete);

@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationService.cs" />
+    <Compile Include="TheaterJobService.cs" />
+    <Compile Include="ProductionJobService.cs" />
     <Compile Include="IAuthorizationService.cs" />
     <Compile Include="PasswordValidatorService.cs" />
     <Compile Include="PermissionService.cs" />

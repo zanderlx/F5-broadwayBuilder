@@ -11,17 +11,28 @@ namespace DataAccessLayer
     [Table("Permissions")]
     public class Permission
     {
-        public Permission(string permission)
+        public Permission(string permission, bool disabled)
         {
-            PermissionTitle = permission.ToLower();
+            PermissionID = Guid.NewGuid();
+            PermissionName = permission.ToLower();
+            this.Disabled = disabled;
         }
         public Permission()
         {
 
         }
+  
         [Key]
-        public string PermissionTitle { get; set; }
-
-        public virtual ICollection<User> Users { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid PermissionID { get; set; }
+        [Required]
+        public string PermissionName { get; set; }
+        [Required]
+        public DateTime DateCreated { get; set; }
+        [Required]
+        public bool Disabled { get; set; }
+        
+        public virtual ICollection<UserPermission> UserPermissions { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }
