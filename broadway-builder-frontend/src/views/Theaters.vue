@@ -34,11 +34,7 @@
             <div class="field is-grouped is-grouped-multiline">
               <div class="control"><span class="button is-danger is-large">Past Productions</span></div>
               <div class="control"><span class="button is-danger is-large">Information / Contact Us</span></div>
-              <div class="control">
-                <span class="button is-danger is-large">
-                  <router-link to="/theater/{theaterid}/helpwanted">Help Wanted</router-link>
-                </span>
-              </div>
+              <div class="control"><span class="button is-danger is-large">Help Wanted</span></div>
             </div>
           </div>
         </div>
@@ -59,14 +55,14 @@ h1 {
   font-size: 3em;
 }
 
-	.backpic
+.backpic
 	{
 		position:absolute;
 		top: 10px;
 		left: 10px;
 		z-index: 1;
 	}
-	.profpic
+.profpic
 	{
 		position:absolute;
 		top: 25px;
