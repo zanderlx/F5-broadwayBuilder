@@ -29,7 +29,7 @@ export default new Router({
     {
       path: '/theater/{theaterid}/helpwanted',
       name: 'helpwanted',
-      component: () => import('./views/HelpWanted/UserHelpWanted.vue')
+      component: () => import('./views/HelpWanted/AdminHelpWanted.vue')
     }
   ]
 })

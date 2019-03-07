@@ -34,7 +34,11 @@
             <div class="field is-grouped is-grouped-multiline">
               <div class="control"><span class="button is-danger is-large">Past Productions</span></div>
               <div class="control"><span class="button is-danger is-large">Information / Contact Us</span></div>
-              <div class="control"><span class="button is-danger is-large">Help Wanted</span></div>
+              <div class="control">
+                <span class="button is-danger is-large">
+                  <router-link to="/theater/{theaterid}/helpwanted">Admin Help Wanted</router-link>
+                </span>
+              </div>
             </div>
           </div>
         </div>
