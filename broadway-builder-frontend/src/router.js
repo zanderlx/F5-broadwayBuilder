@@ -14,10 +14,7 @@ export default new Router({
     {
       path: '/theaters',
       name: 'theaters',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Theaters.vue')
+      component: () => import('./views/Theaters.vue')
     },
     {
       path: '/account',
@@ -32,7 +29,7 @@ export default new Router({
     {
       path: '/theater/{theaterid}/helpwanted',
       name: 'helpwanted',
-      component: () => import('./views/HelpWanted/UserHelpWanted.vue')
+      component: () => import('./views/HelpWanted/AdminHelpWanted.vue')
     }
   ]
 })

@@ -36,7 +36,7 @@
               <div class="control"><span class="button is-danger is-large">Information / Contact Us</span></div>
               <div class="control">
                 <span class="button is-danger is-large">
-                  <router-link to="/theater/{theaterid}/helpwanted">Help Wanted</router-link>
+                  <router-link to="/theater/{theaterid}/helpwanted">Admin Help Wanted</router-link>
                 </span>
               </div>
             </div>
@@ -59,14 +59,14 @@ h1 {
   font-size: 3em;
 }
 
-	.backpic
+.backpic
 	{
 		position:absolute;
 		top: 10px;
 		left: 10px;
 		z-index: 1;
 	}
-	.profpic
+.profpic
 	{
 		position:absolute;
 		top: 25px;
