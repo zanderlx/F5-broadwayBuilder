@@ -21,6 +21,34 @@ namespace ServiceLayer
             theater.DateCreated = DateTime.Now;
             _dbContext.Theaters.Add(theater);
         }
+
+        public Theater GetTheaterByID(Guid theaterID)
+        {
+            return _dbContext.Theaters.Find(theaterID);
+        }
+
+        public Theater GetTheaterByName(string theaterName)
+        {
+            return _dbContext.Theaters.Find(theaterName);
+        }
+
+        public Theater UpdateTheater(Theater theater)
+        {
+            Theater theaterToUpdate = _dbContext.Theaters.Find(theater.TheaterID);
+
+            if (theaterToUpdate != null)
+            {
+                theaterToUpdate.TheaterName = theater.TheaterName;
+                theaterToUpdate.CompanyName = theater.CompanyName;
+                theaterToUpdate.StreetAddress = theater.StreetAddress;
+                theaterToUpdate.City = theater.City;
+                theaterToUpdate.State = theater.State;
+                theaterToUpdate.Country = theater.Country;
+                theaterToUpdate.PhoneNumber = theater.PhoneNumber;
+            }
+            return theaterToUpdate;
+        }
+
         public void DeleteTheater(Theater theater)
         {
             Theater theaterToDelete = _dbContext.Theaters.Find(theater.TheaterID);
@@ -29,6 +57,12 @@ namespace ServiceLayer
             {
                 _dbContext.Theaters.Remove(theaterToDelete);
             }
+        }
+
+        public Theater DeleteTheaterAgain(Theater theater)
+        {
+            Theater deletedTheater = _dbContext.Theaters.Remove(theater);
+            return deletedTheater;
         }
     }
 }
