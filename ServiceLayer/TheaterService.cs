@@ -22,15 +22,15 @@ namespace ServiceLayer
             _dbContext.Theaters.Add(theater);
         }
 
-        public Theater GetTheaterByID(Guid theaterID)
+        public Theater GetTheaterByID(int theaterID)
         {
             return _dbContext.Theaters.Find(theaterID);
         }
 
-        public Theater GetTheaterByName(string theaterName)
-        {
-            return _dbContext.Theaters.Find(theaterName);
-        }
+        //public Theater GetTheaterByName(string theaterName)
+        //{
+        //    return _dbContext.Theaters.Find(theaterName);
+        //}
 
         public Theater UpdateTheater(Theater theater)
         {
