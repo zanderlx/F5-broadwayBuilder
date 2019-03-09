@@ -30,6 +30,11 @@ export default new Router({
       path: '/theater/{theaterid}/helpwanted',
       name: 'helpwanted',
       component: () => import('./views/HelpWanted/AdminHelpWanted.vue')
+    },
+    {
+      path:'/theater/{theaterid}/userproductioninfo',
+      name: 'userproductioninfo',
+      component: () => import('./views/ProductionInfo/UserProductionInfo.vue')
     }
   ]
 })
