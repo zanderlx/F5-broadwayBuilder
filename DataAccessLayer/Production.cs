@@ -16,13 +16,21 @@ namespace DataAccessLayer
         //[Column(Order = 1)]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductionID { get; set; }
+        [Required]
         public string ProductionName { get; set; }
+        [Required]
         public string DirectorFirstName { get; set; }
+        [Required]
         public string DirectorLastName { get; set; }
+        [Required]
         public string Street { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string StateProvince { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string Zipcode { get; set; }
 
         //[Key]
@@ -31,8 +39,9 @@ namespace DataAccessLayer
         public Theater theater { get; set; }
 
         public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
+        public virtual ICollection<ProductionDateTime> ProductionDateTime { get; set; }
 
-
+        //Overloaded Constructor
         public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
         {
             //ProductionID = Guid.NewGuid();
@@ -46,11 +55,6 @@ namespace DataAccessLayer
             Country = country;
             Zipcode = zipcode;
            
-        }
-
-        public void UploadProgram()
-        {
-           //need to add a relationship between file on server ad production
         }
 
     }

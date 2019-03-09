@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\RoleType.cs" />
+    <Compile Include="ProductionDateTime.cs" />
     <Compile Include="TheaterJobPosting.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Production.cs" />
