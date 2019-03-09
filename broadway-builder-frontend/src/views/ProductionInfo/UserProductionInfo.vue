@@ -1,5 +1,7 @@
 <template>
+
     <div class="UserProductionInfo">
+      <h1>CECS Theatre Dept. | </h1> The Fantastic 5 Ampitheatre
         <PicGrid/>
     </div>
 </template>
@@ -17,6 +19,9 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../node_modules/bulma/bulma.sass'
+
+h1 
+  font-size: 3em
 
 
 </style>
