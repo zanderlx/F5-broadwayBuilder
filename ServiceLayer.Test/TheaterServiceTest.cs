@@ -150,6 +150,7 @@ namespace ServiceLayer.Test
             context.SaveChanges();
 
             theaterService.DeleteTheater(theater);
+            context.SaveChanges();
 
             // Assert
             Assert.AreEqual(expected.TheaterName, actual.TheaterName);
