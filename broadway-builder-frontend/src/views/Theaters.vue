@@ -32,7 +32,10 @@
         <div class="hero-foot">
           <div class="columns is-mobile is-centered">
             <div class="field is-grouped is-grouped-multiline">
-              <div class="control"><span class="button is-danger is-large">Past Productions</span></div>
+              <div class="control"><span class="button is-danger is-large">
+                <router-link to="/theater/{theaterid}/userproductioninfo">Past Productions</router-link>
+                </span>
+                </div>
               <div class="control"><span class="button is-danger is-large">Information / Contact Us</span></div>
               <div class="control">
                 <span class="button is-danger is-large">
@@ -73,4 +76,8 @@ h1 {
 		left: 25px;
 		z-index: 2;
 	}
+
+  .card-footer-item {
+    color: black;
+  }
 </style>
