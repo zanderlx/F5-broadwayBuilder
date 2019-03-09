@@ -12,9 +12,9 @@ namespace DataAccessLayer
     [Table("UserPermissions")]
     public class UserPermission
     {
-        public UserPermission(string userName, Guid permissionId, Guid theaterId, bool disabled)
+        public UserPermission(int userName, int permissionId, int theaterId, bool disabled)
         {
-            this.UserName = userName;
+            this.UserId = userName;
             this.PermissionID = permissionId;
             this.TheaterID = theaterId;
             this.isEnabled = disabled;
@@ -22,7 +22,7 @@ namespace DataAccessLayer
         }
         public UserPermission()
         {
-            this.UserName = null;
+            //this.UserId = null;
             this.isEnabled = false;
             DateCreated = DateTime.Now;
         }
@@ -34,15 +34,15 @@ namespace DataAccessLayer
 
         [Key]
         [Column(Order =1)]
-        public string UserName { get; set; }
+        public int UserId { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public Guid PermissionID { get; set; }
+        public int PermissionID { get; set; }
 
         [Key]
         [Column(Order = 3)]
-        public Guid TheaterID { get; set; }
+        public int TheaterID { get; set; }
 
         public User user { get; set; }
         public Permission permission { get; set; }

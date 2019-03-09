@@ -52,6 +52,12 @@ namespace DataAccessLayer
 
         [Key]
         [Required]
+        public int UserId { get; set; }
+
+
+        [Required]
+        [StringLength(450)]
+        [Index(IsUnique =true)]
         public string Username { get; set; }
 
         [Required]

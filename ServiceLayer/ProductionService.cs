@@ -21,7 +21,7 @@ namespace ServiceLayer
             _dbContext.Productions.Add(production);
         }
 
-        public Production GetProduction(Guid productionId)
+        public Production GetProduction(int productionId)
         {
             return _dbContext.Productions.Find(productionId);
         }

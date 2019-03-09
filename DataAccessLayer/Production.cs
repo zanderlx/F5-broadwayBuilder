@@ -14,8 +14,8 @@ namespace DataAccessLayer
     {
         [Key]
         //[Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ProductionID { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductionID { get; set; }
         public string ProductionName { get; set; }
         public string DirectorFirstName { get; set; }
         public string DirectorLastName { get; set; }
@@ -27,15 +27,15 @@ namespace DataAccessLayer
 
         //[Key]
         //[Column(Order = 2)]
-        public Guid TheaterID { get; set; }
+        public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
         public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
 
 
-        public Production(Guid theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
+        public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
         {
-            ProductionID = Guid.NewGuid();
+            //ProductionID = Guid.NewGuid();
             TheaterID = theaterId;
             ProductionName = productionName;
             DirectorFirstName = directorFirstName;
