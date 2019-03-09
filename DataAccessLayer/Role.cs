@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public Role(string role, bool disabled)
         {
-            RoleID = Guid.NewGuid();
+            //RoleID = Guid.NewGuid();
             RoleName = role;
             this.isEnabled = disabled;
         }
@@ -27,8 +27,8 @@ namespace DataAccessLayer
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid RoleID { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int RoleID { get; set; }
 
         [Required]
         public string RoleName { get; set; }

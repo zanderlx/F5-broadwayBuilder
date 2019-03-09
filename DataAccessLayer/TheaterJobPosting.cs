@@ -11,9 +11,9 @@ namespace DataAccessLayer
     public class TheaterJobPosting
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //[Column(Order = 2)]
-        public Guid HelpWantedID { get; set; }
+        public int HelpWantedID { get; set; }
         [Required]
         public DateTime DateCreated { get; set; }
         [Required]
@@ -26,12 +26,12 @@ namespace DataAccessLayer
         public string Hours { get; set; }
         [Required]
         public string Requirements { get; set; }
-        public Guid TheaterID { get; set; }
+        public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
-        public TheaterJobPosting( Guid theaterID, string position, string description, string title, string hour, string requirement)
+        public TheaterJobPosting( int theaterID, string position, string description, string title, string hour, string requirement)
         {
-            this.HelpWantedID = Guid.NewGuid();
+            //this.HelpWantedID = Guid.NewGuid();
             this.TheaterID = theaterID;
             this.Position = position;
             this.Description = description;
