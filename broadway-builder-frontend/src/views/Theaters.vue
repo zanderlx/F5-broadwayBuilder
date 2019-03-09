@@ -32,7 +32,10 @@
         <div class="hero-foot">
           <div class="columns is-mobile is-centered">
             <div class="field is-grouped is-grouped-multiline">
-              <div class="control"><span class="button is-danger is-large">Past Productions</span></div>
+              <div class="control"><span class="button is-danger is-large">
+                <router-link to="/theater/{theaterid}/userproductioninfo">Past Productions</router-link>
+                </span>
+                </div>
               <div class="control"><span class="button is-danger is-large">Information / Contact Us</span></div>
               <div class="control">
                 <span class="button is-danger is-large">
@@ -42,6 +45,87 @@
             </div>
           </div>
         </div>
+        <div class="columns is-multiline">
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="@/assets/download.png" alt="">
+              
+            </figure>
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-info">
+                Photo Title That is really long to show the clipping
+              </span>       
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a class="card-footer-item">
+              BUY
+            </a>
+        </footer>
+    </div>
+  </div>
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="@/assets/download.png" alt="">
+            </figure>
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-info">
+                Photo Title
+              </span>       
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a class="card-footer-item">
+              BUY
+            </a>
+        </footer>
+    </div>
+  </div>  
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="@/assets/download.png" alt="">
+            </figure>
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-info">
+                Photo Title
+              </span>       
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a class="card-footer-item">
+              BUY
+            </a>
+        </footer>
+    </div>
+  </div>
+  <div class="column is-one-quarter-desktop is-half-tablet">
+    <div class="card">
+        <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="@/assets/download.png" alt="">
+            </figure>
+            <div class="card-content is-overlay is-clipped">
+              <span class="tag is-info">
+                Photo Title
+              </span>       
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a class="card-footer-item">
+              BUY
+            </a>
+        </footer>
+    </div>
+  </div>
+
+
+</div>
   </div>
 </template>
 
@@ -73,4 +157,8 @@ h1 {
 		left: 25px;
 		z-index: 2;
 	}
+
+  .card-footer-item {
+    color: black;
+  }
 </style>
