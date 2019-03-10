@@ -2,7 +2,7 @@
   <div class="HelloWorld">
     <h1>{{ info }}</h1>
     <div class="control">
-      <h1>Search</h1>
+      <h1>Search Bar</h1>
       <input class="input is-medium is-rounded" type="text" placeholder="Theatre, company, city, etc..">
     </div>
   </div>
