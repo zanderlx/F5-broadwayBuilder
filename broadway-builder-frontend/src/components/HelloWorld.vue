@@ -2,28 +2,32 @@
   <div class="HelloWorld">
     <h1>{{ info }}</h1>
     <div class="control">
-      <h1>Search Bar</h1>
-      <input class="input is-medium is-rounded" type="text" placeholder="Theatre, company, city, etc..">
+      <h1>Search</h1>
+      <input
+        class="input is-medium is-rounded"
+        type="text"
+        placeholder="Theatre, company, city, etc.."
+      >
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   data() {
     return {
-      info: ''
-    }
+      info: ""
+    };
   },
   mounted() {
     axios
       .get("http://api.broadwaybuilder.xyz/helloworld")
-      .then(response => (this.info = response.data))
+      .then(response => (this.info = response.data));
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
