@@ -28,8 +28,13 @@ export default new Router({
     },
     {
       path: '/theater/{theaterid}/helpwanted',
-      name: 'helpwanted',
+      name: 'adminhelpwanted',
       component: () => import('./views/HelpWanted/AdminHelpWanted.vue')
+    },
+    {
+      path: '/theater/{theaterid}/helpwanted/apply',
+      name: 'userhelpwanted',
+      component: () => import('./views/HelpWanted/UserHelpWanted.vue')
     },
     {
       path:'/theater/{theaterid}/userproductioninfo',
