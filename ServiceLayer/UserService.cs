@@ -50,6 +50,11 @@ namespace ServiceLayer
             return _dbContext.Users.Find(username);
         }
 
+        public User GetUser(User user)
+        {
+            return _dbContext.Users.Find(user.UserId);
+        }
+
         /// <summary>
         /// UpdateUser is a method in the UserService class. 
         /// The user gets updated in the database.
