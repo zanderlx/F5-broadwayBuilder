@@ -66,6 +66,6 @@ export default {
 
 .card
   padding: 1em
-  box-shadow: 0 14px 28px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 75px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22)
 
 </style>
