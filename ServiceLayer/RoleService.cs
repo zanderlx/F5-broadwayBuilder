@@ -33,7 +33,7 @@ namespace ServiceLayer
         /// </summary>
         /// <param name="role">The role we want to retrieve</param>
         /// <returns></returns>
-        public Role GetRole(Guid role)
+        public Role GetRole(int role)
         {
             return _dbContext.Roles.Find(role);
         }

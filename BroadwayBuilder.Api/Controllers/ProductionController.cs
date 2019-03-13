@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using ServiceLayer;
+using DataAccessLayer;
 
 namespace BroadwayBuilder.Api.Controllers
 {
@@ -13,11 +15,12 @@ namespace BroadwayBuilder.Api.Controllers
     {
         [Route("production/{productionId}/uploadProgram")]
         [HttpPut]
-        // Author: Debendra Dash
-        // Date: 02-17-16
-        //Edited: Abi
-        public IHttpActionResult UploadProductionProgram(Guid productionId)
+
+        public IHttpActionResult UploadProductionProgram(int productionId)
         {
+            var dbcontext = new BroadwayBuilderContext();
+            var productionService = new ProductionService(dbcontext);
+
             //try to upload pdf and save to server
             try
             {
@@ -38,50 +41,46 @@ namespace BroadwayBuilder.Api.Controllers
                         IList<string> AllowedFileExtension = new List<string> { ".pdf" };
                         var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
-                        // If its not an appropriate file extension
+                        
                         if (!AllowedFileExtension.Contains(extension))
                         {
+                            // Todo: Decide whether or not to attach this msg to the bad request response
+                            //var message = string.Format("Please Upload image of type .pdf only");
 
-                            var message = string.Format("Please Upload image of type .pdf only");
-
-                            //dict.Add("error", message);
-                            // Log the error that occurs
+                            // Todo: Log the error that occurs
                             return BadRequest();
                         }
                         else if (putFile.ContentLength > MaxContentLength)
                         {
+                            // Todo: Decide whether or not to attach this msg to the bad request response
+                            //var message = string.Format("Please Upload a file upto 1 mb.");
 
-                            var message = string.Format("Please Upload a file upto 1 mb.");
-
-                            //dict.Add("error", message);
-                            //log the error that occurs
+                            // Todo: log the error that occurs
                             return BadRequest();
                         }
                         else
                         {
+                            productionService.UploadProgram(productionId, extension, putFile);
 
-                            //if needed write the code to update the table
-
-                            var filePath = HttpContext.Current.Server.MapPath("~/ProductionPrograms/" + productionId + extension);
-                            //Userimage myfolder name where i want to save my image
-                            putFile.SaveAs(filePath);
 
                         }
                     }
-
-                    var message1 = string.Format("Image Updated Successfully.");
+                    
+                    // Todo: Decide whether or not to attach this msg to the ok response
+                    //var message1 = string.Format("Image Updated Successfully.");
                     //return Created(insert path);
                     //return Created("C:\\Users\\ProductionPrograms");
                     return Ok("Pdf Uploaded");
                 }
-                var res = string.Format("Please Upload an image.");
-                //dict.Add("error", res);
-                //log the error that occurs
+                // Todo: Decide whether or not to attach this msg to the bad request response
+                //var res = string.Format("Please Upload an image.");
+
+                // Todo: log the error that occurs
                 return BadRequest();
             }
 
                 catch (Exception ex) {
-                //log error
+                // Todo: log error
                 return BadRequest();
                
                 }

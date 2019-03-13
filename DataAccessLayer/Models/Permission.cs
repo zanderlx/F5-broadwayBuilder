@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public Permission(string permission, bool disabled)
         {
-            PermissionID = Guid.NewGuid();
+            //PermissionID = Guid.NewGuid();
             PermissionName = permission.ToLower();
             this.Disabled = disabled;
         }
@@ -23,8 +23,8 @@ namespace DataAccessLayer
         }
   
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid PermissionID { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PermissionID { get; set; }
         [Required]
         public string PermissionName { get; set; }
         [Required]

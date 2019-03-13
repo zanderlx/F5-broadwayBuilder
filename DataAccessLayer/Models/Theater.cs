@@ -12,8 +12,8 @@ namespace DataAccessLayer
     public class Theater
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid TheaterID { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TheaterID { get; set; }
         [Required]
         public string TheaterName { get; set; }
         [Required]
@@ -39,7 +39,7 @@ namespace DataAccessLayer
         public Theater(string theaterName, string companyName, string streetAddress, string city,
             string state, string country, string phoneNumber)
             {
-                TheaterID = Guid.NewGuid();
+                //TheaterID = Guid.NewGuid();
                 this.TheaterName = theaterName;
                 this.CompanyName = companyName;
                 this.StreetAddress = streetAddress;
@@ -47,6 +47,16 @@ namespace DataAccessLayer
                 this.State = state;
                 this.Country = country;
                 this.PhoneNumber = phoneNumber;
-            }            
+            }
+        public Theater()
+        {
+            this.TheaterName = "";
+            this.CompanyName = "";
+            this.StreetAddress = "";
+            this.City = "";
+            this.State = "";
+            this.Country = "";
+            this.PhoneNumber = "";
+        }
     }
 }

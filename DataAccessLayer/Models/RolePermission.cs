@@ -10,7 +10,7 @@ namespace DataAccessLayer
 {
     public class RolePermission
     {
-        public RolePermission(Guid permissionId, Guid roleId, bool disabled)
+        public RolePermission(int permissionId, int roleId, bool disabled)
         {
             this.PermissionID = permissionId;
             this.RoleID = roleId;
@@ -26,12 +26,12 @@ namespace DataAccessLayer
         [Key]
         [Required]
         [Column(Order =1)]
-        public Guid PermissionID { get; set; }
+        public int PermissionID { get; set; }
 
         [Key]
         [Required]
         [Column(Order = 2)]
-        public Guid RoleID { get; set; }
+        public int RoleID { get; set; }
 
         public Role role { get; set; }
         public Permission permission { get; set; }
