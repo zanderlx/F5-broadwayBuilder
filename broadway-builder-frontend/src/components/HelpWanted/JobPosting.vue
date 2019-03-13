@@ -1,43 +1,31 @@
 <template>
-  <div class="JobPosting">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">Component</p>
-        <a href="#" class="card-header-icon" aria-label="more options">
-          <span class="icon">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </a>
-      </header>
-      <div class="card-content">
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-          <a
-            href="#"
-          >@bulmaio</a>.
-          <a href="#">#css</a>
-          <a href="#">#responsive</a>
-          <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
-    </div>
+  <div>
+    <div v-for="(item, index) in jobPostings" :key="index">
+
+    
+  </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["jobPostings", "show"],
+  data() {
+    return {
+      categories: ["Description", "Hours", "Requirements"]
+    };
+  }
+};
+</script>
+
 
 <style lang="sass" scoped>
 @import '../../../node_modules/bulma/bulma.sass'
 
-.JobPosting
-    box-shadow: 0 14px 28px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22);
+.card    
+  margin: 1.25em 0 1.25em 0
+  box-shadow: 0 14px 28px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22)
 
-.card
-  margin: 1em 0 1em 0
 
 </style>
 
