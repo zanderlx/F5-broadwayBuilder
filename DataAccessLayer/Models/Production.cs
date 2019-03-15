@@ -13,8 +13,8 @@ namespace DataAccessLayer
     public class Production
     {
         [Key]
-        //[Column(Order = 1)]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        // [Column(Order = 1)]
+        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductionID { get; set; }
         [Required]
         public string ProductionName { get; set; }
@@ -33,15 +33,15 @@ namespace DataAccessLayer
         [Required]
         public string Zipcode { get; set; }
 
-        //[Key]
-        //[Column(Order = 2)]
+        // [Key]
+        // [Column(Order = 2)]
         public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
         public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
         public virtual ICollection<ProductionDateTime> ProductionDateTime { get; set; }
 
-        //Overloaded Constructor
+        // Overloaded Constructor
         public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
         {
             //ProductionID = Guid.NewGuid();
@@ -55,6 +55,12 @@ namespace DataAccessLayer
             Country = country;
             Zipcode = zipcode;
            
+        }
+
+        // Parameterless constructor due to EF needing it because we provided an overloading constructor
+        public Production()
+        {
+
         }
 
     }
