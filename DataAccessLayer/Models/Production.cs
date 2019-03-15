@@ -35,17 +35,17 @@ namespace DataAccessLayer
 
         // [Key]
         // [Column(Order = 2)]
-        //public int TheaterID { get; set; }
-        //public Theater theater { get; set; }
+        public int TheaterID { get; set; }
+        public Theater theater { get; set; }
 
         public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
         public virtual ICollection<ProductionDateTime> ProductionDateTime { get; set; }
 
         // Overloaded Constructor
-        public Production(string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
+        public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
         {
             //ProductionID = Guid.NewGuid();
-            //TheaterID = theaterId;
+            TheaterID = theaterId;
             ProductionName = productionName;
             DirectorFirstName = directorFirstName;
             DirectorLastName = directorLastName;
