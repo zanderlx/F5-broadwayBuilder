@@ -19,7 +19,8 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
-            var production = new Production(theater.TheaterID, "someName","directorln", "directorfn", "street", "city", "state", "country", "zip");
+            //theater.TheaterID, 
+            var production = new Production("someName","directorln", "directorfn", "street", "city", "state", "country", "zip");
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
@@ -52,7 +53,8 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
-            var production = new Production(theater.TheaterID, "someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
+            //theater.TheaterID,
+            var production = new Production( "someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
@@ -86,7 +88,8 @@ namespace ServiceLayer.Test
             var actual = false;
 
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
-            var production = new Production(theater.TheaterID, "someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
+            //theater.TheaterID, 
+            var production = new Production("someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
