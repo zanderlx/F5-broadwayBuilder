@@ -89,7 +89,7 @@ namespace BroadwayBuilder.Api.Controllers
          * BLOCKED: In order to continue with this endpoint, 
          * A theater in the database is needed in order to create a production.
          */
-        [Route("Production/createproduction")]
+        [Route("production/createproduction")]
         [HttpPost]
 
         public IHttpActionResult CreateProduction([FromBody] Production production)

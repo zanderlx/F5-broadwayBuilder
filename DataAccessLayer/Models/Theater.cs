@@ -32,7 +32,7 @@ namespace DataAccessLayer
         public string PhoneNumber { get; set; }
         
 
-        public virtual ICollection<Production> Production { get; set; }
+        //public virtual ICollection<Production> Production { get; set; }
         public virtual ICollection<UserPermission> userPermissions { get; set; }
         public virtual ICollection<TheaterJobPosting> theaterJobPostings { get; set; }
 
