@@ -21,7 +21,7 @@ namespace BroadwayBuilder.Api.Controllers
             var dbcontext = new BroadwayBuilderContext();
             var productionService = new ProductionService(dbcontext);
 
-            //try to upload pdf and save to server
+            //try to upload pdf and save to server filesystem
             try
             {
                 //get the content, headers, etc the full request of the current http request
@@ -44,7 +44,7 @@ namespace BroadwayBuilder.Api.Controllers
                         
                         if (!AllowedFileExtension.Contains(extension))
                         {
-                            // Todo: Decide whether or not to attach this msg to the bad request response
+                           
                             //var message = string.Format("Please Upload image of type .pdf only");
 
                             // Todo: Log the error that occurs
@@ -52,7 +52,7 @@ namespace BroadwayBuilder.Api.Controllers
                         }
                         else if (putFile.ContentLength > MaxContentLength)
                         {
-                            // Todo: Decide whether or not to attach this msg to the bad request response
+                            
                             //var message = string.Format("Please Upload a file upto 1 mb.");
 
                             // Todo: log the error that occurs
@@ -62,17 +62,16 @@ namespace BroadwayBuilder.Api.Controllers
                         {
                             productionService.UploadProgram(productionId, extension, putFile);
 
-
                         }
                     }
                     
-                    // Todo: Decide whether or not to attach this msg to the ok response
+                    // Todo: Create an ErrorMessage model
                     //var message1 = string.Format("Image Updated Successfully.");
                     //return Created(insert path);
                     //return Created("C:\\Users\\ProductionPrograms");
                     return Ok("Pdf Uploaded");
                 }
-                // Todo: Decide whether or not to attach this msg to the bad request response
+                // Todo: Create an ErrorMessage model
                 //var res = string.Format("Please Upload an image.");
 
                 // Todo: log the error that occurs
@@ -80,12 +79,44 @@ namespace BroadwayBuilder.Api.Controllers
             }
 
                 catch (Exception ex) {
+                // Todo: add proper error handling
                 // Todo: log error
                 return BadRequest();
                
                 }
         }
+        /*
+         * BLOCKED: In order to continue with this endpoint, 
+         * A theater in the database is needed in order to create a production.
+         */
+        [Route("Production/createproduction")]
+        [HttpPost]
 
+        public IHttpActionResult CreateProduction([FromBody] Production production)
+        {
+            
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+            var productionService = new ProductionService(dbcontext);
+
+                try
+                {
+                    productionService.CreateProduction(production);
+                    dbcontext.SaveChanges();
+
+                    // Todo: Turn this into Created(201) once the get endpoint is done so we can return the url to get the item that was just created
+                    return Ok("production created");
+
+                }
+                // Todo: add proper error handling
+                catch (Exception e)
+                {
+                    return BadRequest();
+                }
+
+            }
+
+        }
 
     }
 }
