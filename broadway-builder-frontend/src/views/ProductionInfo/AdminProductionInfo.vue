@@ -1,15 +1,16 @@
 <template>
-  <div class="UserProductionInfo">
-    <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
-    <PicGrid/>
-  </div>
+
+    <div class="AdminProductionInfo">
+      <h1>CECS Theatre Dept. | </h1> The Fantastic 5 Ampitheatre
+        <PicGrid/>
+    </div>
 </template>
 
 <script>
 import PicGrid from "@/components/ProductionInfo/PicGrid.vue";
 
 export default {
-  name: "UserProductionInfo",
+  name: "AdminProductionInfo",
   components: {
     PicGrid
   }
