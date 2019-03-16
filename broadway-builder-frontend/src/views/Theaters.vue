@@ -6,8 +6,62 @@
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
             <h1 class="title is-2">Ticket Selling</h1>
-            <h2 class="subtitle is-4">Coming to a browser near you, next sprint!
-              <p>*Insert Component Here</p>
+            <h2 class="subtitle is-4">
+              <h2>Production Name
+                <p>
+                  <input
+                    v-model="info.ProductionName"
+                    name="Production Name"
+                    placeholder="Enter production name"
+                  >
+                </p>
+              </h2>
+              <h2>Director First Name
+                <p>
+                  <input
+                    v-model="info.DirectorFirstName"
+                    name="Director Name"
+                    placeholder="Enter first name"
+                  >
+                </p>
+              </h2>
+              <h2>Director Last Name
+                <p>
+                  <input
+                    v-model="info.DirectorLastName"
+                    name="Last Name"
+                    placeholder="Enter last name"
+                  >
+                </p>
+              </h2>
+              <h2>Street
+                <p>
+                  <input v-model="info.Street" name="Street" placeholder="Enter street">
+                </p>
+              </h2>
+              <h2>City
+                <p>
+                  <input v-model="info.City" name="City" placeholder="Enter city">
+                </p>
+              </h2>
+              <h2>State
+                <p>
+                  <input v-model="info.StateProvince" name="State" placeholder="Enter state">
+                </p>
+              </h2>
+              <h2>Country
+                <p>
+                  <input v-model="info.Country" name="Country" placeholder="Enter country">
+                </p>
+              </h2>
+              <h2>Zipcode
+                <p>
+                  <input v-model="info.Zipcode" name="Zipcode" placeholder="Enter zipcode">
+                </p>
+              </h2>
+              <p>
+                <input type="Submit" v-on:click="submitProduction" name="Submit">
+              </p>
             </h2>
           </div>
 
@@ -27,8 +81,11 @@
       <div class="columns is-mobile is-centered">
         <div class="field is-grouped is-grouped-multiline">
           <div class="control">
-            <span class="button is-danger is-large">
+            <span class="button is-danger is-large" v-if="!isAdmin">
               <router-link to="/theater/{theaterid}/userproductioninfo">Past Productions</router-link>
+            </span>
+            <span class="button is-danger is-large" v-if="isAdmin">
+              <router-link to="/theater/{theaterid}/adminproductioninfo">Past Productions</router-link>
             </span>
           </div>
           <div class="control">
@@ -54,11 +111,40 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  name: "Theaters",
   data() {
     return {
-      isAdmin: false
+      info: {
+        ProductionName: "",
+        DirectorFirstName: "",
+        DirectorLastName: "",
+        Street: "",
+        City: "",
+        StateProvince: "",
+        Country: "",
+        Zipcode: ""
+      }
     };
+  },
+  mounted() {},
+  methods: {
+    submitProduction() {
+      axios
+        .post(
+          "http://api.broadwaybuilder.xyz/production/createproduction",
+          this.info,
+          {
+            headers: {
+              "content-type": "application/json"
+            }
+          }
+        )
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+    }
   }
 };
 </script>

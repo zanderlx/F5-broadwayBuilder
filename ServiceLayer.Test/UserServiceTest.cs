@@ -40,8 +40,8 @@ namespace ServiceLayer.Test
                 actual = true;
 
             // Assert
-            userService.DeleteUser(user);
-            context.SaveChanges();
+            //userService.DeleteUser(user);
+           // context.SaveChanges();
             Assert.AreEqual(expected, actual);
         }
 
