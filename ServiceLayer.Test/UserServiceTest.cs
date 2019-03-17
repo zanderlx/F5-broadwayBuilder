@@ -2,6 +2,7 @@
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {

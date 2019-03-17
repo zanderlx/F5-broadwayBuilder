@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer
+namespace ServiceLayer.Services
 {
-    public interface IAuthorizationService
+    public class EncryptionService
     {
-        
+        public EncryptionService()
+        {
 
+        }
     }
 }
