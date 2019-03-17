@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
