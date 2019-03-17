@@ -23,7 +23,7 @@ namespace BroadwayBuilder.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            EnableCorsAttribute cors = new EnableCorsAttribute("http://www.broadwaybuilder.xyz", "*", "GET,POST"); // HACK: only using * for testing. will be updated
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "GET,POST");//"http://www.broadwaybuilder.xyz", "*", "GET,POST"); // HACK: only using * for testing. will be updated
             config.EnableCors(cors);
         }
     }

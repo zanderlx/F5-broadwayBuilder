@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Http;
 using ServiceLayer;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace BroadwayBuilder.Api.Controllers
 {
+    [RoutePrefix("production")]
     public class ProductionController : ApiController
     {
-        [Route("production/{productionId}/uploadProgram")]
+        [Route("{productionId}/uploadProgram")]
         [HttpPut]
 
         public IHttpActionResult UploadProductionProgram(int productionId)
@@ -85,11 +87,8 @@ namespace BroadwayBuilder.Api.Controllers
                
                 }
         }
-        /*
-         * BLOCKED: In order to continue with this endpoint, 
-         * A theater in the database is needed in order to create a production.
-         */
-        [Route("production/createproduction")]
+
+        [Route("createproduction")]
         [HttpPost]
 
         public IHttpActionResult CreateProduction([FromBody] Production production)
@@ -116,6 +115,28 @@ namespace BroadwayBuilder.Api.Controllers
 
             }
 
+        }
+
+        [Route("getproduction")]
+        [HttpGet]
+
+        public IHttpActionResult GetProductionById(int productionId)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+
+            {
+                var productionService = new ProductionService(dbcontext);
+
+                try
+                {
+                    productionService.GetProduction(productionId);
+                } catch
+                {
+
+                }
+            }
+
+            return Ok();
         }
 
     }
