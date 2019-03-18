@@ -92,8 +92,8 @@ namespace ServiceLayer.Test
             var actual = productionService.UpdateProduction(production);
             dbcontext.SaveChanges();
 
-            //productionService.DeleteProduction(production);
-            //dbcontext.SaveChanges();
+            productionService.DeleteProduction(production);
+            dbcontext.SaveChanges();
 
         }
 
