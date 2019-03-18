@@ -12,14 +12,14 @@ namespace DataAccessLayer
     {
         //[Key]
         //[Column(Order = 1)]
-        public Guid ProductionID { get; set; }
+        public int ProductionID { get; set; }
         //[Key]
         //[Column(Order = 2)]
         //public Guid TheaterID { get; set; }
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //[Column(Order = 3)]
-        public Guid HelpWantedID { get; set; }
+        public int HelpWantedID { get; set; }
         [Required]
         public DateTime DateCreated { get; set; }
         [Required]
@@ -34,10 +34,10 @@ namespace DataAccessLayer
         public string Requirements { get; set; }
         public Production Production { get; set; }
 
-        public ProductionJobPosting(Guid productionId, string position, string description, string title, string hour, string requirement)
+        public ProductionJobPosting(int productionId, string position, string description, string title, string hour, string requirement)
         {
             this.ProductionID = productionId;
-            this.HelpWantedID = Guid.NewGuid();
+            //this.HelpWantedID = Guid.NewGuid();
             //this.TheaterID = theaterID;
             //this.DateCreated = dateTime;
             this.Position = position;

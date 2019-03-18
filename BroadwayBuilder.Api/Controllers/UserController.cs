@@ -16,7 +16,7 @@ namespace BroadwayBuilder.Api
 
         public string HelloWorld()
         {
-            return "Hello World " + DateTime.Now;
+            return "Hello World! " + DateTime.Now;
         }
     }
 }

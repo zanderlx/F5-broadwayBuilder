@@ -144,9 +144,12 @@ namespace ServiceLayer.Test
             theater.TheaterName = "Natural History";
             theater.CompanyName = "Different Company";
             var expected = theater;
-            var actual = theater;
-            //var actual = theaterService.UpdateTheater(theater);
-            theater.StreetAddress = "125 Bogus Lane";
+            //var actual = theater;
+            var actual = theaterService.UpdateTheater(theater);
+            //theater.StreetAddress = "125 Bogus Lane";
+            context.SaveChanges();
+
+            theaterService.DeleteTheater(theater);
             context.SaveChanges();
 
             // Assert

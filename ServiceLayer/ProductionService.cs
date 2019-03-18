@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Hosting;
 
 namespace ServiceLayer
 {
@@ -21,7 +23,7 @@ namespace ServiceLayer
             _dbContext.Productions.Add(production);
         }
 
-        public Production GetProduction(Guid productionId)
+        public Production GetProduction(int productionId)
         {
             return _dbContext.Productions.Find(productionId);
         }
@@ -56,6 +58,11 @@ namespace ServiceLayer
             }
         }
 
-        
+        public void UploadProgram(int productionId, string extension, HttpPostedFile postedFile)
+        {
+            var filePath = HostingEnvironment.MapPath("~/ProductionPrograms/" + productionId + extension);
+            postedFile.SaveAs(filePath);
+        }
+
     }
 }

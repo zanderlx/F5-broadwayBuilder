@@ -14,28 +14,37 @@ namespace DataAccessLayer
     {
         [Key]
         //[Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ProductionID { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductionID { get; set; }
+        [Required]
         public string ProductionName { get; set; }
+        [Required]
         public string DirectorFirstName { get; set; }
+        [Required]
         public string DirectorLastName { get; set; }
+        [Required]
         public string Street { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string StateProvince { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string Zipcode { get; set; }
 
         //[Key]
         //[Column(Order = 2)]
-        public Guid TheaterID { get; set; }
+        public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
         public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
+        public virtual ICollection<ProductionDateTime> ProductionDateTime { get; set; }
 
-
-        public Production(Guid theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
+        //Overloaded Constructor
+        public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
         {
-            ProductionID = Guid.NewGuid();
+            //ProductionID = Guid.NewGuid();
             TheaterID = theaterId;
             ProductionName = productionName;
             DirectorFirstName = directorFirstName;
@@ -46,11 +55,6 @@ namespace DataAccessLayer
             Country = country;
             Zipcode = zipcode;
            
-        }
-
-        public void UploadProgram()
-        {
-           //need to add a relationship between file on server ad production
         }
 
     }

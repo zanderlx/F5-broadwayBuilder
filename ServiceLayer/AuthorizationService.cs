@@ -1,5 +1,4 @@
 ﻿using DataAccessLayer;
-using DataAccessLayer.Enums;
 //using ServiceLayer.Enums;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace ServiceLayer
         /// <returns>true if user has permission, false otherwise</returns>
         public bool HasPermission(User user, Permission checkIfAuthorized,Theater theater)
         {
-            UserPermission userPermission = _dbContext.UserPermissions.Find(user.Username, checkIfAuthorized.PermissionID, theater.TheaterID);
+            UserPermission userPermission = _dbContext.UserPermissions.Find(user.UserId, checkIfAuthorized.PermissionID, theater.TheaterID);
             if (userPermission != null)
             {
                 return true;
@@ -40,7 +39,7 @@ namespace ServiceLayer
 
         }
 
-        public bool HasPermission(string username, Permission checkIfAuthorized, Theater theater)
+        public bool HasPermission(int username, Permission checkIfAuthorized, Theater theater)
         {
             UserPermission userPermission = _dbContext.UserPermissions.Find(username, checkIfAuthorized.PermissionID, theater.TheaterID);
             if (userPermission != null)
