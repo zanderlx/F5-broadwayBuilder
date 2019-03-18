@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ServiceLayer
+namespace ServiceLayer.Services
 {
     public class AuthorizationService : IAuthorizationService
     {

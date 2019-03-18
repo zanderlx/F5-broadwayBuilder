@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 
-namespace ServiceLayer
+namespace ServiceLayer.Services
 {
    public class ProductionService
     {
@@ -16,7 +16,7 @@ namespace ServiceLayer
         public ProductionService(BroadwayBuilderContext dbcontext)
         {
             _dbContext = dbcontext;
-        }
+        } 
 
         public void CreateProduction(Production production)
         {
@@ -25,7 +25,9 @@ namespace ServiceLayer
 
         public Production GetProduction(int productionId)
         {
-            return _dbContext.Productions.Find(productionId);
+            return _dbContext.Productions
+                .Where(o => o.ProductionID == productionId)
+                .FirstOrDefault(); //if item doesn't exist it returns null
         }
 
         public Production UpdateProduction(Production production)

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
 
-namespace ServiceLayer
+namespace ServiceLayer.Services
 {
     /// <summary>
     /// The class that will deal with all security hashes and encryption

@@ -44,18 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationService.cs" />
-    <Compile Include="TheaterJobService.cs" />
-    <Compile Include="ProductionJobService.cs" />
-    <Compile Include="IAuthorizationService.cs" />
-    <Compile Include="PasswordValidatorService.cs" />
-    <Compile Include="PermissionService.cs" />
-    <Compile Include="ProductionService.cs" />
+    <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\EncryptionService.cs" />
+    <Compile Include="Services\IAuthorizationService.cs" />
+    <Compile Include="Services\PasswordValidatorService.cs" />
+    <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\ProductionJobService.cs" />
+    <Compile Include="Services\ProductionService.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\SecurityService.cs" />
+    <Compile Include="Services\TheaterJobService.cs" />
+    <Compile Include="Services\TheaterService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleService.cs" />
-    <Compile Include="SecurityService.cs" />
-    <Compile Include="TheaterService.cs" />
-    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
@@ -67,6 +68,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
