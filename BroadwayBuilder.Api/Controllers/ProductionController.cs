@@ -117,7 +117,7 @@ namespace BroadwayBuilder.Api.Controllers
 
         }
 
-        [Route("getproduction")]
+        [Route("{productionId}")]
         [HttpGet]
 
         public IHttpActionResult GetProductionById(int productionId)
@@ -129,14 +129,18 @@ namespace BroadwayBuilder.Api.Controllers
 
                 try
                 {
-                    productionService.GetProduction(productionId);
-                } catch
-                {
+                    Production current_production = productionService.GetProduction(productionId);
 
+                    return Ok(current_production);
+                }
+                // Hack: Need to add proper exception
+                catch (Exception e)
+                {
+                    return BadRequest();
                 }
             }
 
-            return Ok();
+           
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,12 +28,15 @@ namespace ServiceLayer.Services
         {
             return _dbContext.Productions
                 .Where(o => o.ProductionID == productionId)
-                .FirstOrDefault(); //if item doesn't exist it returns null
+                //.Include(o => o.ProductionDateTime) //  Only Needed if lazy loading is off and you need to get the production date times
+                .FirstOrDefault(); //if item doesn't exist it returns null Todo: throw a specific exception
         }
 
         public Production UpdateProduction(Production production)
         {
-            Production currentProduction = _dbContext.Productions.Find(production.ProductionID);
+            Production currentProduction = _dbContext.Productions
+                 .Where(o => o.ProductionID == production.ProductionID)
+                 .FirstOrDefault(); //gives you first production that satisfies the where
 
             if (currentProduction != null)
             {
@@ -52,11 +56,17 @@ namespace ServiceLayer.Services
 
         public void DeleteProduction(Production production)
         {
-            Production productionToDelete = _dbContext.Productions.Find(production.ProductionID);
+            Production productionToDelete = _dbContext.Productions
+                .Where(o => o.ProductionID == production.ProductionID)
+                .FirstOrDefault(); //gives you first production that satisfies the where
+            
             // If the production found is not null, delete the production
             if (productionToDelete != null)
             {
                 _dbContext.Productions.Remove(productionToDelete);
+            } else
+            {
+                //throw an exception
             }
         }
 

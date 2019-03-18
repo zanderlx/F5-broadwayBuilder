@@ -38,8 +38,13 @@ namespace DataAccessLayer
         public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
-        public virtual ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
-        public virtual ICollection<ProductionDateTime> ProductionDateTime { get; set; }
+        #region -- Relationship --
+
+        public ICollection<ProductionJobPosting> ProductionJobPostings { get; set; }
+
+        public ICollection<ProductionDateTime> ProductionDateTime { get; set; }
+
+        #endregion
 
         // Overloaded Constructor
         public Production(int theaterId, string productionName, string directorFirstName, string directorLastName, string street, string city, string stateProvince, string country, string zipcode)
