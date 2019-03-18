@@ -90,7 +90,7 @@ namespace BroadwayBuilder.Api.Controllers
                 }
                 catch(Exception e)//needs to be updated
                 {
-                    return BadRequest();
+                    return Content((HttpStatusCode)400, e.Message);
                 }
             }
         }
