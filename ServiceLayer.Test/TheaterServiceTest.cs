@@ -78,7 +78,7 @@ namespace ServiceLayer.Test
             // Assert
             theaterService.DeleteTheater(theater);
             context.SaveChanges();
-            Console.WriteLine("aaaaaaaaaaaaaaaa");
+            //Console.WriteLine("aaaaaaaaaaaaaaaa");
             Assert.AreEqual(expected, actual);
         }
 
