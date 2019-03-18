@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
@@ -85,7 +86,7 @@ namespace ServiceLayer.Test
             var expected = true;
             var actual = false;
 
-            var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
+            var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");            
             var production = new Production(theater.TheaterID, "someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);

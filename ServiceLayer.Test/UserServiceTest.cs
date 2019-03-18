@@ -2,6 +2,7 @@
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
@@ -40,8 +41,8 @@ namespace ServiceLayer.Test
                 actual = true;
 
             // Assert
-            userService.DeleteUser(user);
-            context.SaveChanges();
+            //userService.DeleteUser(user);
+           // context.SaveChanges();
             Assert.AreEqual(expected, actual);
         }
 
