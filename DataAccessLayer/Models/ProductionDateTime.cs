@@ -13,13 +13,16 @@ namespace DataAccessLayer
     {
         [Key]
         public int ProductionDateTimeId { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime Date { get; set; }
+        
         //[Column(TypeName = "time")]
         public TimeSpan Time { get; set; }
 
         public int ProductionID { get; set; }
-        public Production production { get; set; }
+
+        public Production Production { get; set; }
 
         //Overloaded Constructor
         public ProductionDateTime(int productionID, DateTime date, TimeSpan time)
@@ -27,8 +30,8 @@ namespace DataAccessLayer
             ProductionID = productionID;
             Date = date;
             Time = time;
-
         }
 
+        public ProductionDateTime() { }
     }
 }
