@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="HelpWantedControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheaterControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
