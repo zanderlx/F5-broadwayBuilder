@@ -6,63 +6,7 @@
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
             <h1 class="title is-2">Ticket Selling</h1>
-            <h2 class="subtitle is-4">
-              <h2>Production Name
-                <p>
-                  <input
-                    v-model="info.ProductionName"
-                    name="Production Name"
-                    placeholder="Enter production name"
-                  >
-                </p>
-              </h2>
-              <h2>Director First Name
-                <p>
-                  <input
-                    v-model="info.DirectorFirstName"
-                    name="Director Name"
-                    placeholder="Enter first name"
-                  >
-                </p>
-              </h2>
-              <h2>Director Last Name
-                <p>
-                  <input
-                    v-model="info.DirectorLastName"
-                    name="Last Name"
-                    placeholder="Enter last name"
-                  >
-                </p>
-              </h2>
-              <h2>Street
-                <p>
-                  <input v-model="info.Street" name="Street" placeholder="Enter street">
-                </p>
-              </h2>
-              <h2>City
-                <p>
-                  <input v-model="info.City" name="City" placeholder="Enter city">
-                </p>
-              </h2>
-              <h2>State
-                <p>
-                  <input v-model="info.StateProvince" name="State" placeholder="Enter state">
-                </p>
-              </h2>
-              <h2>Country
-                <p>
-                  <input v-model="info.Country" name="Country" placeholder="Enter country">
-                </p>
-              </h2>
-              <h2>Zipcode
-                <p>
-                  <input v-model="info.Zipcode" name="Zipcode" placeholder="Enter zipcode">
-                </p>
-              </h2>
-              <p>
-                <input type="Submit" v-on:click="submitProduction" name="Submit">
-              </p>
-            </h2>
+            <h2 class="subtitle is-4">Coming soon to a browser near you!</h2>
           </div>
 
           <div class="column is-5 is-half">
@@ -127,7 +71,7 @@ export default {
         Country: "",
         Zipcode: ""
       },
-      isAdmin:false
+      isAdmin: false
     };
   },
   mounted() {},
