@@ -100,9 +100,9 @@
                   </a>
                 </header>
                 <div class="card-table">
-                  <div class="content">
-                    <table class="table is-fullwidth is-striped">
-                      <tbody>
+                  <div class="content is-fullwidth">
+                    <table class="table is-fullwidth is-striped is-scrollable">
+                      <tbody height="200px">
                         <tr>
                           <td width="5%">
                             <i class="fa fa-bell-o"></i>
@@ -211,3 +211,12 @@ export default {
   methods: {}
 };
 </script>
+
+<style lang="sass">
+.table
+  &.is-scrollable
+    tbody
+      overflow-y: scroll
+      width: 100%
+      position: absolute
+</style>

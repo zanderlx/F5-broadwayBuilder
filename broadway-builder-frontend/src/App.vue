@@ -14,8 +14,6 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
-          @click="isOpen = !isOpen"
-          v-bind:class="{'is-active': isOpen}"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -23,7 +21,7 @@
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu" v-bind="{'is-active':isOpen}">
+      <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           <router-link to="/" class="navbar-item">Broadway Builder</router-link>
         </div>
