@@ -17,9 +17,9 @@ export default new Router({
       component: () => import("./views/Theaters.vue")
     },
     {
-      path: "/account",
-      name: "account",
-      component: () => import("./views/Account.vue")
+      path: "/adminaccount/{userID}",
+      name: "adminaccount",
+      component: () => import("./views/AdminAccount.vue")
     },
     {
       path: "/contactus",
