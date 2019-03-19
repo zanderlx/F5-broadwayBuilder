@@ -5,13 +5,13 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title">
-              <strong id="title">{{ item.title }}</strong>
+              <strong id="Title">{{ item.Title }}</strong>
             </p>
           </header>
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <p id="description">{{ item.description }}</p>
+              <p id="Description">{{ item.Description }}</p>
             </div>
           </div>
           <footer class="card-footer">
@@ -23,7 +23,7 @@
         <div class="card" v-if="item.show === true">
           <header class="card-header">
             <p class="card-header-title">
-              <strong id="title">{{ item.title }}</strong>
+              <strong id="Title">{{ item.Title }}</strong>
             </p>
             <a v-on:click="item.show = false" class="card-header-icon" aria-label="more options">
                 <span class="icon">
@@ -34,15 +34,15 @@
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <p id="description">{{ item.description }}</p>
+              <p id="Description">{{ item.Description }}</p>
             </div>
             <div class="content">
               <strong>Hours</strong>
-              <p id="hours">{{ item.hours }}</p>
+              <p id="Hours">{{ item.Hours }}</p>
             </div>
             <div class="content">
               <strong>Requirements</strong>
-              <p id="requirements">{{ item.requirements }}</p>
+              <p id="Requirements">{{ item.Requirements }}</p>
             </div>
           </div>
           <footer class="card-footer">

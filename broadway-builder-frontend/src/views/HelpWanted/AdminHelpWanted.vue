@@ -26,7 +26,7 @@ import JobPostings from "@/components/HelpWanted/JobPostings.vue";
 import JobFilter from "@/components/HelpWanted/JobFilter.vue";
 
 // NOTE: axios will be needed when data store is set up
-// import axios from 'axios'
+ import axios from 'axios'
 
 export default {
   name: "AdminHelpWanted",
@@ -47,7 +47,7 @@ export default {
     },
     newJobPostingSuccess(newJob) {
       this.jobs.unshift(newJob);
-      this.addJob = false;
+      this.addJob = true;
     },
     cancelNewJobPosting(canceled) {
       this.addJob = canceled;
@@ -58,6 +58,14 @@ export default {
   },
   mounted() {
     // NOTE: When data store is set up, GET the job postings from the data store
+    axios.get("http://localhost:64512/helpwanted/2")
+    .then(response => (this.jobs = response.data,console.log(response)))
+    
+    this.jobs=[{"Title": 'testF',
+      "Description": 'testF',
+      "Hours": '',
+      "Requirements": '',
+      show: false}]
   }
 };
 </script>
