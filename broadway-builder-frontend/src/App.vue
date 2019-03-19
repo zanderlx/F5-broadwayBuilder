@@ -38,7 +38,7 @@
           </a>
           
           <a class="navbar-item">
-            <router-link to="/account">Account</router-link>
+            <router-link to="/adminaccount/{userID}">Account</router-link>
           </a>
           
           <a class="navbar-item">
