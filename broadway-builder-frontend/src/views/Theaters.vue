@@ -25,28 +25,17 @@
       <div class="columns is-mobile is-centered">
         <div class="field is-grouped is-grouped-multiline">
           <div class="control">
-            <span class="button is-danger is-large" v-if="!isAdmin">
+            <span class="button is-danger is-rounded is-medium">
               <router-link to="/theater/{theaterid}/userproductioninfo">Past Productions</router-link>
             </span>
-            <span class="button is-danger is-large" v-if="isAdmin">
-              <router-link to="/theater/{theaterid}/adminproductioninfo">Past Productions</router-link>
-            </span>
           </div>
           <div class="control">
-            <span class="button is-danger is-large">Information / Contact Us</span>
+            <span class="button is-danger is-rounded is-medium">Information / Contact Us</span>
           </div>
           <div class="control">
-            <span class="button is-danger is-large" v-if="!isAdmin">
+            <span class="button is-danger is-rounded is-medium">
               <router-link to="/theater/{theaterid}/helpwanted/apply">Help Wanted</router-link>
             </span>
-            <span class="button is-danger is-large" v-if="isAdmin">
-              <router-link to="/theater/{theaterid}/helpwanted">Help Wanted</router-link>
-            </span>
-            <label class="checkbox">
-              <input type="checkbox" v-model="isAdmin">
-              Are you an admin?
-            </label>
-            {{ isAdmin }}
           </div>
         </div>
       </div>
@@ -124,5 +113,18 @@ h1 {
 
 .card-footer-item {
   color: black;
+}
+
+.button {
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  align: center;
+}
+
+.button:hover {
+  background-color: #6f0000;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 </style>
