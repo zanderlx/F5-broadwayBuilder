@@ -5,7 +5,7 @@
       <div class="columns">
         <div class="column is-3">
           <aside class="menu is-hidden-mobile">
-            <p class="menu-label">General</p>
+            <p style="padding-top: 15px" class="menu-label">General</p>
             <ul class="menu-list">
               <li>
                 <a>Edit Theater Info</a>
@@ -40,13 +40,13 @@
             <p class="menu-label">Help Wanted</p>
             <ul class="menu-list">
               <li>
-                <a>Job Postings</a>
+                <router-link to="/theater/{theaterid}/helpwanted">Job Postings</router-link>
               </li>
             </ul>
             <p class="menu-label">Production Info</p>
             <ul class="menu-list">
               <li>
-                <a>Edit Past Production Info</a>
+                <router-link to="/theater/{theaterid}/adminproductioninfo">Edit Past Production Info</router-link>
               </li>
             </ul>
           </aside>
@@ -101,7 +101,7 @@
                 </header>
                 <div class="card-table">
                   <div class="content is-fullwidth">
-                    <table class="table is-fullwidth is-striped is-scrollable">
+                    <table class="table is-striped is-scrollable">
                       <tbody height="200px">
                         <tr>
                           <td width="5%">
@@ -219,4 +219,10 @@ export default {
       overflow-y: scroll
       width: 100%
       position: absolute
+.card
+  &.events-card
+    background-color: white
+    -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)
+    color: #4a4a4a
 </style>

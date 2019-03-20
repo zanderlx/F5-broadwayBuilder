@@ -28,7 +28,7 @@
 
         <div class="navbar-end">
           <router-link to="/" class="navbar-item">Home</router-link>
-          <router-link to="/theaters" class="navbar-item">Theatres</router-link>
+          <router-link to="/theaterprofile/{theaterid}" class="navbar-item">Theatres</router-link>
           <router-link to="/adminaccount/{userID}" class="navbar-item">Account</router-link>
           <router-link to="/contactus" class="navbar-item">Contact Us</router-link>
           <div class="navbar-item">
