@@ -92,5 +92,52 @@ namespace BroadwayBuilder.Api.Tests
             service.DeleteTheater(theater);
             dbcontext.SaveChanges();
         }
+
+        [TestMethod]
+        public void PutShouldUpdateTheater_Pass()
+        {
+            // Arrange
+            var dbcontext = new BroadwayBuilderContext();
+            var theaterService = new TheaterService(dbcontext);
+            var theater = new Theater("TEST", "Theater controller", "PUT", "UpdateTheater", "CA", "US", "1355");
+            theaterService.CreateTheater(theater);
+            dbcontext.SaveChanges();
+            var theaterController = new TheaterController();
+
+            // Act
+            theater.State = "CHANGED DATA";
+            theater.City = "CHANGED DATA";
+            theater.PhoneNumber = "CHanged DATA";
+            var actionResult = theaterController.UpdateTheater(theater);
+            var response = actionResult as NegotiatedContentResult<Theater>;
+            var content = response.Content;
+
+            // Assert
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(content);
+            Assert.AreEqual((HttpStatusCode)200, response.StatusCode);
+        }
+
+        [TestMethod]
+        public void DeleteShouldDeleteTheater_Pass()
+        {
+            // Arrange
+            var dbcontext = new BroadwayBuilderContext();
+            var theaterService = new TheaterService(dbcontext);
+            var theater = new Theater("TEST", "Theater controller", "PUT", "UpdateTheater", "CA", "US", "1355");
+            theaterService.CreateTheater(theater);
+            dbcontext.SaveChanges();
+            var theaterController = new TheaterController();
+
+            // Act
+            var actionResult = theaterController.DeleteTheater(theater);
+            var response = actionResult as NegotiatedContentResult<String>;
+            var content = response.Content;
+
+            // Assert
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(content);
+            Assert.AreEqual((HttpStatusCode)200, response.StatusCode);
+        }
     }
 }
