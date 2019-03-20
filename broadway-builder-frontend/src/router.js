@@ -12,9 +12,9 @@ export default new Router({
       component: Home
     },
     {
-      path: "/theaters",
-      name: "theaters",
-      component: () => import("./views/Theaters.vue")
+      path: "/theaterprofile/{theaterid}",
+      name: "theaterprofile",
+      component: () => import("./views/TheaterProfile.vue")
     },
     {
       path: "/adminaccount/{userID}",

@@ -1,5 +1,5 @@
 <template>
-  <div class="theaters">
+  <div class="theaterprofile">
     <div class="hero-body">
       <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
       <div class="container has-text-centered">
@@ -47,7 +47,7 @@
 import axios from "axios";
 
 export default {
-  name: "Theaters",
+  name: "TheaterProfile",
   data() {
     return {
       info: {
