@@ -1,5 +1,5 @@
 <template>
-  <div class="HelloWorld">
+  <div class="SearchBar">
     <h1>{{ info }}</h1>
     <div class="control">
       <h1>Search Bar</h1>
@@ -13,20 +13,14 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "HelloWorld",
+  name: "SearchBar",
   data() {
     return {
       info: ""
     };
   },
-  mounted() {
-    axios
-      .get("http://api.broadwaybuilder.xyz/helloworld")
-      .then(response => (this.info = response.data));
-  }
+  mounted() {}
 };
 </script>
 
