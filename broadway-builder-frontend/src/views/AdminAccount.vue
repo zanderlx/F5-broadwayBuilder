@@ -5,7 +5,7 @@
       <div class="columns">
         <div class="column is-3">
           <aside class="menu is-hidden-mobile">
-            <p class="menu-label">General</p>
+            <p style="padding-top: 15px" class="menu-label">General</p>
             <ul class="menu-list">
               <li>
                 <a>Edit Theater Info</a>
