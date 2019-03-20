@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,10 +28,24 @@ namespace ServiceLayer.Services
             return _dbContext.Theaters.Find(theaterID);
         }
 
-        //public Theater GetTheaterByName(string theaterName)
-        //{
-        //    return _dbContext.Theaters.Find(theaterName);
-        //}
+        public Theater GetTheaterByName(string theaterName)
+        {
+            return _dbContext.Theaters.Where(theater => theater.TheaterName == theaterName).FirstOrDefault<Theater>();
+        }
+
+        public IEnumerable GetAllTheaters()
+        {
+            return _dbContext.Theaters.Select(theater => new
+            {
+                TheaterName = theater.TheaterName,
+                CompanyName = theater.CompanyName,
+                StreetAddress = theater.StreetAddress,
+                City = theater.City,
+                State = theater.State,
+                Country = theater.Country,
+                PhoneNumber = theater.PhoneNumber
+            }).ToList();
+        }
 
         public Theater UpdateTheater(Theater theater)
         {

@@ -5,30 +5,36 @@
       <div class="columns">
         <div class="column is-3">
           <aside class="menu is-hidden-mobile">
-            <p class="menu-label">General</p>
+            <p style="padding-top: 15px" class="menu-label">General</p>
             <ul class="menu-list">
               <li>
-                <a>Productions</a>
+                <a>Edit Theater Info</a>
               </li>
               <li>
-                <a>Reviews</a>
+                <a>Notifications</a>
               </li>
             </ul>
             <p class="menu-label">Administration</p>
             <ul class="menu-list">
               <li>
-                <a>Team Settings</a>
-              </li>
-              <li>
-                <a>Manage Your Team</a>
+                <a>Manage Users</a>
                 <ul>
                   <li>
-                    <a>Members</a>
+                    <a>Staff</a>
                   </li>
                   <li>
-                    <a>Add a member</a>
+                    <a>User Collected Data</a>
+                  </li>
+                  <li>
+                    <a>Blacklist</a>
                   </li>
                 </ul>
+              </li>
+            </ul>
+            <p class="menu-label">Financial</p>
+            <ul class="menu-list">
+              <li>
+                <a>Ticket Sales</a>
               </li>
             </ul>
             <p class="menu-label">Help Wanted</p>
@@ -37,16 +43,10 @@
                 <a>Job Postings</a>
               </li>
             </ul>
-            <p class="menu-label">Transactions</p>
+            <p class="menu-label">Production Info</p>
             <ul class="menu-list">
               <li>
-                <a>Payments</a>
-              </li>
-              <li>
-                <a>Transfers</a>
-              </li>
-              <li>
-                <a>Balance</a>
+                <a>Edit Past Production Info</a>
               </li>
             </ul>
           </aside>
@@ -71,13 +71,13 @@
               <div class="tile is-parent">
                 <article class="tile is-child box">
                   <p class="title">59</p>
-                  <p class="subtitle">Productions</p>
+                  <p class="subtitle"># of Reviews</p>
                 </article>
               </div>
               <div class="tile is-parent">
                 <article class="tile is-child box">
-                  <p class="title">3</p>
-                  <p class="subtitle">Shows Selling</p>
+                  <p class="title">4.7</p>
+                  <p class="subtitle">Avg. Show Rating</p>
                 </article>
               </div>
               <div class="tile is-parent">
@@ -100,9 +100,9 @@
                   </a>
                 </header>
                 <div class="card-table">
-                  <div class="content">
-                    <table class="table is-fullwidth is-striped">
-                      <tbody>
+                  <div class="content is-fullwidth">
+                    <table class="table is-fullwidth is-striped is-scrollable">
+                      <tbody height="200px">
                         <tr>
                           <td width="5%">
                             <i class="fa fa-bell-o"></i>
@@ -211,3 +211,12 @@ export default {
   methods: {}
 };
 </script>
+
+<style lang="sass">
+.table
+  &.is-scrollable
+    tbody
+      overflow-y: scroll
+      width: 100%
+      position: absolute
+</style>

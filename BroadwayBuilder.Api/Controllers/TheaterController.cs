@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using ServiceLayer.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,11 +33,53 @@ namespace BroadwayBuilder.Api.Controllers
                 // Todo: add proper error handling
                 catch (Exception e)
                 {
-                    return BadRequest();
+                    return Content((HttpStatusCode)400, "Unable to add that Theater.");
                 }
 
             }
 
+        }
+
+        [HttpGet, Route("theater/{theatername}")]
+        public IHttpActionResult GetTheaterByName(string theatername)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                TheaterService service = new TheaterService(dbcontext);
+                try
+                {
+                    Theater theater = service.GetTheaterByName(theatername);
+                    if(theater == null)
+                    {
+                        throw new Exception();
+                    }
+                    return Content((HttpStatusCode)200,theater);
+                }
+                catch (Exception)
+                {
+                    return Content((HttpStatusCode)404, "The Theater could not be found");
+                }
+            }
+        }
+
+        [HttpGet,Route("theater/all")]
+        public IHttpActionResult GetAllTheaters()
+        {
+            using(var dbcontext = new BroadwayBuilderContext())
+            {
+                TheaterService service = new TheaterService(dbcontext);
+                try
+                {
+                    IEnumerable list = service.GetAllTheaters();
+                    return Content((HttpStatusCode)200,list);
+                }
+                catch(Exception e)
+                {
+                    return Content((HttpStatusCode)500,"Oops! Something went wrong on our end");
+                }
+                
+
+            }
         }
     }
 }
