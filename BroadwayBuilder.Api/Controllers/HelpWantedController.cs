@@ -15,6 +15,7 @@ namespace BroadwayBuilder.Api.Controllers
     [RoutePrefix("helpwanted")]
     public class HelpWantedController : ApiController
     {
+        public HelpWantedController() { }
         [HttpGet,Route("{theaterid}")]
         public IHttpActionResult GetTheaterJobs(int theaterid)//needs to be changed to string for encryption purposes
         {
@@ -89,7 +90,7 @@ namespace BroadwayBuilder.Api.Controllers
                 }
                 catch(Exception e)//needs to be updated
                 {
-                    return BadRequest();
+                    return Content((HttpStatusCode)400, e.Message);
                 }
             }
         }

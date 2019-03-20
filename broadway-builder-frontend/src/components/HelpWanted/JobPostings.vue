@@ -1,31 +1,31 @@
 <template>
   <div>
-    <div class="columns" v-for="(item, index) in jobPostings" v-bind:key="index">
+    <div class="columns" v-for="(job, index) in jobPostings" v-bind:key="index">
       <div class="column is-6">
         <div class="card">
           <header class="card-header">
             <p class="card-header-title">
-              <strong id="title">{{ item.title }}</strong>
+              <strong id="Title">{{ job.Title }}</strong>
             </p>
           </header>
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <p id="description">{{ item.description }}</p>
+              <p id="Description">{{ job.Description }}</p>
             </div>
           </div>
           <footer class="card-footer">
-            <a v-on:click="item.show = true" class="card-footer-item">View</a>
+            <a class="card-footer-item" v-on:click="job.show = !job.show">View</a>
           </footer>
         </div>
       </div>
       <div class="column is-6">
-        <div class="card" v-if="item.show === true">
+        <div class="card" v-if="job.show">
           <header class="card-header">
             <p class="card-header-title">
-              <strong id="title">{{ item.title }}</strong>
+              <strong id="Title">{{ job.Title }}</strong>
             </p>
-            <a v-on:click="item.show = false" class="card-header-icon" aria-label="more options">
+            <a v-on:click="job.show = false" class="card-header-icon" aria-label="more options">
                 <span class="icon">
                   <FontAwesomeIcon icon="times"/>
                 </span>
@@ -34,20 +34,20 @@
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <p id="description">{{ item.description }}</p>
+              <p id="Description">{{ job.Description }}</p>
             </div>
             <div class="content">
               <strong>Hours</strong>
-              <p id="hours">{{ item.hours }}</p>
+              <p id="Hours">{{ job.Hours }}</p>
             </div>
             <div class="content">
               <strong>Requirements</strong>
-              <p id="requirements">{{ item.requirements }}</p>
+              <p id="Requirements">{{ job.Requirements }}</p>
             </div>
           </div>
           <footer class="card-footer">
             <a v-on:click="editJobPosting(index)" class="card-footer-item">Edit</a>
-            <a v-on:click="removeJobPosting(item, index)" class="card-footer-item">Delete</a>
+            <a v-on:click="removeJobPosting(job, index)" class="card-footer-item">Delete</a>
           </footer>
         </div>
       </div>
@@ -59,6 +59,7 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// import axios from 'axios';
 library.add(faTimes);
 export default {
   components: {
@@ -71,10 +72,18 @@ export default {
     };
   },
   methods: {
-    removeJobPosting(item, index) {
-      item.show = false;
-      this.jobPostings.splice(index, 1);
-      this.$emit('removed', this.jobPostings)
+    // async removeJobPosting(job, index) {
+    //   await axios
+    //     .delete('http://localhost:64512/helpwanted/deletetheaterjob/12')
+    //     .then(
+    //       this.jobPostings.splice(index, 1),
+    //       job.show = false,
+    //       this.$emit('removed', this.jobPostings)
+    //     )
+    //},
+    showDetails(job) {
+      job.show = true
+      console.log(job.show)
     }
   }
 };

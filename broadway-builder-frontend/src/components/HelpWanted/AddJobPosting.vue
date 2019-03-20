@@ -3,21 +3,31 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          <input class="input" v-model="title" placeholder="Title / Subject">
+          <input class="input" v-model="Title" placeholder="Title / Subject">
         </p>
       </header>
       <div class="card-content">
+
+        <strong>Type of Job</strong><br>
+        <input type="radio" id="jobType" value="Theater" v-model="jobType">
+        <label for="one">Theater</label>
+        
+        <input type="radio" id="jobType" value="Production" v-model="jobType">
+        <label for="two">Production</label>
+        <br>
+        <br>
+
         <div class="content" v-for="(category, index) in categories" v-bind:key="index">
           <strong>{{ category }}</strong>
           <div class="control">
             <div v-if="index === 0">
-              <textarea v-model="description" class="textarea"></textarea>
+              <textarea v-model="Description" class="textarea"></textarea>
             </div>
             <div v-else-if="index === 1">
-              <textarea v-model="hours" class="textarea"></textarea>
+              <textarea v-model="Hours" class="textarea"></textarea>
             </div>
             <div v-else>
-              <textarea v-model="requirements" class="textarea"></textarea>
+              <textarea v-model="Requirements" class="textarea"></textarea>
             </div>
           </div>
         </div>
@@ -31,29 +41,39 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       categories: ["Description", "Hours", "Requirements"],
-      title: '',
-      description: '',
-      hours: '',
-      requirements: '',
-      show: false
+      job: {
+        Title: "",
+        Description: "",
+        Hours: "",
+        Requirements: "",
+        Position: "frontend",
+        theaterid: 13
+      },
+      jobType: '',
+      show: true
     };
   },
   methods: {
-    addNewJobPosting() {
-      this.$emit('add', {
-        title: this.title,
-        description: this.description,
-        hours: this.hours,
-        requirements: this.requirements,
-        show: this.show
-      })
+    async addNewJobPosting() {
+      // if (this.show.localCompare("Theater")) {
+        await axios
+          .post("http://localhost:64512/helpwanted/createtheaterjob", this.job)
+          .then(response => console.log(response));
+      // }
+      // else (this.show.localCompare("Production")) {
+      //   await axios
+      //     .post("http://localhost:64512/helpwanted/createproductionjob", this.job)
+      //     .then(response => console.log(response));
+      // }
+
     },
     cancelNewJobPosting() {
-      this.$emit('cancel', false)
+      this.$emit("cancel", false);
     }
   }
 };
@@ -69,6 +89,9 @@ export default {
 
 a
   color: #6F0000
+
+#jobType
+  margin: 1em
 
 </style>
 

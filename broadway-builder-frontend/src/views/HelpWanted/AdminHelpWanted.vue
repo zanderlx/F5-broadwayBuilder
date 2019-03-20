@@ -11,10 +11,7 @@
           @add="newJobPostingSuccess"
           @cancel="cancelNewJobPosting"
         />
-        <JobPostings
-          v-bind:jobPostings="jobs"
-          @removed="removeJobPosting"
-        />
+        <JobPostings v-bind:jobPostings="jobs" @removed="removeJobPosting"/>
       </div>
     </div>
   </div>
@@ -26,7 +23,7 @@ import JobPostings from "@/components/HelpWanted/JobPostings.vue";
 import JobFilter from "@/components/HelpWanted/JobFilter.vue";
 
 // NOTE: axios will be needed when data store is set up
-// import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "AdminHelpWanted",
@@ -47,7 +44,7 @@ export default {
     },
     newJobPostingSuccess(newJob) {
       this.jobs.unshift(newJob);
-      this.addJob = false;
+      this.addJob = true;
     },
     cancelNewJobPosting(canceled) {
       this.addJob = canceled;
@@ -56,8 +53,17 @@ export default {
       this.jobs = updatedJobPostings;
     }
   },
-  mounted() {
+  async mounted() {
     // NOTE: When data store is set up, GET the job postings from the data store
+    await axios
+      .get("http://localhost:64512/helpwanted/13")
+      .then(response => this.jobs = response.data, console.log(this.jobs))
+
+    for (var i = 0; i < this.jobs.length; i++) {
+      this.$set(this.jobs[i], "show", false)
+    }
+
+    console.log(this.jobs[0].show)
   }
 };
 </script>
