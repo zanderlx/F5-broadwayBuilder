@@ -7,6 +7,16 @@
         </p>
       </header>
       <div class="card-content">
+
+        <strong>Type of Job</strong><br>
+        <input type="radio" id="jobType" value="Theater" v-model="jobType">
+        <label for="one">Theater</label>
+        
+        <input type="radio" id="jobType" value="Production" v-model="jobType">
+        <label for="two">Production</label>
+        <br>
+        <br>
+
         <div class="content" v-for="(category, index) in categories" v-bind:key="index">
           <strong>{{ category }}</strong>
           <div class="control">
@@ -31,40 +41,39 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   data() {
     return {
       categories: ["Description", "Hours", "Requirements"],
-      "Title": '',
-      "Description": '',
-      "Hours": '',
-      "Requirements": '',
+      job: {
+        Title: "",
+        Description: "",
+        Hours: "",
+        Requirements: "",
+        Position: "frontend",
+        theaterid: 13
+      },
+      jobType: '',
       show: true
     };
   },
   methods: {
-    addNewJobPosting() {
-      axios
-      .post("http://localhost:64512/helpwanted/createtheaterjob", {
-        Title: this.Title,
-        Description: this.Description,
-        Hours: this.Hours,
-        Requirements: this.Requirements,
-        Position:"frontend",
-        theaterid:2
-      })
-      .then(this.$emit('add', {
-        Title: this.Title,
-        Description: this.Description,
-        Hours: this.Hours,
-        Requirements: this.Requirements,
-        show: true
-      }));
-      
+    async addNewJobPosting() {
+      // if (this.show.localCompare("Theater")) {
+        await axios
+          .post("http://localhost:64512/helpwanted/createtheaterjob", this.job)
+          .then(response => console.log(response));
+      // }
+      // else (this.show.localCompare("Production")) {
+      //   await axios
+      //     .post("http://localhost:64512/helpwanted/createproductionjob", this.job)
+      //     .then(response => console.log(response));
+      // }
+
     },
     cancelNewJobPosting() {
-      this.$emit('cancel', false)
+      this.$emit("cancel", false);
     }
   }
 };
@@ -80,6 +89,9 @@ export default {
 
 a
   color: #6F0000
+
+#jobType
+  margin: 1em
 
 </style>
 
