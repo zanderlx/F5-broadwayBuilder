@@ -41,7 +41,8 @@ namespace ServiceLayer.Services
                         Title = job.Title, //Position = job.Position,
                         Hours = job.Hours,
                         Description = job.Description,
-                        Requirement = job.Requirements
+                        Requirement = job.Requirements,
+                        HelpWantedId = job.HelpWantedID
                     }).ToList();
         }
         public void UpdateTheaterJob(TheaterJobPosting updatedTheaterJob, TheaterJobPosting originalTheaterJob)
