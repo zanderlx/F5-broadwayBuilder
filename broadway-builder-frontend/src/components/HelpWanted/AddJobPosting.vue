@@ -9,12 +9,10 @@
       <div class="card-content">
         <div class="columns">
           <div class="column is-6 is-narrow">
-
             <!-- Show inputs for the adding a new job posting -->
             <div class="content" v-for="(category, index) in categories" v-bind:key="index">
               <strong>{{ category }}</strong>
               <div class="control">
-
                 <!-- Description input -->
                 <div v-if="index === 0">
                   <textarea v-model="job.Description" class="textarea"></textarea>
@@ -37,7 +35,7 @@
             <br>
             <input type="radio" id="jobType" value="Theater" v-model="jobType">
             <label for="one">Theater</label>
-            
+
             <input type="radio" id="jobType" value="Production" v-model="jobType">
             <label for="two">Production</label>
             <br>
@@ -64,7 +62,7 @@ export default {
       job: {
         Title: "",
         Description: "",
-        Hours: "",  
+        Hours: "",
         Requirements: "",
         Position: "Actor",
         theaterid: 1
@@ -77,11 +75,13 @@ export default {
     async addNewJobPosting() {
       // Sends a new job posting to the database
       await axios
-        .post("http://api.broadwaybuilder.xyz/helpwanted/createtheaterjob", this.job)
+        .post(
+          "http://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
+          this.job
+        )
         // NOTE: For testing purposes
         // .post("http://localhost:64512/helpwanted/createtheaterjob", this.job)
         .then(response => console.log(response), this.$emit("add", this.job));
-
     },
     // Cancel the creation of a new job
     cancelNewJobPosting() {
