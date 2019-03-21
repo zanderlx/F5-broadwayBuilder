@@ -178,5 +178,39 @@ namespace BroadwayBuilder.Api.Controllers
 
         }
 
+        [Route("delete")]
+        [HttpDelete]
+
+        public IHttpActionResult deleteProduction(Production productionToDelete)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                var productionService = new ProductionService(dbcontext);
+
+                try
+                {
+                    if (productionToDelete == null)
+                    {
+                        return BadRequest("no production object provided");
+                    }
+                    else if (productionToDelete.ProductionID == null)
+                    {
+                        return BadRequest("Production id is null");
+                    }
+
+                    productionService.DeleteProduction(productionToDelete);
+                    dbcontext.SaveChanges();
+
+                    return Ok("Production deleted succesfully");
+
+                } 
+                // Hack: Need to add proper exception handling
+                catch (Exception e)
+                {
+                    return BadRequest();
+                }
+            }
+        }
+
     }
 }
