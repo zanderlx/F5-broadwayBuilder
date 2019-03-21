@@ -81,5 +81,43 @@ namespace BroadwayBuilder.Api.Controllers
 
             }
         }
+
+        [HttpPut,Route("theater/updateTheater")]
+        public IHttpActionResult UpdateTheater([FromBody] Theater theater)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                try
+                {
+                    var theaterService = new TheaterService(dbcontext);
+                    theaterService.UpdateTheater(theater);
+                    dbcontext.SaveChanges();
+                    return Content((HttpStatusCode)200, theater);
+                }
+                catch
+                {
+                    return Content((HttpStatusCode)404, "The theater could not be found");
+                }
+            }
+        }
+        
+        [HttpDelete, Route("theater/deleteTheater")]
+        public IHttpActionResult DeleteTheater([FromBody] Theater theater)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                try
+                {
+                    var theaterService = new TheaterService(dbcontext);
+                    theaterService.DeleteTheater(theater);
+                    dbcontext.SaveChanges();
+                    return Content((HttpStatusCode)200, "Theater Successfully Deleted");
+                }
+                catch
+                {
+                    return Content((HttpStatusCode)404, "The theater could not be found");
+                }
+            }
+        }
     }
 }
