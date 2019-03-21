@@ -1,13 +1,15 @@
 <template>
   <div class="AdminHelpWanted">
-    <h1><strong>Job Opportunities</strong> | Insert Theater Name Here</h1>
+    <h1>
+      <strong>Job Opportunities</strong> | Insert Theater Name Here
+    </h1>
     <div class="columns">
       <div class="column is-2 is-narrow">
         <!-- These are the buttons to ADD A JOB and to VIEW RESUMES
-        VIEW RESUMES is still a work in progress... -->
+        VIEW RESUMES is still a work in progress...-->
         <div id="buttons">
           <a class="button is-rounded is-medium" v-on:click="addJobButton">Post A New Job</a>
-          <a class="button is-rounded is-medium" >View Resumes</a>
+          <a class="button is-rounded is-medium">View Resumes</a>
         </div>
 
         <!-- This is the JOB FILTER checkboxes (Still a work in progress) -->
@@ -43,7 +45,7 @@ export default {
   },
   data() {
     return {
-      // This array stores the jobs obtained from the database. 
+      // This array stores the jobs obtained from the database.
       // It is reactive.
       jobs: [],
       // Boolean value to display new job posting inputs
@@ -76,13 +78,14 @@ export default {
         .get("http://api.broadwaybuilder.xyz/helpwanted/1")
         // NOTE: For testing purposes
         // .get("http://localhost:64512/helpwanted/1")
-        .then(response => this.jobs = response.data, console.log(this.jobs))
+        .then(response => (this.jobs = response.data), console.log(this.jobs));
 
-        // For each of the object...
-        for (var i = 0; i < this.jobs.length; i++) {
-          // Appends a "show" attribute to display more details about the job
-          this.$set(this.jobs[i], "show", false)
-        }
+      // For each of the object...
+      for (var i = 0; i < this.jobs.length; i++) {
+        // Appends a "show" attribute to display more details about the job
+        this.$set(this.jobs[i], "show", false);
+        this.$set(this.jobs[i], "edit", false);
+      }
     }
   },
   mounted() {
