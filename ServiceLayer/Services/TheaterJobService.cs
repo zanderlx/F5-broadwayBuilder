@@ -38,11 +38,14 @@ namespace ServiceLayer.Services
         {
             return _dbContext.TheaterJobPostings.Where(job => job.TheaterID == theaterid)
                     .Select(job => new {
-                        Title = job.Title, //Position = job.Position,
+                        Title = job.Title,
+                        Position = job.Position,
                         Hours = job.Hours,
                         Description = job.Description,
-                        Requirement = job.Requirements,
-                        HelpWantedId = job.HelpWantedID
+                        Requirements = job.Requirements,
+                        DateCreated = job.DateCreated,
+                        HelpWantedId = job.HelpWantedID,
+                        TheaterId = job.TheaterID
                     }).ToList();
         }
         public void UpdateTheaterJob(TheaterJobPosting updatedTheaterJob, TheaterJobPosting originalTheaterJob)
