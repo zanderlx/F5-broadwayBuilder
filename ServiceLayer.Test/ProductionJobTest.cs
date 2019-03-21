@@ -24,7 +24,10 @@ namespace ServiceLayer.Test
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             var results = dbcontext.SaveChanges();
@@ -57,7 +60,10 @@ namespace ServiceLayer.Test
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             dbcontext.SaveChanges();
@@ -91,7 +97,10 @@ namespace ServiceLayer.Test
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             dbcontext.SaveChanges();

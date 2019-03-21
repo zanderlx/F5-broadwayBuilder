@@ -88,7 +88,7 @@ namespace BroadwayBuilder.Api.Controllers
                 }
         }
 
-        [Route("createproduction")]
+        [Route("create")]
         [HttpPost]
 
         public IHttpActionResult CreateProduction([FromBody] Production production)
@@ -133,14 +133,49 @@ namespace BroadwayBuilder.Api.Controllers
 
                     return Ok(current_production);
                 }
-                // Hack: Need to add proper exception
+                // Hack: Need to add proper exception handling
+                catch (Exception e)
+                {
+                    return BadRequest();
+                }
+            }
+  
+        }
+
+        [Route("update")]
+        [HttpPut]
+
+        public IHttpActionResult UpdateProduction([FromBody] Production production_to_update)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                var productionService = new ProductionService(dbcontext);
+
+                try
+                {
+                    if (production_to_update == null)
+                    {
+                        return BadRequest("no production object provided");
+                    }
+                    else if (production_to_update.ProductionID == null)
+                    {
+                        return BadRequest("Production id is null");
+                    }
+
+
+                    Production updated_production = productionService.UpdateProduction(production_to_update);
+                    dbcontext.SaveChanges();
+
+                    return Ok(updated_production);
+
+                }
+                // Hack: Need to add proper exception handling
                 catch (Exception e)
                 {
                     return BadRequest();
                 }
             }
 
-           
         }
 
     }
