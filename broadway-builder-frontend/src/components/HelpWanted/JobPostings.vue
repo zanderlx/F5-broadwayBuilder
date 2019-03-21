@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="columns" v-for="(job, index) in jobPostings" v-bind:key="index">
+      <!-- This coloumn just displays a brief description for the job posting -->
       <div class="column is-6">
         <div class="card">
           <header class="card-header">
@@ -19,35 +20,56 @@
           </footer>
         </div>
       </div>
+
+      <!-- This column shows additional information about the job posting -->
       <div class="column is-6">
         <div class="card" v-if="job.show">
           <header class="card-header">
             <p class="card-header-title">
-              <strong id="Title">{{ job.Title }}</strong>
+              <input class="input" type="text" v-model="job.Title" v-if="job.edit">
+              <strong id="Title" v-else>{{ job.Title }}</strong>
             </p>
-            <a v-on:click="job.show = false" class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <FontAwesomeIcon icon="times"/>
-                </span>
-              </a>
+            <a
+              v-on:click="job.show = false; job.edit = false"
+              class="card-header-icon"
+              aria-label="more options"
+            >
+              <span class="icon">
+                <FontAwesomeIcon icon="times"/>
+              </span>
+            </a>
           </header>
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <p id="Description">{{ job.Description }}</p>
+              <input class="input" type="text" v-if="job.edit" v-model="job.Description">
+              <p id="Description" v-else>{{ job.Description }}</p>
             </div>
             <div class="content">
               <strong>Hours</strong>
-              <p id="Hours">{{ job.Hours }}</p>
+              <input class="input" type="text" v-if="job.edit" v-model="job.Hours">
+              <p id="Hours" v-else>{{ job.Hours }}</p>
             </div>
             <div class="content">
               <strong>Requirements</strong>
-              <p id="Requirements">{{ job.Requirements }}</p>
+              <input class="input" type="text" v-if="job.edit" v-model="job.Requirement">
+              <p id="Requirements" v-else>{{ job.Requirement }}</p>
             </div>
           </div>
+
+          <!-- Allows the admin to EDIT (work in progress) or DELETE  -->
           <footer class="card-footer">
-            <a v-on:click="editJobPosting(index)" class="card-footer-item">Edit</a>
-            <a v-on:click="removeJobPosting(job, index)" class="card-footer-item">Delete</a>
+            <a class="card-footer-item" v-if="!job.edit" v-on:click="editJobPosting(job)">Edit</a>
+            <a
+              class="card-footer-item"
+              v-if="!job.edit"
+              v-on:click="removeJobPosting(job, index)"
+            >Delete</a>
+            <a
+              class="card-footer-item"
+              v-if="job.edit"
+              v-on:click="finishEditing(job)"
+            >Finish Editing</a>
           </footer>
         </div>
       </div>
@@ -59,7 +81,8 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// import axios from 'axios';
+import axios from "axios";
+
 library.add(faTimes);
 export default {
   components: {
@@ -72,18 +95,32 @@ export default {
     };
   },
   methods: {
-    // async removeJobPosting(job, index) {
-    //   await axios
-    //     .delete('http://localhost:64512/helpwanted/deletetheaterjob/12')
-    //     .then(
-    //       this.jobPostings.splice(index, 1),
-    //       job.show = false,
-    //       this.$emit('removed', this.jobPostings)
-    //     )
-    //},
+    editJobPosting(job) {
+      job.edit = true;
+    },
+    finishEditing(job) {
+      axios.put("", {});
+
+      job.edit = false;
+    },
+    async removeJobPosting(job, index) {
+      // Removes a job posting from the database
+      await axios
+        .delete(
+          "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
+            job.HelpWantedId
+        )
+        // NOTE: For testing purposes
+        // .delete("http://localhost:64512/helpwanted/createtheaterjob/" + job.HelpWantedId)
+        .then(
+          this.jobPostings.splice(index, 1),
+          this.$emit("removed", this.jobPostings),
+          (job.show = false)
+        );
+    },
     showDetails(job) {
-      job.show = true
-      console.log(job.show)
+      job.show = true;
+      console.log(job.show);
     }
   }
 };
