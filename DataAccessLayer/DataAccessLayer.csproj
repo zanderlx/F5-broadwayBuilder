@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ProductionDateTime.cs" />
+    <Compile Include="Models\ResumeTheaterJob.cs" />
     <Compile Include="Models\TheaterJobPosting.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Production.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserPermission.cs" />
+    <Compile Include="Models\Resume.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
