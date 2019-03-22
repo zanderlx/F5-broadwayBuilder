@@ -51,6 +51,8 @@
     <Compile Include="Services\PermissionService.cs" />
     <Compile Include="Services\ProductionJobService.cs" />
     <Compile Include="Services\ProductionService.cs" />
+    <Compile Include="Services\ResumeService.cs" />
+    <Compile Include="Services\ResumeTheaterJobService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\SecurityService.cs" />
     <Compile Include="Services\TheaterJobService.cs" />
