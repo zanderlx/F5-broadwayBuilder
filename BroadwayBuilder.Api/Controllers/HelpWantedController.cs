@@ -42,11 +42,11 @@ namespace BroadwayBuilder.Api.Controllers
                     {
                         return Content((HttpStatusCode)202, "Updated Job Posting");//not sure to return object or just string response
                     }
-                    return BadRequest();//need to edit 
+                    return Content((HttpStatusCode)500,"Theater Job could not be added");//need to edit 
                 }
                 else
                 {
-                    return BadRequest();//need to edit 
+                    return Content((HttpStatusCode)500, "Theater Job could not be added");//need to edit 
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace BroadwayBuilder.Api.Controllers
                 }
                 catch (Exception e)
                 {
-                    return BadRequest();
+                    return Content((HttpStatusCode)400, "Production Job could not be created");
                 }
             }
         }
