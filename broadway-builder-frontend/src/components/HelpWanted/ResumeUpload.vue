@@ -1,41 +1,67 @@
+<!-- App.vue -->
+
+<!-- HTML Template -->
 <template>
-  <div class="ResumeUpload">
-    <form action="">
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
-        <p>Drag your files <br> or click in this area</p>
-    </form>
+  <div id="app">
+    <div class="file has-name is-boxed">
+      <label class="file-label">
+        <input class="file-input" type="file" name="resume" @change="getFileName()">
+        <span class="file-cta">
+          <span class="file-icon">
+            <FontAwesomeIcon icon="cloud-upload-alt"/>
+          </span>
+          <span class="file-label">Click to upload</span>
+        </span>
+        <span class="file-name">{{ fileName }}</span>
+      </label>
+    </div>
   </div>
 </template>
 
+<!-- Javascript -->
 <script>
 export default {
-  name: "ResumeUpload"
+  date() {
+    return {
+      fileName: ""
+    };
+  },
+  methods: {
+    getFileName() {
+      this.fileName = document.getElementsByClassName("file-input")[0].value;
+    }
+  }
 };
 </script>
 
-<style scoped>
-body {
-  background: rgba(0, 0, 0, 0.9);
+<!-- SASS styling -->
+<style lang="scss">
+.dropbox {
+  outline: 2px dashed grey; /* the dash box */
+  outline-offset: -10px;
+  background: lightcyan;
+  color: dimgray;
+  padding: 10px 10px;
+  min-height: 200px; /* minimum height */
+  position: relative;
+  cursor: pointer;
 }
-form {
-  height: 10em;
-  border: 4px dashed #fff;
-}
-form p {
+
+.input-file {
+  opacity: 0; /* invisible but it's there! */
   width: 100%;
-  height: 100%;
-  text-align: center;
-  padding-top: 3em;
-  color: #ffffff;
-  font-family: Arial;
-}
-form input {
+  height: 200px;
   position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
+  cursor: pointer;
+}
+
+.dropbox:hover {
+  background: lightblue; /* when mouse over to the drop zone, change color */
+}
+
+.dropbox p {
+  font-size: 1.2em;
+  text-align: center;
+  padding: 50px 0;
 }
 </style>
