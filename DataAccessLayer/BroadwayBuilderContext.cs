@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using DataAccessLayer.Models;
 
 namespace DataAccessLayer
 {
     public class BroadwayBuilderContext : DbContext
     {
-        public BroadwayBuilderContext(): base("name=BroadwayBuilder")
+        public BroadwayBuilderContext() : base("name=BroadwayBuilder")
         {
             // Todo: will want to remove this once we start persiting data as this will cause our data to be lost when changes to models occur
-            //Database.SetInitializer<BroadwayBuilderContext>(new DropCreateDatabaseIfModelChanges<BroadwayBuilderContext>());
+            Database.SetInitializer<BroadwayBuilderContext>(new DropCreateDatabaseIfModelChanges<BroadwayBuilderContext>());
         }
 
         //Creating property on db context
@@ -27,5 +28,7 @@ namespace DataAccessLayer
         public DbSet<TheaterJobPosting> TheaterJobPostings { get; set; }
         public DbSet<ProductionJobPosting> ProductionJobPostings { get; set; }
         public DbSet<ProductionDateTime> ProductionDateTimes { get; set; }
+        public DbSet<Resume> Resumes { get; set; }
+        public DbSet<ResumeTheaterJob> ResumeTheaterJobs {get;set;}
     }
 }
