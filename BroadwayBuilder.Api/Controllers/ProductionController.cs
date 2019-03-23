@@ -212,5 +212,76 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
+        [Route("{productionId}/uploadPhoto")]
+        [HttpPost]
+
+        public IHttpActionResult uploadPhoto(int productionId)
+        {
+            var dbcontext = new BroadwayBuilderContext();
+            var productionService = new ProductionService(dbcontext);
+
+            //try to upload pdf and save to server filesystem
+            try
+            {
+                //get the content, headers, etc the full request of the current http request
+                var httpRequest = HttpContext.Current.Request;
+
+                // Todo: Check if length of httpRequest.Files <= 10 to ensure only 10 photos is uploaded
+
+                var count = 0;
+                foreach (string filename in httpRequest.Files)
+                {
+                    var putFile = httpRequest.Files[filename];
+                    if (putFile != null && putFile.ContentLength > 0) //validates if file exists ContentLengh is # of bytes
+                    {
+
+                        int MaxContentLength = 1 * 1024 * 1024 * 5; //Size = 5 MB
+
+                        //A list in case we want to accept more than one file type
+                        IList<string> AllowedFileExtension = new List<string> { ".jpg" };
+                        var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+
+                        if (!AllowedFileExtension.Contains(extension))
+                        {
+
+                            //var message = string.Format("Please Upload image of type .jpg only");
+
+                            // Todo: Log the error that occurs
+                            return BadRequest();
+                        }
+                        else if (putFile.ContentLength > MaxContentLength)
+                        {
+
+                            //var message = string.Format("Please Upload a file upto 1 mb.");
+
+                            // Todo: log the error that occurs
+                            return BadRequest();
+                        }
+                        else
+                        {
+                            productionService.UploadPhoto(productionId, count, extension, putFile);
+                        }
+                    }
+
+                    // Todo: Create an ErrorMessage model
+                    //var message1 = string.Format("Image Updated Successfully.");
+                    //return Created(insert path);
+                    //return Created("C:\\Users\\ProductionPrograms");
+                    count++;
+                }
+
+                return Ok("Photo Uploaded");
+            }
+
+            catch (Exception ex)
+            {
+                // Todo: add proper error handling
+                // Todo: log error
+                return BadRequest();
+
+            }
+        }
+
     }
 }
