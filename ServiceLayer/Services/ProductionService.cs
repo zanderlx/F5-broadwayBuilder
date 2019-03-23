@@ -76,5 +76,11 @@ namespace ServiceLayer.Services
             postedFile.SaveAs(filePath);
         }
 
+        public void UploadPhoto(int productionId, int count, string extension, HttpPostedFile postedFile)
+        {
+            var filePath = HostingEnvironment.MapPath("~/ProductionPhotos/" + productionId + "-" + count + extension);
+            postedFile.SaveAs(filePath);
+        }
+
     }
 }
