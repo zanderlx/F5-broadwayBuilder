@@ -24,7 +24,7 @@
         />
 
         <!-- This displays all jobs stored in the database as cards on the page -->
-        <JobPostings v-bind:jobPostings="jobs" @removed="removeJobPosting"/>
+        <JobPostings :jobPostings="jobs" :hasPermission="true"/>
       </div>
     </div>
   </div>
@@ -77,10 +77,9 @@ export default {
       await axios
         .get("http://api.broadwaybuilder.xyz/helpwanted/1")
         // NOTE: For testing purposes
-        // .get("http://localhost:64512/helpwanted/1")
+        // .get("http://localhost:64512/helpwanted/3")
         .then(response => (this.jobs = response.data), console.log(this.jobs));
 
-      // For each of the object...
       for (var i = 0; i < this.jobs.length; i++) {
         // Appends a "show" attribute to display more details about the job
         this.$set(this.jobs[i], "show", false);
@@ -117,7 +116,7 @@ a
 
 .button
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
+  transition: all 0.2s ease 0s;
   align: center
 
 .button:hover
@@ -125,4 +124,5 @@ a
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
   color: #fff;
   transform: translateY(-7px);
+  font-weight: bold
 </style>
