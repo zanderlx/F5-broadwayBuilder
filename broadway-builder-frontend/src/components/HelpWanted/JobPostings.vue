@@ -132,7 +132,7 @@ export default {
         // )
         // NOTE: For testing purposes
         .delete(
-          "http://localhost:64512/helpwanted/deletetheaterjob/" +
+          "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
             job.HelpWantedId
         )
         .then(
