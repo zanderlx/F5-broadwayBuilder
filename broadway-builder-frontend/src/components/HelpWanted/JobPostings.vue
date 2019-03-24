@@ -11,9 +11,21 @@
           </header>
           <div class="card-content">
             <div class="content">
+              <p id="Position">
+                <strong>Position: &nbsp;</strong>
+                <u>{{ job.Position }}</u>
+              </p>
               <strong>Description</strong>
               <p id="Description">{{ job.Description }}</p>
+              <em
+                id="DatePosted"
+                v-bind="dateDifference = calculateDateDifference(job.DateCreated)"
+              >
+                Posted
+                <strong>{{ dateDifference }}</strong> day(s) ago
+              </em>
             </div>
+            <div class="content"></div>
           </div>
           <footer class="card-footer">
             <a class="card-footer-item" v-on:click="job.show = !job.show">View</a>
@@ -30,7 +42,8 @@
               <strong id="Title" v-else>{{ job.Title }}</strong>
             </p>
             <a
-              v-on:click="job.show = false; job.edit = false"
+              v-on:click="job.show = false"
+              v-if="!job.edit"
               class="card-header-icon"
               aria-label="more options"
             >
@@ -42,34 +55,36 @@
           <div class="card-content">
             <div class="content">
               <strong>Description</strong>
-              <input class="input" type="text" v-if="job.edit" v-model="job.Description">
+              <textarea class="textarea" v-model="job.Description" v-if="job.edit"></textarea>
               <p id="Description" v-else>{{ job.Description }}</p>
             </div>
             <div class="content">
               <strong>Hours</strong>
-              <input class="input" type="text" v-if="job.edit" v-model="job.Hours">
+              <textarea class="textarea" v-model="job.Hours" v-if="job.edit"></textarea>
               <p id="Hours" v-else>{{ job.Hours }}</p>
             </div>
             <div class="content">
               <strong>Requirements</strong>
-              <input class="input" type="text" v-if="job.edit" v-model="job.Requirement">
-              <p id="Requirements" v-else>{{ job.Requirement }}</p>
+              <textarea class="textarea" v-model="job.Requirements" v-if="job.edit"></textarea>
+              <p id="Requirements" v-else>{{ job.Requirements }}</p>
             </div>
           </div>
 
-          <!-- Allows the admin to EDIT (work in progress) or DELETE  -->
-          <footer class="card-footer">
+          <footer class="card-footer" v-if="hasPermission">
             <a class="card-footer-item" v-if="!job.edit" v-on:click="editJobPosting(job)">Edit</a>
-            <a
-              class="card-footer-item"
-              v-if="!job.edit"
-              v-on:click="removeJobPosting(job, index)"
-            >Delete</a>
             <a
               class="card-footer-item"
               v-if="job.edit"
               v-on:click="finishEditing(job)"
             >Finish Editing</a>
+            <a
+              class="card-footer-item"
+              v-if="!job.edit"
+              v-on:click="removeJobPosting(job, index)"
+            >Delete</a>
+          </footer>
+          <footer class="card-footer" v-else>
+            <a class="card-footer-item">Accept Job</a>
           </footer>
         </div>
       </div>
@@ -78,20 +93,14 @@
 </template>
 
 <script>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import axios from "axios";
 
-library.add(faTimes);
 export default {
-  components: {
-    FontAwesomeIcon
-  },
-  props: ["jobPostings"],
+  props: ["jobPostings", "hasPermission"],
   data() {
     return {
-      categories: ["Description", "Hours", "Requirements"]
+      categories: ["Description", "Hours", "Requirements"],
+      dateDifference: ""
     };
   },
   methods: {
@@ -99,19 +108,33 @@ export default {
       job.edit = true;
     },
     finishEditing(job) {
-      axios.put("", {});
+      axios
+        .put("http://api.broadwaybuilder.xyz/helpwanted/edittheaterjob", {
+          HelpWantedId: job.HelpWantedId,
+          TheaterId: job.TheaterId,
+          DateCreated: job.DateCreated,
+          Position: job.Position,
+          Title: job.Title,
+          Description: job.Description,
+          Hours: job.Hours,
+          Requirements: job.Requirements
+        })
+        .then(response => console.log(response));
 
       job.edit = false;
     },
     async removeJobPosting(job, index) {
       // Removes a job posting from the database
       await axios
+        // .delete(
+        //   "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
+        //     job.HelpWantedId
+        // )
+        // NOTE: For testing purposes
         .delete(
           "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
             job.HelpWantedId
         )
-        // NOTE: For testing purposes
-        // .delete("http://localhost:64512/helpwanted/createtheaterjob/" + job.HelpWantedId)
         .then(
           this.jobPostings.splice(index, 1),
           this.$emit("removed", this.jobPostings),
@@ -120,7 +143,12 @@ export default {
     },
     showDetails(job) {
       job.show = true;
-      console.log(job.show);
+    },
+    calculateDateDifference(datePosted) {
+      var dateCreated = new Date(Date.parse(datePosted));
+      var dateToday = new Date();
+      var dateDifference = dateToday.getDay() - dateCreated.getDay();
+      return dateDifference;
     }
   }
 };
@@ -129,22 +157,29 @@ export default {
 <style lang="sass" scoped>
 @import '../../../node_modules/bulma/bulma.sass'
 
-.card    
+card    
   margin: 1.25em 0 1.25em 0
   box-shadow: 0 14px 75px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22)
+  transition: all 0.5s ease 0s;
 
 .card-header-icon
   color: #6F0000
 
 .card-footer-item
-  transition: all 0.3s ease 0s;
+  transition: all 0.2s ease 0s;
 
 .card-footer-item:hover
-  transform: translateY(-7px);
+  transform: translateY(-5px);
+  font-weight: bold
+  color: #6F0000
 
 a 
   color: #6F0000
 
+#Title
+  font-size: 20px
+  text-decoration: underline
+  
 
 </style>
 

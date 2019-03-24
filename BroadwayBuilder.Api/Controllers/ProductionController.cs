@@ -29,37 +29,41 @@ namespace BroadwayBuilder.Api.Controllers
                 //get the content, headers, etc the full request of the current http request
                 var httpRequest = HttpContext.Current.Request;
 
+                //A list in case we want to accept more than one file type
+                IList<string> AllowedFileExtension = new List<string> { ".pdf" };
+                
                 // Todo: Check if length of httpRequest.Files == 1 to ensure only 1 file is uploaded
 
+                // Max file size is 1MB
+                int MaxContentLength = 1024 * 1024 * 1;
+
                 foreach (string filename in httpRequest.Files)
-                {   
+                {
+                    // Grab current file of the request
                     var putFile = httpRequest.Files[filename];
-                    if (putFile != null && putFile.ContentLength > 0) //validates if file exists ContentLengh is # of bytes
+                    
+                    // Continue if the file has content
+                    if (putFile != null && putFile.ContentLength > 0) 
                     {
-
-                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
-
-                        //A list in case we want to accept more than one file type
-                        IList<string> AllowedFileExtension = new List<string> { ".pdf" };
+                        // Checks the current extension of the current file
                         var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
-                        
+
+                        // File extension is not valid
                         if (!AllowedFileExtension.Contains(extension))
                         {
-                           
                             //var message = string.Format("Please Upload image of type .pdf only");
-
                             // Todo: Log the error that occurs
                             return BadRequest();
                         }
+                        // File size is too big
                         else if (putFile.ContentLength > MaxContentLength)
-                        {
-                            
+                        {            
                             //var message = string.Format("Please Upload a file upto 1 mb.");
-
                             // Todo: log the error that occurs
                             return BadRequest();
                         }
+                        // Send to production service where functinality to save the file is
                         else
                         {
                             productionService.UploadProgram(productionId, extension, putFile);
@@ -75,7 +79,6 @@ namespace BroadwayBuilder.Api.Controllers
                 }
                 // Todo: Create an ErrorMessage model
                 //var res = string.Format("Please Upload an image.");
-
                 // Todo: log the error that occurs
                 return BadRequest();
             }
@@ -96,7 +99,7 @@ namespace BroadwayBuilder.Api.Controllers
             
             using (var dbcontext = new BroadwayBuilderContext())
             {
-            var productionService = new ProductionService(dbcontext);
+                var productionService = new ProductionService(dbcontext);
 
                 try
                 {
@@ -113,6 +116,43 @@ namespace BroadwayBuilder.Api.Controllers
                     return BadRequest();
                 }
 
+            }
+
+        }
+
+        [Route("{productionId}/create")]
+        [HttpPost]
+
+        public IHttpActionResult createProductionDateTime([FromUri] int productionId, [FromBody] ProductionDateTime productionDateTime )
+        {
+            try
+            {
+                using(var dbcontext = new BroadwayBuilderContext())
+                {
+                    var productionService = new ProductionService(dbcontext);
+
+                    try
+                    {
+                        if (productionDateTime == null)
+                        {
+                            return BadRequest("no production date time object provided");
+                        }
+                        productionDateTime.ProductionID = productionId;
+                        productionService.CreateProductionDateTime(productionDateTime);
+                        dbcontext.SaveChanges();
+
+                        // Todo: Change this to a 201 Created(insert url of resource) once get productiondate time route is created
+                        return Ok(productionDateTime);
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+            catch (Exception e )
+            {
+                return BadRequest("Something went wrong!");
             }
 
         }
@@ -140,6 +180,11 @@ namespace BroadwayBuilder.Api.Controllers
                 }
             }
   
+        }
+
+        public IHttpActionResult GetProductionList(string curr_date, string past_date)
+        {
+            return BadRequest();
         }
 
         [Route("update")]
@@ -228,28 +273,36 @@ namespace BroadwayBuilder.Api.Controllers
 
                 // Todo: Check if length of httpRequest.Files <= 10 to ensure only 10 photos is uploaded
 
+                // A list in case we want to accept more than one file type
+                IList<string> AllowedFileExtension = new List<string> { ".jpg" };
+
+                // Max file size is 1MB
+                int MaxContentLength = 1 * 1024 * 1024 * 5; //Size = 5 MB
+
                 var count = 0;
+
                 foreach (string filename in httpRequest.Files)
                 {
+                    // Grab current file of the request
                     var putFile = httpRequest.Files[filename];
-                    if (putFile != null && putFile.ContentLength > 0) //validates if file exists ContentLengh is # of bytes
+
+                    // Continue if the file has content
+                    if (putFile != null && putFile.ContentLength > 0)
                     {
 
-                        int MaxContentLength = 1 * 1024 * 1024 * 5; //Size = 5 MB
-
-                        //A list in case we want to accept more than one file type
-                        IList<string> AllowedFileExtension = new List<string> { ".jpg" };
+                        // Checks the current extension of the current file
                         var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
-
+                        
+                        // File extension is not valid
                         if (!AllowedFileExtension.Contains(extension))
                         {
 
                             //var message = string.Format("Please Upload image of type .jpg only");
-
                             // Todo: Log the error that occurs
                             return BadRequest();
                         }
+                        // File size is too big
                         else if (putFile.ContentLength > MaxContentLength)
                         {
 
@@ -258,16 +311,13 @@ namespace BroadwayBuilder.Api.Controllers
                             // Todo: log the error that occurs
                             return BadRequest();
                         }
+                        // Send to production service where functinality to save the file is
                         else
                         {
                             productionService.UploadPhoto(productionId, count, extension, putFile);
                         }
                     }
 
-                    // Todo: Create an ErrorMessage model
-                    //var message1 = string.Format("Image Updated Successfully.");
-                    //return Created(insert path);
-                    //return Created("C:\\Users\\ProductionPrograms");
                     count++;
                 }
 
