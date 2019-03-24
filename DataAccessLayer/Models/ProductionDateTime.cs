@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccessLayer
 {
-    [Table("ProductionsDatesTimes")]
+    [Table("ProductionsDateTimes")]
    public class ProductionDateTime
     {
         [Key]
