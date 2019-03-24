@@ -112,6 +112,8 @@ namespace BroadwayBuilder.Api.Tests
             var response = actionResult as NegotiatedContentResult<Theater>;
             var content = response.Content;
 
+            theaterService.DeleteTheater(theater);
+            dbcontext.SaveChanges();
             // Assert
             Assert.IsNotNull(response);
             Assert.IsNotNull(content);

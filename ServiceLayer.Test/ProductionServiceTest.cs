@@ -146,6 +146,7 @@ namespace ServiceLayer.Test
             dbcontext.SaveChanges();
 
             productionService.DeleteProduction(production);
+            theaterService.DeleteTheater(theater);
             dbcontext.SaveChanges();
 
         }
