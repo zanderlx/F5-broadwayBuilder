@@ -120,10 +120,10 @@ namespace BroadwayBuilder.Api.Controllers
 
         }
 
-        [Route("create")]
+        [Route("{productionId}/create")]
         [HttpPost]
 
-        public IHttpActionResult createProductionDateTime()
+        public IHttpActionResult createProductionDateTime([FromUri] int productionId, [FromBody] ProductionDateTime productionDateTime )
         {
             try
             {
@@ -133,20 +133,28 @@ namespace BroadwayBuilder.Api.Controllers
 
                     try
                     {
-                        //productionService.CreateProductionDateTime
-                    }
-                    catch
-                    {
+                        if (productionDateTime == null)
+                        {
+                            return BadRequest("no production date time object provided");
+                        }
+                        productionDateTime.ProductionID = productionId;
+                        productionService.CreateProductionDateTime(productionDateTime);
+                        dbcontext.SaveChanges();
 
+                        // Todo: Change this to a 201 Created(insert url of resource) once get productiondate time route is created
+                        return Ok(productionDateTime);
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
                     }
                 }
             }
-            catch
+            catch (Exception e )
             {
-
+                return BadRequest("Something went wrong!");
             }
 
-            return BadRequest();
         }
 
         [Route("{productionId}")]
