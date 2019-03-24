@@ -144,7 +144,8 @@ namespace BroadwayBuilder.Api.Controllers
                     {
                         throw new ZeroAffectedRowsException();
                     }
-                    return Content((HttpStatusCode)201, "Theater Job Posting Created");
+                    return Content((HttpStatusCode)201, theaterJob);
+                    //return Content((HttpStatusCode)201, "Theater Job Posting Created");
                 }
                 catch (ZeroAffectedRowsException)
                 {
