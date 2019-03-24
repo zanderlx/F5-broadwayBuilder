@@ -32,7 +32,7 @@ namespace ServiceLayer.Services
                 .FirstOrDefault(); //if item doesn't exist it returns null Todo: throw a specific exception
         }
 
-        public IEnumerable<Production> GetProductionsByPreviousDate(DateTime previousDate)
+        public List<Production> GetProductionsByPreviousDate(DateTime previousDate)
         {
             return _dbContext.Productions
                 .Include(production => production.ProductionDateTime)
@@ -40,7 +40,7 @@ namespace ServiceLayer.Services
                 .ToList();
         }
 
-        public IEnumerable<Production> GetProductionsByCurrentAndFutureDate(DateTime currentDate)
+        public List<Production> GetProductionsByCurrentAndFutureDate(DateTime currentDate)
         {
             return _dbContext.Productions
                 .Include(production => production.ProductionDateTime)
