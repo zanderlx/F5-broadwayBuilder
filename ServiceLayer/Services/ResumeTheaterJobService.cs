@@ -36,5 +36,14 @@ namespace ServiceLayer.Services
                     DateUploaded = submittedResumes.DateUploaded
                 }).ToList();
         }
+
+        public void DeleteResumeTheaterJob(ResumeTheaterJob resumeTheaterJob)
+        {
+            ResumeTheaterJob deleteResumeJob = _dbContext.ResumeTheaterJobs.Find(resumeTheaterJob.ResumeTheaterJobID);
+            if (deleteResumeJob != null)
+            {
+                _dbContext.ResumeTheaterJobs.Remove(deleteResumeJob);
+            }
+        }
     }
 }
