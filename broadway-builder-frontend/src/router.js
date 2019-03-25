@@ -45,6 +45,11 @@ export default new Router({
       path: "/theater/{theaterid}/adminproductioninfo",
       name: "adminproductioninfo",
       component: () => import("./views/ProductionInfo/AdminProductionInfo.vue")
+    },
+    {
+      path: "/theater/{theaterid}/adminproductioninfo/{productionid}",
+      name: "adminpicturewheel",
+      component: () => import("./views/ProductionInfo/AdminProductionInfo.vue")
     }
   ]
 });
