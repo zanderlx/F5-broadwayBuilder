@@ -32,6 +32,22 @@ namespace ServiceLayer.Services
                 .FirstOrDefault(); //if item doesn't exist it returns null Todo: throw a specific exception
         }
 
+        public List<Production> GetProductionsByPreviousDate(DateTime previousDate)
+        {
+            return _dbContext.Productions
+                .Include(production => production.ProductionDateTime)
+                .Where(production => production.ProductionDateTime.Where(productionDateTime => productionDateTime.Date <= previousDate).Any())
+                .ToList();
+        }
+
+        public List<Production> GetProductionsByCurrentAndFutureDate(DateTime currentDate)
+        {
+            return _dbContext.Productions
+                .Include(production => production.ProductionDateTime)
+                .Where(production => production.ProductionDateTime.Where(productionDateTime => productionDateTime.Date >= currentDate).Any())
+                .ToList();
+        }
+
         public Production UpdateProduction(Production production)
         {
             Production currentProduction = _dbContext.Productions
@@ -82,5 +98,9 @@ namespace ServiceLayer.Services
             postedFile.SaveAs(filePath);
         }
 
+        public void CreateProductionDateTime(ProductionDateTime productionDateTime)
+        {
+            _dbContext.ProductionDateTimes.Add(productionDateTime);
+        }
     }
 }
