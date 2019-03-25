@@ -44,42 +44,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  name: "TheaterProfile",
-  data() {
-    return {
-      info: {
-        ProductionName: "",
-        DirectorFirstName: "",
-        DirectorLastName: "",
-        Street: "",
-        City: "",
-        StateProvince: "",
-        Country: "",
-        Zipcode: ""
-      },
-      isAdmin: false
-    };
-  },
-  mounted() {},
-  methods: {
-    submitProduction() {
-      axios
-        .post(
-          "http://api.broadwaybuilder.xyz/production/createproduction",
-          this.info,
-          {
-            headers: {
-              "content-type": "application/json"
-            }
-          }
-        )
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error));
-    }
-  }
+  name: "TheaterProfile"
 };
 </script>
 
