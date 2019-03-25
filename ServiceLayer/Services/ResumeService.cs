@@ -27,5 +27,25 @@ namespace ServiceLayer.Services
             return _dbContext.Resumes.Find(resumeID);
         }
 
+        public void DeleteResume(Resume resume)
+        {
+            Resume Findresume = _dbContext.Resumes.Find(resume.ResumeID);
+            if (Findresume != null)
+            {
+                _dbContext.Resumes.Remove(Findresume);
+            }
+        }
+
+        public Resume UpdateResume(Resume resume)
+        {
+            Resume Findresume = _dbContext.Resumes.Find(resume.ResumeID);
+            if (Findresume != null)
+            {
+                Findresume.ResumeGuid = resume.ResumeGuid;
+            }
+
+            return Findresume;
+        }
+
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="ProductionJobTest.cs" />
     <Compile Include="ProductionServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResumeServiceTest.cs" />
     <Compile Include="RoleServiceTest.cs" />
     <Compile Include="TheaterJobPostingTest.cs" />
     <Compile Include="TheaterServiceTest.cs" />
