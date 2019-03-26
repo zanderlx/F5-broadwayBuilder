@@ -62,6 +62,28 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
+        [HttpGet,Route("theater/{theaterid}")]
+        public IHttpActionResult GetTheaterById(int theaterid)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                TheaterService service = new TheaterService(dbcontext);
+                try
+                {
+                    Theater theater = service.GetTheaterByID(theaterid);
+                    if (theater == null)
+                    {
+                        throw new Exception();
+                    }
+                    return Content((HttpStatusCode)200, theater);
+                }
+                catch (Exception)
+                {
+                    return Content((HttpStatusCode)404, "The Theater could not be found");
+                }
+            }
+        }
+
         [HttpGet,Route("theater/all")]
         public IHttpActionResult GetAllTheaters()
         {
