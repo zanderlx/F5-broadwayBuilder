@@ -33,7 +33,7 @@ namespace BroadwayBuilder.Api.Controllers
                 // Todo: add proper error handling
                 catch (Exception e)
                 {
-                    return Content((HttpStatusCode)400, "Unable to add that Theater.");
+                    return Content((HttpStatusCode)400,e.Message);
                 }
 
             }

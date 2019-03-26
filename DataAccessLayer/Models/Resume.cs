@@ -16,7 +16,7 @@ namespace DataAccessLayer
 
         [Required]
         [Index(IsUnique =true)]
-        Guid ResumeGuid { get; set; }
+        public Guid ResumeGuid { get; set; }
 
         public int UserId { get; set; }
 

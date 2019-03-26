@@ -11,10 +11,8 @@ namespace DataAccessLayer.Models
     public class ResumeTheaterJob
     {
         [Key]
-        [Column(Order = 1)]
+        public int ResumeTheaterJobID { get; set; }
         public int HelpWantedID { get; set; }
-        [Key]
-        [Column(Order = 2)]
         public int ResumeID { get; set; }
         public DateTime DateUploaded { get; set; }
         public TheaterJobPosting theaterJobPosting { get; set; }
