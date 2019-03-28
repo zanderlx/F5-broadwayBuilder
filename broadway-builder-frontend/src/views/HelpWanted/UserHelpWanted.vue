@@ -39,9 +39,7 @@ export default {
       // Obtain all jobs from the database
       await axios
         .get("http://api.broadwaybuilder.xyz/helpwanted/1")
-        // NOTE: For testing purposes
-        // .get("http://localhost:64512/helpwanted/3")
-        .then(response => (this.jobs = response.data), console.log(this.jobs));
+        .then(response => (this.jobs = response.data));
 
       for (var i = 0; i < this.jobs.length; i++) {
         // Appends a "show" attribute to display more details about the job
@@ -50,7 +48,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     // On load, get all jobs from the database
     this.getAllJobPostings();
   }
