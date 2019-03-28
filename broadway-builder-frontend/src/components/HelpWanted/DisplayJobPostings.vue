@@ -17,12 +17,9 @@
               </p>
               <strong>Description</strong>
               <p id="Description">{{ job.Description }}</p>
-              <em
-                id="DatePosted"
-                :dateDifference="dateDifference = calculateDateDifference(job.DateCreated)"
-              >
+              <em id="DatePosted">
                 Posted
-                <strong>{{ dateDifference }}</strong> day(s) ago
+                <strong>{{ calculateDateDifference(job.DateCreated) }}</strong> day(s) ago
               </em>
             </div>
             <div class="content"></div>
@@ -99,8 +96,7 @@ export default {
   props: ["jobPostings", "hasPermission"],
   data() {
     return {
-      categories: ["Description", "Hours", "Requirements"],
-      dateDifference: ""
+      categories: ["Description", "Hours", "Requirements"]
     };
   },
   methods: {
@@ -119,17 +115,7 @@ export default {
           Hours: job.Hours,
           Requirements: job.Requirements
         })
-        // .put("http://localhost:64512//helpwanted/edittheaterjob", {
-        //   HelpWantedId: job.HelpWantedId,
-        //   TheaterId: job.TheaterId,
-        //   DateCreated: job.DateCreated,
-        //   Position: job.Position,
-        //   Title: job.Title,
-        //   Description: job.Description,
-        //   Hours: job.Hours,
-        //   Requirements: job.Requirements
-        // })
-        .then(response => console.log(response));
+        .then(response => console.log("Job Updated!", response));
 
       job.edit = false;
     },
@@ -140,11 +126,6 @@ export default {
           "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
             job.HelpWantedId
         )
-        // NOTE: For testing purposes
-        // .delete(
-        //   "http://localhost:64512/helpwanted/deletetheaterjob/" +
-        //     job.HelpWantedId
-        // )
         .then(
           this.jobPostings.splice(index, 1),
           this.$emit("removed", this.jobPostings),
@@ -160,6 +141,9 @@ export default {
       var dateDifference = Math.floor(
         (dateToday.getTime() - dateCreated.getTime()) / (1000 * 60 * 60 * 24)
       );
+
+      if (dateDifference === -1) dateDifference = 0;
+
       return dateDifference;
     }
   }

@@ -108,8 +108,6 @@ export default {
           "http://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
           this.job
         )
-        // NOTE: For testing purposes
-        // .post("http://localhost:64512/helpwanted/createtheaterjob", this.job)
         .then(
           response => console.log(response.data),
           this.$emit("add", this.job)
