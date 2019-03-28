@@ -9,7 +9,7 @@
         <JobFilter/>
       </div>
       <div class="column is-10">
-        <JobPostings :jobPostings="jobs" :hasPermission="false"/>
+        <DisplayJobPostings :jobPostings="jobs" :hasPermission="false"/>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 import ResumeUpload from "@/components/HelpWanted/ResumeUpload.vue";
-import JobPostings from "@/components/HelpWanted/JobPostings.vue";
+import DisplayJobPostings from "@/components/HelpWanted/DisplayJobPostings.vue";
 import JobFilter from "@/components/HelpWanted/JobFilter.vue";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ export default {
   name: "UserHelpWanted",
   components: {
     ResumeUpload,
-    JobPostings,
+    DisplayJobPostings,
     JobFilter
   },
   props: ["hasPermission"],
