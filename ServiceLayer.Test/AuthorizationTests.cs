@@ -1,8 +1,8 @@
 ﻿using System;
 using DataAccessLayer;
-using DataAccessLayer.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {

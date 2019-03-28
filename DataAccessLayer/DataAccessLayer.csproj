@@ -48,19 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\RoleType.cs" />
-    <Compile Include="ProductionDateTime.cs" />
-    <Compile Include="TheaterJobPosting.cs" />
-    <Compile Include="Permission.cs" />
-    <Compile Include="Production.cs" />
-    <Compile Include="ProductionJobPosting.cs" />
+    <Compile Include="Models\ProductionDateTime.cs" />
+    <Compile Include="Models\ResumeTheaterJob.cs" />
+    <Compile Include="Models\TheaterJobPosting.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\Production.cs" />
+    <Compile Include="Models\ProductionJobPosting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BroadwayBuilderContext.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="RolePermission.cs" />
-    <Compile Include="Theater.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserPermission.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RolePermission.cs" />
+    <Compile Include="Models\Theater.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserPermission.cs" />
+    <Compile Include="Models\Resume.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

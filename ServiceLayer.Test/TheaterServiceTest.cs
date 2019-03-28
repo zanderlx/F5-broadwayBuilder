@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
@@ -77,7 +78,7 @@ namespace ServiceLayer.Test
             // Assert
             theaterService.DeleteTheater(theater);
             context.SaveChanges();
-            Console.WriteLine("aaaaaaaaaaaaaaaa");
+            //Console.WriteLine("aaaaaaaaaaaaaaaa");
             Assert.AreEqual(expected, actual);
         }
 

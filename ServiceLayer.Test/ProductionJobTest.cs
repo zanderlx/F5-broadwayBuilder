@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
@@ -23,7 +24,10 @@ namespace ServiceLayer.Test
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             var results = dbcontext.SaveChanges();
@@ -56,7 +60,10 @@ namespace ServiceLayer.Test
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             dbcontext.SaveChanges();
@@ -85,12 +92,15 @@ namespace ServiceLayer.Test
             var expected = true;
             var actual = false;
 
-            var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
+            var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");            
             var production = new Production(theater.TheaterID, "someName", "directorln", "directorfn", "street", "city", "state", "country", "zip");
             theaterService.CreateTheater(theater);
             productionService.CreateProduction(production);
             dbcontext.SaveChanges();
-            var jobPosting = new ProductionJobPosting(production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
+            /* Info: Had to cast to int because in production entity model int was made into a Nullable<int> or int? for data validation purposes
+                If we make model in frontend then we can remove this cast to int and it will make things cleaner
+            */
+            var jobPosting = new ProductionJobPosting((int)production.ProductionID, "intern", "some decription", "title", "hours", "some requirements");
             //Act
             productionJobService.CreateProductionJob(jobPosting);
             dbcontext.SaveChanges();

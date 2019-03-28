@@ -1,8 +1,8 @@
 ﻿using System;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataAccessLayer.Enums;
 using DataAccessLayer;
+using ServiceLayer.Services;
 
 namespace ServiceLayer.Test
 {
@@ -167,19 +167,22 @@ namespace ServiceLayer.Test
         //    //Act
         //    try
         //    {
-        //        user.UserId = 25;
+        //        user.Username = "fake@email.com";
         //        context.SaveChanges();
         //    }
         //    catch (Exception)
         //    {
         //        actual = false;
         //    }
-        //    user.Username = "abixcastro@gmail.com";
+        //    //user.Username = "abixcastro@gmail.com";
+        //    var testuser = userService.GetUser(user);
         //    userService.DeleteUser(user);
         //    context.SaveChanges();
 
         //    //Assert
         //    Assert.AreEqual(expected, actual);
+        //    //Assert.AreEqual(user.UserId, testuser.UserId);
+        //    //Assert.AreEqual(user.Username, testuser.Username);
         //}
 
         [TestMethod]

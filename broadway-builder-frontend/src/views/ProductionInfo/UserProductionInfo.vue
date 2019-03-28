@@ -1,9 +1,8 @@
 <template>
-
-    <div class="UserProductionInfo">
-      <h1>CECS Theatre Dept. | </h1> The Fantastic 5 Ampitheatre
-        <PicGrid/>
-    </div>
+  <div class="UserProductionInfo">
+    <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
+    <PicGrid/>
+  </div>
 </template>
 
 <script>
