@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -50,6 +51,10 @@ namespace BroadwayBuilder.Api.Controllers
                     // Save file in the directory chosen
                     else
                     {
+                        //Resume resume = new Resume(User.UserID,Guid.NewGuid());
+                        //userService.CreateResume(resume);
+                        //var results = dbcontext.SaveChanges();
+
                         // Directory of where the uploaded files will be stored
                         var filePath = HttpContext.Current.Server.MapPath("~/Resumes/" + postedFile.FileName);
                         postedFile.SaveAs(filePath);
