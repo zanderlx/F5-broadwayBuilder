@@ -74,7 +74,7 @@ export default {
     async getAllJobPostings() {
       // Obtain all jobs from the database
       await axios
-        .get("http://api.broadwaybuilder.xyz/helpwanted/1")
+        .get("https://api.broadwaybuilder.xyz/helpwanted/1")
         .then(response => (this.jobs = response.data));
 
       for (var i = 0; i < this.jobs.length; i++) {

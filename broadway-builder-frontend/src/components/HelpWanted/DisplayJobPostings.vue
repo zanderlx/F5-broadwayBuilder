@@ -105,7 +105,7 @@ export default {
     },
     finishEditing(job) {
       axios
-        .put("http://api.broadwaybuilder.xyz/helpwanted/edittheaterjob", {
+        .put("https://api.broadwaybuilder.xyz/helpwanted/edittheaterjob", {
           HelpWantedId: job.HelpWantedId,
           TheaterId: job.TheaterId,
           DateCreated: job.DateCreated,
@@ -123,7 +123,7 @@ export default {
       // Removes a job posting from the database
       await axios
         .delete(
-          "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
+          "https://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
             job.HelpWantedId
         )
         .then(

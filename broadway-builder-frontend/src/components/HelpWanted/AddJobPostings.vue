@@ -105,7 +105,7 @@ export default {
       // Sends a new job posting to the database
       await axios
         .post(
-          "http://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
+          "https://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
           this.job
         )
         .then(
