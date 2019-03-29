@@ -62,7 +62,7 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
-        [HttpGet,Route("theater/{theaterid}")]
+        [HttpGet,Route("theater/get/{theaterid}")]
         public IHttpActionResult GetTheaterById(int theaterid)
         {
             using (var dbcontext = new BroadwayBuilderContext())
