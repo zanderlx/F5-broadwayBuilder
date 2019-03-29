@@ -17,12 +17,9 @@
               </p>
               <strong>Description</strong>
               <p id="Description">{{ job.Description }}</p>
-              <em
-                id="DatePosted"
-                v-bind="dateDifference = calculateDateDifference(job.DateCreated)"
-              >
+              <em id="DatePosted">
                 Posted
-                <strong>{{ dateDifference }}</strong> day(s) ago
+                <strong>{{ calculateDateDifference(job.DateCreated) }}</strong> day(s) ago
               </em>
             </div>
             <div class="content"></div>
@@ -99,8 +96,7 @@ export default {
   props: ["jobPostings", "hasPermission"],
   data() {
     return {
-      categories: ["Description", "Hours", "Requirements"],
-      dateDifference: ""
+      categories: ["Description", "Hours", "Requirements"]
     };
   },
   methods: {
@@ -109,7 +105,7 @@ export default {
     },
     finishEditing(job) {
       axios
-        .put("http://api.broadwaybuilder.xyz/helpwanted/edittheaterjob", {
+        .put("https://api.broadwaybuilder.xyz/helpwanted/edittheaterjob", {
           HelpWantedId: job.HelpWantedId,
           TheaterId: job.TheaterId,
           DateCreated: job.DateCreated,
@@ -119,20 +115,15 @@ export default {
           Hours: job.Hours,
           Requirements: job.Requirements
         })
-        .then(response => console.log(response));
+        .then(response => console.log("Job Updated!", response));
 
       job.edit = false;
     },
     async removeJobPosting(job, index) {
       // Removes a job posting from the database
       await axios
-        // .delete(
-        //   "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
-        //     job.HelpWantedId
-        // )
-        // NOTE: For testing purposes
         .delete(
-          "http://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
+          "https://api.broadwaybuilder.xyz/helpwanted/deletetheaterjob/" +
             job.HelpWantedId
         )
         .then(
@@ -147,7 +138,12 @@ export default {
     calculateDateDifference(datePosted) {
       var dateCreated = new Date(Date.parse(datePosted));
       var dateToday = new Date();
-      var dateDifference = dateToday.getDay() - dateCreated.getDay();
+      var dateDifference = Math.floor(
+        (dateToday.getTime() - dateCreated.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (dateDifference === -1) dateDifference = 0;
+
       return dateDifference;
     }
   }
@@ -157,7 +153,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../../node_modules/bulma/bulma.sass'
 
-card    
+.card    
   margin: 1.25em 0 1.25em 0
   box-shadow: 0 14px 75px rgba(0,0,0,0.19), 0 10px 10px rgba(0,0,0,0.22)
   transition: all 0.5s ease 0s;
