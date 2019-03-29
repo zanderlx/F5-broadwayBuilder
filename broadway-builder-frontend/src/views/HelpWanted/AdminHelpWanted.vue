@@ -17,36 +17,35 @@
       </div>
       <div class="column is-10">
         <!-- This is the card that allows an admin to enter information for a new job -->
-        <AddJobPosting
+        <AddJobPostings
           v-if="addJob === true"
           @add="newJobPostingSuccess"
           @cancel="cancelNewJobPosting"
         />
 
         <!-- This displays all jobs stored in the database as cards on the page -->
-        <JobPostings :jobPostings="jobs" :hasPermission="true"/>
+        <DisplayJobPostings :jobPostings="jobs" :hasPermission="true"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AddJobPosting from "@/components/HelpWanted/AddJobPosting.vue";
-import JobPostings from "@/components/HelpWanted/JobPostings.vue";
+import AddJobPostings from "@/components/HelpWanted/AddJobPostings.vue";
+import DisplayJobPostings from "@/components/HelpWanted/DisplayJobPostings.vue";
 import JobFilter from "@/components/HelpWanted/JobFilter.vue";
 import axios from "axios";
 
 export default {
   name: "AdminHelpWanted",
   components: {
-    AddJobPosting,
-    JobPostings,
+    AddJobPostings,
+    DisplayJobPostings,
     JobFilter
   },
   data() {
     return {
       // This array stores the jobs obtained from the database.
-      // It is reactive.
       jobs: [],
       // Boolean value to display new job posting inputs
       addJob: false
@@ -75,10 +74,8 @@ export default {
     async getAllJobPostings() {
       // Obtain all jobs from the database
       await axios
-        .get("http://api.broadwaybuilder.xyz/helpwanted/1")
-        // NOTE: For testing purposes
-        // .get("http://localhost:64512/helpwanted/3")
-        .then(response => (this.jobs = response.data), console.log(this.jobs));
+        .get("https://api.broadwaybuilder.xyz/helpwanted/1")
+        .then(response => (this.jobs = response.data));
 
       for (var i = 0; i < this.jobs.length; i++) {
         // Appends a "show" attribute to display more details about the job
@@ -88,7 +85,7 @@ export default {
     }
   },
   mounted() {
-    // On load, get all jobs from the database
+    // On initial load, get all jobs from the database
     this.getAllJobPostings();
   }
 };

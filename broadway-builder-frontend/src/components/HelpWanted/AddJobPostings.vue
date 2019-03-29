@@ -31,15 +31,32 @@
             </div>
           </div>
           <div class="column is-6 is-narrow">
-            <strong>Type of Job</strong>
-            <br>
-            <input type="radio" id="jobType" value="Theater" v-model="jobType">
-            <label for="one">Theater</label>
+            <div>
+              <strong>Type of Job</strong>
+              <br>
+              <input type="radio" id="jobType" value="Full-Time" v-model="jobType">
+              <label for="one">Full-Time</label>
 
-            <input type="radio" id="jobType" value="Production" v-model="jobType">
-            <label for="two">Production</label>
-            <br>
-            <br>
+              <input type="radio" id="jobType" value="Part-Time" v-model="jobType">
+              <label for="two">Part-Time</label>
+
+              <input type="radio" id="jobType" value="Seasonal" v-model="jobType">
+              <label for="two">Seasonal</label>
+              <br>
+              <br>
+              <strong>Role (This cannot be changed!)</strong>
+            </div>
+
+            <div class="addJobPosition" v-for="(position, index) in positions" :key="index">
+              <input
+                type="radio"
+                id="jobType"
+                :value="position"
+                name="jobPosition"
+                v-model="job.Position"
+              >
+              <label for="one">{{ position }}</label>
+            </div>
           </div>
         </div>
       </div>
@@ -59,12 +76,24 @@ export default {
   data() {
     return {
       categories: ["Description", "Hours", "Requirements"],
+      positions: [
+        "Actors",
+        "Stagehands",
+        "Backstage",
+        "Stage Manager",
+        "Wardrobe Adviser",
+        "Scenic Artist",
+        "Director",
+        "Producer",
+        "Usher",
+        "Dresser"
+      ],
       job: {
         Title: "",
         Description: "",
         Hours: "",
         Requirements: "",
-        Position: "Actor",
+        Position: "",
         theaterid: 1
       },
       jobType: "",
@@ -76,12 +105,13 @@ export default {
       // Sends a new job posting to the database
       await axios
         .post(
-          "http://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
+          "https://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
           this.job
         )
-        // NOTE: For testing purposes
-        // .post("http://localhost:64512/helpwanted/createtheaterjob", this.job)
-        .then(response => console.log(response), this.$emit("add", this.job));
+        .then(
+          response => console.log(response.data),
+          this.$emit("add", this.job)
+        );
     },
     // Cancel the creation of a new job
     cancelNewJobPosting() {
@@ -104,6 +134,10 @@ a
 
 #jobType
   margin: 1em
+
+.addJobPosition
+  float: right
+  width: 50%
 
 </style>
 
