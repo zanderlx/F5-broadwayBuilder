@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Vuetify from "vuetify";
+import Vuex from "vuex";
+import "es6-promise/auto";
 import "vuetify/dist/vuetify.min.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +15,7 @@ library.add(faCloudUploadAlt);
 Vue.component("FontAwesomeIcon", FontAwesomeIcon);
 
 Vue.use(Vuetify);
+Vue.use(Vuex);
 Vue.config.productionTip = false;
 
 new Vue({

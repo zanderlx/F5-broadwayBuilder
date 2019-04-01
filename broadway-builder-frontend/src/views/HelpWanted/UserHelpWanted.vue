@@ -9,7 +9,7 @@
         <JobFilter/>
       </div>
       <div class="column is-10">
-        <JobPostings :jobPostings="jobs" :hasPermission="false"/>
+        <DisplayJobPostings :jobPostings="jobs" :hasPermission="false"/>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 import ResumeUpload from "@/components/HelpWanted/ResumeUpload.vue";
-import JobPostings from "@/components/HelpWanted/JobPostings.vue";
+import DisplayJobPostings from "@/components/HelpWanted/DisplayJobPostings.vue";
 import JobFilter from "@/components/HelpWanted/JobFilter.vue";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ export default {
   name: "UserHelpWanted",
   components: {
     ResumeUpload,
-    JobPostings,
+    DisplayJobPostings,
     JobFilter
   },
   props: ["hasPermission"],
@@ -38,10 +38,8 @@ export default {
     async getAllJobPostings() {
       // Obtain all jobs from the database
       await axios
-        .get("http://api.broadwaybuilder.xyz/helpwanted/1")
-        // NOTE: For testing purposes
-        // .get("http://localhost:64512/helpwanted/3")
-        .then(response => (this.jobs = response.data), console.log(this.jobs));
+        .get("https://api.broadwaybuilder.xyz/helpwanted/1")
+        .then(response => (this.jobs = response.data));
 
       for (var i = 0; i < this.jobs.length; i++) {
         // Appends a "show" attribute to display more details about the job
@@ -50,7 +48,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     // On load, get all jobs from the database
     this.getAllJobPostings();
   }
