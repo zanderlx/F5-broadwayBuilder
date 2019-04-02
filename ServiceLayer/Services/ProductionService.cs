@@ -52,7 +52,8 @@ namespace ServiceLayer.Services
         {
             Production currentProduction = _dbContext.Productions
                  .Where(o => o.ProductionID == production.ProductionID)
-                 .FirstOrDefault(); //gives you first production that satisfies the where
+                 .FirstOrDefault(); //gives you first production that satisfies the where. 
+                //if item doesn't exist it returns null Todo: throw a specific exception
 
             if (currentProduction != null)
             {
@@ -64,6 +65,9 @@ namespace ServiceLayer.Services
                 currentProduction.StateProvince = production.StateProvince;
                 currentProduction.Country = production.Country;
                 currentProduction.Zipcode = production.Zipcode;
+            } else
+            {
+                //throw an exception
             }
 
             return currentProduction;
@@ -101,6 +105,25 @@ namespace ServiceLayer.Services
         public void CreateProductionDateTime(ProductionDateTime productionDateTime)
         {
             _dbContext.ProductionDateTimes.Add(productionDateTime);
+        }
+
+        public ProductionDateTime UpdateProductionDateTime(ProductionDateTime productionDateTime)
+        {
+            ProductionDateTime currentProductionDateTime = _dbContext.ProductionDateTimes
+                .Where(prodDateTime => prodDateTime.ProductionDateTimeId == productionDateTime.ProductionDateTimeId)
+                .FirstOrDefault();
+
+            if (currentProductionDateTime != null)
+            {
+                currentProductionDateTime.Date = productionDateTime.Date;
+                currentProductionDateTime.Time = productionDateTime.Time;
+            } else
+            {
+                //throw an exception
+            }
+
+            return currentProductionDateTime;
+
         }
     }
 }
