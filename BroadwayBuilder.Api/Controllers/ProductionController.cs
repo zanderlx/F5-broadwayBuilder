@@ -413,7 +413,7 @@ namespace BroadwayBuilder.Api.Controllers
 
         [Route("{productionId}/create")]
         [HttpPost]
-        public IHttpActionResult createProductionDateTime([FromUri] int productionId, [FromBody] ProductionDateTime productionDateTime )
+        public IHttpActionResult createProductionDateTime(int productionId, [FromBody] ProductionDateTime productionDateTime )
         {
             try
             {
@@ -450,7 +450,7 @@ namespace BroadwayBuilder.Api.Controllers
 
         [Route("{productionDateTimeID}")]
         [HttpPut]
-        public IHttpActionResult updateProductionDateTime([FromUri] int productionDateTimeId, [FromBody] ProductionDateTime productionDateTime)
+        public IHttpActionResult updateProductionDateTime(int productionDateTimeId, [FromBody] ProductionDateTime productionDateTime)
         {
             try
             {
@@ -483,6 +483,42 @@ namespace BroadwayBuilder.Api.Controllers
             {
                 // Todo: add proper error response when requet fails due to not being able to create dbcontext...
                 return BadRequest("Something bad happend!");
+            }
+        }
+
+        [Route("{productionDateTimeId}")]
+        [HttpDelete]
+        public IHttpActionResult deleteProductiondateTime(int productionDateTimeid, ProductionDateTime productionDateTimeToDelete)
+        {
+            try
+            {
+                using (var dbcontext = new BroadwayBuilderContext())
+                {
+                    var productionService = new ProductionService(dbcontext);
+
+                    try
+                    {
+                        if (productionDateTimeToDelete == null)
+                        {
+                            return BadRequest("no production date time object provided");
+                        }
+
+                        productionService.DeleteProductionDateTime(productionDateTimeToDelete);
+                        dbcontext.SaveChanges();
+                        return Ok("Production date time deleted succesfully!");
+
+                    }
+                    catch (Exception e)
+                    {
+                        // Todo: Catch a specific error so you can tell send a specific response model stating why a production date time was not able to be deleted
+                        return BadRequest("Was not able to delete production date time because.....");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Todo: User proper error handling responses catch  a more specific error
+                return BadRequest("Major error happened!"); 
             }
         }
     }
