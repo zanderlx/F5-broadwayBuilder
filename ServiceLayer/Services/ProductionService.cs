@@ -52,7 +52,8 @@ namespace ServiceLayer.Services
         {
             Production currentProduction = _dbContext.Productions
                  .Where(o => o.ProductionID == production.ProductionID)
-                 .FirstOrDefault(); //gives you first production that satisfies the where
+                 .FirstOrDefault(); //gives you first production that satisfies the where. 
+                //if item doesn't exist it returns null Todo: throw a specific exception
 
             if (currentProduction != null)
             {
@@ -64,6 +65,9 @@ namespace ServiceLayer.Services
                 currentProduction.StateProvince = production.StateProvince;
                 currentProduction.Country = production.Country;
                 currentProduction.Zipcode = production.Zipcode;
+            } else
+            {
+                //throw an exception
             }
 
             return currentProduction;
@@ -75,12 +79,14 @@ namespace ServiceLayer.Services
             Production productionToDelete = _dbContext.Productions
                 .Where(o => o.ProductionID == production.ProductionID)
                 .FirstOrDefault(); //gives you first production that satisfies the where
-            
+                //if item doesn't exist it returns null Todo: throw a specific exception
+
             // If the production found is not null, delete the production
             if (productionToDelete != null)
             {
                 _dbContext.Productions.Remove(productionToDelete);
-            } else
+            }
+            else
             {
                 //throw an exception
             }
@@ -101,6 +107,44 @@ namespace ServiceLayer.Services
         public void CreateProductionDateTime(ProductionDateTime productionDateTime)
         {
             _dbContext.ProductionDateTimes.Add(productionDateTime);
+        }
+
+        public ProductionDateTime UpdateProductionDateTime(ProductionDateTime productionDateTime)
+        {
+            ProductionDateTime currentProductionDateTime = _dbContext.ProductionDateTimes
+                .Where(prodDateTime => prodDateTime.ProductionDateTimeId == productionDateTime.ProductionDateTimeId)
+                .FirstOrDefault();
+
+            if (currentProductionDateTime != null)
+            {
+                currentProductionDateTime.Date = productionDateTime.Date;
+                currentProductionDateTime.Time = productionDateTime.Time;
+            } else
+            {
+                //throw an exception
+            }
+
+            return currentProductionDateTime;
+
+        }
+
+        public void DeleteProductionDateTime(ProductionDateTime productionDateTime)
+        {
+            ProductionDateTime productionDateTimeToDelete = _dbContext.ProductionDateTimes
+                .Where(o => o.ProductionDateTimeId == productionDateTime.ProductionDateTimeId)
+                .FirstOrDefault();//gives you first production date time that satisfies the where
+                                  //if item doesn't exist it returns null Todo: throw a specific exception
+
+            // If the production date time found is not null, delete the production
+            if (productionDateTimeToDelete != null)
+            {
+                _dbContext.ProductionDateTimes.Remove(productionDateTimeToDelete);
+            }
+            else
+            {
+                //throw an exception
+            }
+
         }
     }
 }
