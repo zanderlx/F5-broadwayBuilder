@@ -8,7 +8,7 @@
             <p style="padding-top: 15px" class="menu-label">Administration</p>
             <ul class="menu-list">
               <li>
-                <a v-on:click="editAccComponent">Edit Profile</a>
+                <a v-on:click="editTheaterComp">Edit Profile</a>
                 <a>Manage Users</a>
                 <ul>
                   <li>
@@ -185,7 +185,7 @@
                 </footer>
               </div>
             </div>
-            <EditAccount v-if="editAccount === true" @cancel="cancelEdit"/>
+            <EditTheater v-if="editTheater === true" v-bind:theater="theater"/>
           </div>
         </div>
       </div>
@@ -195,21 +195,29 @@
 </template>
 
 <script>
-import EditAccount from "@/components/Admin/EditAccount.vue";
+import EditTheater from "@/components/Admin/EditTheater.vue";
 export default {
   name: "AdminAccount",
   components: {
-    EditAccount
+    EditTheater
   },
   data() {
     return {
-      editAccount: false
+      editTheater: false,
+      theater: {
+        companyName: "Company",
+        theaterName: "Theater",
+        phoneNumber: "5555555555",
+        street: "123 Testfield Way",
+        state: "CA",
+        country: "USA"
+      }
     };
   },
   mounted() {},
   methods: {
-    editAccComponent() {
-      this.editAccount = !this.editAccount;
+    editTheaterComp() {
+      this.editTheater = !this.editTheater;
     }
   }
 };
