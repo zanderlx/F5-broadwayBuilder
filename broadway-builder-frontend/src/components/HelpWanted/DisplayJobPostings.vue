@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns" v-for="(job, index) in jobPostings" v-bind:key="index">
+    <div class="columns" v-for="(job, index) in filteredValues" v-bind:key="index">
       <!-- This coloumn just displays a brief description for the job posting -->
       <div class="column is-6">
         <div class="card">
@@ -93,11 +93,22 @@
 import axios from "axios";
 
 export default {
-  props: ["jobPostings", "hasPermission"],
+  props: ["jobPostings", "hasPermission", "filters"],
   data() {
     return {
-      categories: ["Description", "Hours", "Requirements"]
+      categories: ["Description", "Hours", "Requirements"],
+      jobs: this.jobPostings,
+      jobFilters: this.filters
     };
+  },
+  computed: {
+    filteredValues() {
+      if (!this.filters.length) return this.jobPostings;
+
+      return this.jobPostings.filter(job =>
+        this.filters.includes(job.Position)
+      );
+    }
   },
   methods: {
     editJobPosting(job) {

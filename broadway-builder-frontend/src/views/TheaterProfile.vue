@@ -1,7 +1,8 @@
 <template>
   <div class="theaterprofile">
     <div class="hero-body">
-      <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
+      <h1>{{theater.TheaterName}} |</h1>
+      {{theatername}}
       <div class="container has-text-centered">
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
@@ -44,8 +45,18 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "TheaterProfile"
+  name: "TheaterProfile",
+  data() {
+    return {
+      theatername: String,
+      companyname: String,
+      contactinfo: []
+    };
+  },
+  props: ["theater"]
 };
 </script>
 
