@@ -8,6 +8,7 @@
             <p style="padding-top: 15px" class="menu-label">Administration</p>
             <ul class="menu-list">
               <li>
+                <a v-on:click="editAccComponent">Edit Profile</a>
                 <a>Manage Users</a>
                 <ul>
                   <li>
@@ -184,56 +185,7 @@
                 </footer>
               </div>
             </div>
-            <div class="column is-6">
-              <div class="field">
-                <label class="label">Company Name</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Theater Name</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Phone Number</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="###-###-####">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">Street</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">State</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">Country</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-link">Submit</button>
-                </div>
-                <div class="control">
-                  <button class="button is-text">Cancel</button>
-                </div>
-              </div>
-            </div>
+            <EditAccount v-if="editAccount === true" @cancel="cancelEdit"/>
           </div>
         </div>
       </div>
@@ -243,13 +195,23 @@
 </template>
 
 <script>
+import EditAccount from "@/components/Admin/EditAccount.vue";
 export default {
   name: "AdminAccount",
+  components: {
+    EditAccount
+  },
   data() {
-    return {};
+    return {
+      editAccount: false
+    };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    editAccComponent() {
+      this.editAccount = !this.editAccount;
+    }
+  }
 };
 </script>
 
