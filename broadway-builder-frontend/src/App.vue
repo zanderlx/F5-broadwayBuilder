@@ -2,12 +2,16 @@
   <div id="app">
     <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
+<<<<<<< HEAD
         <a class="navbar-item">
           <router-link to="/">
             <img src="@/assets/download.png">
           </router-link>
         </a>
 
+=======
+        
+>>>>>>> a0d9cf896fabf846628cbc8b634aa0e055ebdc55
         <a
           role="button"
           class="navbar-burger burger"

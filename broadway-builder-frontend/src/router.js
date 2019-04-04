@@ -27,6 +27,11 @@ export default new Router({
       component: () => import("./views/AdminAccount.vue")
     },
     {
+      path: "/sysadminaccount/{userID}",
+      name: "sysadminaccount",
+      component: () => import("./views/SysAdminAccount.vue")
+    },
+    {
       path: "/contactus",
       name: "contactus",
       component: () => import("./views/ContactUs.vue")

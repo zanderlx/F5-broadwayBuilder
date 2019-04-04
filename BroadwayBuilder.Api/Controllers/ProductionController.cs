@@ -119,41 +119,6 @@ namespace BroadwayBuilder.Api.Controllers
 
         }
 
-        [Route("{productionId}/create")]
-        [HttpPost]
-        public IHttpActionResult createProductionDateTime([FromUri] int productionId, [FromBody] ProductionDateTime productionDateTime )
-        {
-            try
-            {
-                using(var dbcontext = new BroadwayBuilderContext())
-                {
-                    var productionService = new ProductionService(dbcontext);
-
-                    try
-                    {
-                        if (productionDateTime == null)
-                        {
-                            return BadRequest("no production date time object provided");
-                        }
-                        productionDateTime.ProductionID = productionId;
-                        productionService.CreateProductionDateTime(productionDateTime);
-                        dbcontext.SaveChanges();
-
-                        // Todo: Change this to a 201 Created(insert url of resource) once get productiondate time route is created
-                        return Ok(productionDateTime);
-                    }
-                    catch (Exception e)
-                    {
-                        return BadRequest();
-                    }
-                }
-            }
-            catch (Exception e )
-            {
-                return BadRequest("Something went wrong!");
-            }
-
-        }
 
         [Route("{productionId}")]
         [HttpGet]
@@ -446,5 +411,115 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
+        [Route("{productionId}/create")]
+        [HttpPost]
+        public IHttpActionResult createProductionDateTime(int productionId, [FromBody] ProductionDateTime productionDateTime )
+        {
+            try
+            {
+                using(var dbcontext = new BroadwayBuilderContext())
+                {
+                    var productionService = new ProductionService(dbcontext);
+
+                    try
+                    {
+                        if (productionDateTime == null)
+                        {
+                            return BadRequest("no production date time object provided");
+                        }
+
+                        productionDateTime.ProductionID = productionId;
+                        productionService.CreateProductionDateTime(productionDateTime);
+                        dbcontext.SaveChanges();
+
+                        // Todo: Change this to a 201 Created(insert url of resource) once get productiondate time route is created
+                        return Ok(productionDateTime);
+                    }
+                    catch (Exception e)
+                    {
+                        return BadRequest();
+                    }
+                }
+            }
+            catch (Exception e )
+            {
+                return BadRequest("Something went wrong!");
+            }
+
+        }
+
+        [Route("{productionDateTimeID}")]
+        [HttpPut]
+        public IHttpActionResult updateProductionDateTime(int productionDateTimeId, [FromBody] ProductionDateTime productionDateTime)
+        {
+            try
+            {
+                using (var dbContext = new BroadwayBuilderContext())
+                {
+                    var productionService = new ProductionService(dbContext);
+
+                    try
+                    {
+                        if (productionDateTime == null)
+                        {
+                            return BadRequest("no date time was provided");
+                        }
+
+                        // Set the production date time id that is to be updated to the id in the uri
+                        productionDateTime.ProductionDateTimeId = productionDateTimeId;
+                       var updatedProductionDateTime = productionService.UpdateProductionDateTime(productionDateTime);
+                        dbContext.SaveChanges();
+
+                        return Ok(updatedProductionDateTime);
+                    }
+                    catch (Exception e)
+                    {
+                        // If none of those if statements were met and we couldnt update a production...
+                        return BadRequest();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Todo: add proper error response when requet fails due to not being able to create dbcontext...
+                return BadRequest("Something bad happend!");
+            }
+        }
+
+        [Route("{productionDateTimeId}")]
+        [HttpDelete]
+        public IHttpActionResult deleteProductiondateTime(int productionDateTimeid, ProductionDateTime productionDateTimeToDelete)
+        {
+            try
+            {
+                using (var dbcontext = new BroadwayBuilderContext())
+                {
+                    var productionService = new ProductionService(dbcontext);
+
+                    try
+                    {
+                        if (productionDateTimeToDelete == null)
+                        {
+                            return BadRequest("no production date time object provided");
+                        }
+
+                        productionService.DeleteProductionDateTime(productionDateTimeToDelete);
+                        dbcontext.SaveChanges();
+                        return Ok("Production date time deleted succesfully!");
+
+                    }
+                    catch (Exception e)
+                    {
+                        // Todo: Catch a specific error so you can tell send a specific response model stating why a production date time was not able to be deleted
+                        return BadRequest("Was not able to delete production date time because.....");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Todo: User proper error handling responses catch  a more specific error
+                return BadRequest("Major error happened!"); 
+            }
+        }
     }
 }
