@@ -205,12 +205,13 @@ export default {
     return {
       editTheater: false,
       theater: {
-        companyName: "Company",
-        theaterName: "Theater",
-        phoneNumber: "5555555555",
-        street: "123 Testfield Way",
-        state: "CA",
-        country: "USA"
+        TheaterName: "Theater",
+        CompanyName: "Company",
+        StreetAddress: "123 Testfield Way",
+        City: "Long Beach",
+        State: "CA",
+        Country: "USA",
+        PhoneNumber: "5555555555"
       }
     };
   },

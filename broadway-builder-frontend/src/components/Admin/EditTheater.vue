@@ -3,42 +3,49 @@
     <div class="field">
       <label class="label">Company Name</label>
       <div class="control">
-        <input class="input" v-model="theater.companyName">
+        <input class="input" v-model="theater.CompanyName">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Theater Name</label>
       <div class="control">
-        <input class="input" v-model="theater.theaterName">
+        <input class="input" v-model="theater.TheaterName">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Phone Number</label>
       <div class="control">
-        <input class="input" v-model="theater.phoneNumber">
+        <input class="input" v-model="theater.PhoneNumber">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Street</label>
       <div class="control">
-        <input class="input" v-model="theater.street">
+        <input class="input" v-model="theater.StreetAddress">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">City</label>
+      <div class="control">
+        <input class="input" v-model="theater.City">
       </div>
     </div>
 
     <div class="field">
       <label class="label">State</label>
       <div class="control">
-        <input class="input" v-model="theater.state">
+        <input class="input" v-model="theater.State">
       </div>
     </div>
 
     <div class="field">
       <label class="label">Country</label>
       <div class="control">
-        <input class="input" v-model="theater.country">
+        <input class="input" v-model="theater.Country">
       </div>
     </div>
 
