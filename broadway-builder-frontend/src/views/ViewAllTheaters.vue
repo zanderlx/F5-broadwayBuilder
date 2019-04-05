@@ -61,9 +61,6 @@ export default {
 <style lang="sass" scoped>
 @import '../../node_modules/bulma/bulma.sass'
 
-.card
-  width: 1em;
-  height: 1em;
 
 
 </style>
