@@ -8,7 +8,7 @@
             <p style="padding-top: 15px" class="menu-label">System Administration</p>
             <ul class="menu-list">
               <li>
-                <a v-on:click="publishComponent">Publish Site</a>
+                <a v-on:click="performPublish">Publish Site</a>
                 <a>Manage Users</a>
                 <ul>
                   <li>
@@ -47,11 +47,7 @@
             </div>
           </section>
           <div class="column is-9">
-            <PublishSite
-              v-if="publishComp === true"
-              v-bind:website="website"
-              @cancel="cancelPublish"
-            />
+            <PublishSite v-if="publish === true" @cancel="cancelPublish"/>
           </div>
         </div>
       </div>
@@ -69,22 +65,15 @@ export default {
   },
   data() {
     return {
-      website: {
-        key: "key",
-        apptitle: "Broadway Builder",
-        description: "We are cool people.",
-        logo: "insertpic",
-        undermaintenance: false
-      },
-      publishComp: false
+      publish: false
     };
   },
   methods: {
-    publishComponent() {
-      this.publishComp = !this.publishComp;
+    performPublish() {
+      this.publish = !this.publish;
     },
     cancelPublish(cancel) {
-      this.publishComp = false;
+      this.publish = cancel;
     }
   }
 };
