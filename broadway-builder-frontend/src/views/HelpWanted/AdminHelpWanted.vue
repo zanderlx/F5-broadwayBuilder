@@ -13,7 +13,7 @@
         </div>
 
         <!-- This is the JOB FILTER checkboxes (Still a work in progress) -->
-        <JobFilter/>
+        <JobFilter :jobPostings="jobs" @filtered="filterJobPostings"/>
       </div>
       <div class="column is-10">
         <!-- This is the card that allows an admin to enter information for a new job -->
@@ -24,7 +24,7 @@
         />
 
         <!-- This displays all jobs stored in the database as cards on the page -->
-        <DisplayJobPostings :jobPostings="jobs" :hasPermission="true"/>
+        <DisplayJobPostings :jobPostings="jobs" :hasPermission="true" :filters="filters"/>
       </div>
     </div>
   </div>
@@ -48,7 +48,8 @@ export default {
       // This array stores the jobs obtained from the database.
       jobs: [],
       // Boolean value to display new job posting inputs
-      addJob: false
+      addJob: false,
+      filters: []
     };
   },
   methods: {
@@ -71,6 +72,9 @@ export default {
     removeJobPosting(updatedJobPostings) {
       this.jobs = updatedJobPostings;
     },
+    filterJobPostings(jobFilters) {
+      this.filters = jobFilters;
+    },
     async getAllJobPostings() {
       // Obtain all jobs from the database
       await axios
@@ -80,6 +84,7 @@ export default {
       for (var i = 0; i < this.jobs.length; i++) {
         // Appends a "show" attribute to display more details about the job
         this.$set(this.jobs[i], "show", false);
+        // Appends a "edit" attribute to check if a job is being editted
         this.$set(this.jobs[i], "edit", false);
       }
     }
