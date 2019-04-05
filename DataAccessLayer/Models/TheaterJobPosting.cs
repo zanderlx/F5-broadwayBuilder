@@ -27,6 +27,8 @@ namespace DataAccessLayer
         public string Hours { get; set; }
         [Required]
         public string Requirements { get; set; }
+        [Required]
+        public string JobType { get; set; }
         public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
