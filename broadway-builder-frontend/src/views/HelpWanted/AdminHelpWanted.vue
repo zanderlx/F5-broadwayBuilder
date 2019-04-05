@@ -87,6 +87,8 @@ export default {
         // Appends a "edit" attribute to check if a job is being editted
         this.$set(this.jobs[i], "edit", false);
       }
+
+      this.jobs.reverse();
     }
   },
   mounted() {
