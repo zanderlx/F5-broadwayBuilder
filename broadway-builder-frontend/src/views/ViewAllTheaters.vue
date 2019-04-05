@@ -1,35 +1,36 @@
 <template>
   <div class="ViewAllTheaters">
-    <div>
-      <div v-for="(theater, index) in theaters" :key="index">
+    <div v-for="(theater, index) in theaters" :key="index">
+      <router-link to="/theater">
         <div class="card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="@/assets/download.png" alt="Placeholder image">
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
             </figure>
           </div>
           <div class="card-content">
             <div class="media">
               <div class="media-left">
                 <figure class="image is-48x48">
-                  <img src="@/assets/logo.png" alt="Placeholder image">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
                 </figure>
               </div>
               <div class="media-content">
-                <p class="title is-4">{{theaters.TheaterName}}</p>
-                <p class="subtitle is-6">{{}}</p>
+                <p class="title is-4">{{theater.CompanyName}}</p>
+                <p class="subtitle is-6">{{theater.TheaterName}}</p>
               </div>
             </div>
+
             <div class="content">
-              {{theaters.StreetAddress}}
+              A Member Since: {{theater.DateCreated}}
               <br>
-              {{theaters.State}}
+              {{theater.StreetAddress}}
               <br>
-              {{theaters.Country}}
+              {{theater.City}}, {{theater.State}} {{theater.Country}}
             </div>
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -51,7 +52,7 @@ export default {
   },
   async mounted() {
     await axios
-      .get("http://localhost:64512/theater/all")
+      .get("https://api.broadwaybuilder.xyz/theater/all")
       .then(response => (this.theaters = response.data));
   }
 };
@@ -59,5 +60,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../node_modules/bulma/bulma.sass'
+
+
 
 </style>
