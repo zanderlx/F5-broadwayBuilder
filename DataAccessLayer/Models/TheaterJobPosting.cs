@@ -34,7 +34,7 @@ namespace DataAccessLayer
 
         ICollection<ResumeTheaterJob> resumeTheaterJobs { get; set; }
 
-        public TheaterJobPosting( int theaterID, string position, string description, string title, string hour, string requirement)
+        public TheaterJobPosting( int theaterID, string position, string description, string title, string hour, string requirement, string jobtype)
         {
             //this.HelpWantedID = Guid.NewGuid();
             this.TheaterID = theaterID;
@@ -43,6 +43,7 @@ namespace DataAccessLayer
             this.Title = title;
             this.Hours = hour;
             this.Requirements = requirement;
+            this.JobType = jobtype;
         }
         public TheaterJobPosting()
         {
