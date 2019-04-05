@@ -54,14 +54,14 @@ namespace BroadwayBuilder.Api.Controllers
                         {
                             //var message = string.Format("Please Upload image of type .pdf only");
                             // Todo: Log the error that occurs
-                            return BadRequest();
+                            return BadRequest("File needs to be of type pdf");
                         }
                         // File size is too big
                         else if (putFile.ContentLength > MaxContentLength)
                         {            
                             //var message = string.Format("Please Upload a file upto 1 mb.");
                             // Todo: log the error that occurs
-                            return BadRequest();
+                            return BadRequest("File exceeds max limit of 1 MB");
                         }
                         // Send to production service where functinality to save the file is
                         else
@@ -80,10 +80,9 @@ namespace BroadwayBuilder.Api.Controllers
                 // Todo: Create an ErrorMessage model
                 //var res = string.Format("Please Upload an image.");
                 // Todo: log the error that occurs
-                return BadRequest();
+                return BadRequest("Please upload an image");
             }
-
-                catch (Exception ex) {
+            catch (Exception ex) {
                 // Todo: add proper error handling
                 // Todo: log error
                 return BadRequest();
