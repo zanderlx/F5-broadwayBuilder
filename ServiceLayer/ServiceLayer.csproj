@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="Services\AuthorizationService.cs" />
     <Compile Include="Services\EncryptionService.cs" />
     <Compile Include="Services\IAuthorizationService.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Services\PermissionService.cs" />
     <Compile Include="Services\ProductionJobService.cs" />
     <Compile Include="Services\ProductionService.cs" />
+    <Compile Include="Services\ResumeService.cs" />
+    <Compile Include="Services\ResumeTheaterJobService.cs" />
     <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\SecurityService.cs" />
     <Compile Include="Services\TheaterJobService.cs" />
@@ -68,8 +71,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

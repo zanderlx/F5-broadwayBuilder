@@ -89,5 +89,6 @@ namespace DataAccessLayer
         public bool isEnabled { get; set; }
         
         public virtual ICollection<UserPermission> UserPermissions { get; set; }
+        public ICollection<Resume> Resumes { get; set; }
     }
 }

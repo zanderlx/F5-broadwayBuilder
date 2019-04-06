@@ -1,18 +1,21 @@
 <template>
-
-    <div class="AdminProductionInfo">
-      <h1>CECS Theatre Dept. | </h1> The Fantastic 5 Ampitheatre
-        <PicGrid/>
-    </div>
+  <div class="AdminProductionInfo">
+    <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
+    <AdminPicGrid/>
+    <AdminPictureWheel/>
+  </div>
 </template>
 
 <script>
-import PicGrid from "@/components/ProductionInfo/PicGrid.vue";
+import AdminPicGrid from "@/components/ProductionInfo/AdminPicGrid.vue";
+import AdminPictureWheel from "@/components/ProductionInfo/AdminPictureWheel.vue";
+import axios from "axios";
 
 export default {
   name: "AdminProductionInfo",
   components: {
-    PicGrid
+    AdminPicGrid,
+    AdminPictureWheel
   }
 };
 </script>

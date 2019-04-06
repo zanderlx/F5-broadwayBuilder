@@ -48,7 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201903251740017_InitialCreate.cs" />
+    <Compile Include="Migrations\201903251740017_InitialCreate.Designer.cs">
+      <DependentUpon>201903251740017_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904052245371_BroadwayBuilder-v1.cs" />
+    <Compile Include="Migrations\201904052245371_BroadwayBuilder-v1.Designer.cs">
+      <DependentUpon>201904052245371_BroadwayBuilder-v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904052252249_AddJobType.cs" />
+    <Compile Include="Migrations\201904052252249_AddJobType.Designer.cs">
+      <DependentUpon>201904052252249_AddJobType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ProductionDateTime.cs" />
+    <Compile Include="Models\ResumeTheaterJob.cs" />
     <Compile Include="Models\TheaterJobPosting.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Production.cs" />
@@ -60,10 +74,22 @@
     <Compile Include="Models\Theater.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserPermission.cs" />
+    <Compile Include="Models\Resume.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903251740017_InitialCreate.resx">
+      <DependentUpon>201903251740017_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904052245371_BroadwayBuilder-v1.resx">
+      <DependentUpon>201904052245371_BroadwayBuilder-v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904052252249_AddJobType.resx">
+      <DependentUpon>201904052252249_AddJobType.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

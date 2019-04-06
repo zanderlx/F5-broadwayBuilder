@@ -1,7 +1,7 @@
 <template>
-  <div class="theaters">
+  <div class="theaterprofile">
     <div class="hero-body">
-      <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
+      <h1>CECS Dept |</h1>Broadway Builder
       <div class="container has-text-centered">
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
@@ -25,28 +25,17 @@
       <div class="columns is-mobile is-centered">
         <div class="field is-grouped is-grouped-multiline">
           <div class="control">
-            <span class="button is-danger is-large" v-if="!isAdmin">
+            <span class="button is-danger is-rounded is-medium">
               <router-link to="/theater/{theaterid}/userproductioninfo">Past Productions</router-link>
             </span>
-            <span class="button is-danger is-large" v-if="isAdmin">
-              <router-link to="/theater/{theaterid}/adminproductioninfo">Past Productions</router-link>
-            </span>
           </div>
           <div class="control">
-            <span class="button is-danger is-large">Information / Contact Us</span>
+            <span class="button is-danger is-rounded is-medium">Information / Contact Us</span>
           </div>
           <div class="control">
-            <span class="button is-danger is-large" v-if="!isAdmin">
+            <span class="button is-danger is-rounded is-medium">
               <router-link to="/theater/{theaterid}/helpwanted/apply">Help Wanted</router-link>
             </span>
-            <span class="button is-danger is-large" v-if="isAdmin">
-              <router-link to="/theater/{theaterid}/helpwanted">Help Wanted</router-link>
-            </span>
-            <label class="checkbox">
-              <input type="checkbox" v-model="isAdmin">
-              Are you an admin?
-            </label>
-            {{ isAdmin }}
           </div>
         </div>
       </div>
@@ -58,39 +47,15 @@
 import axios from "axios";
 
 export default {
-  name: "Theaters",
-  data() {
-    return {
-      info: {
-        ProductionName: "",
-        DirectorFirstName: "",
-        DirectorLastName: "",
-        Street: "",
-        City: "",
-        StateProvince: "",
-        Country: "",
-        Zipcode: ""
-      },
-      isAdmin: false
-    };
-  },
-  mounted() {},
-  methods: {
-    submitProduction() {
-      axios
-        .post(
-          "http://api.broadwaybuilder.xyz/production/createproduction",
-          this.info,
-          {
-            headers: {
-              "content-type": "application/json"
-            }
-          }
-        )
-        .then(response => console.log(response.data))
-        .catch(error => console.log(error));
-    }
-  }
+  name: "TheaterProfile"
+  // data() {
+  //   return {
+  //     theatername: String,
+  //     companyname: String,
+  //     contactinfo: []
+  //   };
+  // },
+  // props: ["theater"]
 };
 </script>
 
@@ -124,5 +89,18 @@ h1 {
 
 .card-footer-item {
   color: black;
+}
+
+.button {
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  align: center;
+}
+
+.button:hover {
+  background-color: #6f0000;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 </style>

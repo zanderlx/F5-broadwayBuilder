@@ -14,12 +14,22 @@ export default new Router({
     {
       path: "/theaters",
       name: "theaters",
-      component: () => import("./views/Theaters.vue")
+      component: () => import("./views/ViewAllTheaters.vue")
+    },
+    {
+      path: "/theater",
+      name: "theater",
+      component: () => import("./views/TheaterProfile.vue")
     },
     {
       path: "/adminaccount/{userID}",
       name: "adminaccount",
       component: () => import("./views/AdminAccount.vue")
+    },
+    {
+      path: "/sysadminaccount/{userID}",
+      name: "sysadminaccount",
+      component: () => import("./views/SysAdminAccount.vue")
     },
     {
       path: "/contactus",
@@ -44,6 +54,11 @@ export default new Router({
     {
       path: "/theater/{theaterid}/adminproductioninfo",
       name: "adminproductioninfo",
+      component: () => import("./views/ProductionInfo/AdminProductionInfo.vue")
+    },
+    {
+      path: "/theater/{theaterid}/adminproductioninfo/{productionid}",
+      name: "adminpicturewheel",
       component: () => import("./views/ProductionInfo/AdminProductionInfo.vue")
     }
   ]

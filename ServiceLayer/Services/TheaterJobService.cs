@@ -38,11 +38,42 @@ namespace ServiceLayer.Services
         {
             return _dbContext.TheaterJobPostings.Where(job => job.TheaterID == theaterid)
                     .Select(job => new {
-                        Title = job.Title, //Position = job.Position,
+                        Title = job.Title,
+                        Position = job.Position,
                         Hours = job.Hours,
                         Description = job.Description,
-                        Requirement = job.Requirements
+                        Requirements = job.Requirements,
+                        DateCreated = job.DateCreated,
+                        HelpWantedId = job.HelpWantedID,
+                        TheaterId = job.TheaterID
                     }).ToList();
+        }
+
+        public IEnumerable FilterTheaterJobPostingFromTheater(int theaterid,string title,string Postion,string Hours, string description, string requirements,DateTime date)
+        {
+            //IQueryable allJobsFromTheater = GetAllJobsForTheater(theaterid);
+            var list = _dbContext.TheaterJobPostings.Where(job => job.TheaterID == theaterid)
+                    .Select(job => new
+                    {
+                        Title = job.Title,
+                        Position = job.Position,
+                        Hours = job.Hours,
+                        Description = job.Description,
+                        Requirements = job.Requirements,
+                        DateCreated = job.DateCreated,
+                        HelpWantedId = job.HelpWantedID,
+                        TheaterId = job.TheaterID
+                    });
+            if (String.IsNullOrEmpty(title))
+            {
+                list = list.Where(job=>job.Title == title);
+            }
+            if (String.IsNullOrEmpty(Postion))
+            {
+                list = list.Where(job => job.Position == Postion);
+            }
+            return list;
+            
         }
         public void UpdateTheaterJob(TheaterJobPosting updatedTheaterJob, TheaterJobPosting originalTheaterJob)
         {

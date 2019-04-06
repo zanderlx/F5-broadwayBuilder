@@ -23,16 +23,20 @@ namespace BroadwayBuilder.Api.Tests
             dbcontext.SaveChanges();
             //Arrange
             var controller = new HelpWantedController();
-            TheaterJobPosting job = new TheaterJobPosting(theater.TheaterID,"test", "test", "test", "test", "test");
+            TheaterJobPosting job = new TheaterJobPosting(theater.TheaterID,"test", "test", "test", "test", "test","testType");
             //Act
             var actionResult = controller.CreateTheaterJob(job);
-            var response = actionResult as NegotiatedContentResult<string>;
+            var response = actionResult as NegotiatedContentResult<TheaterJobPosting>;
             var content = response.Content;
 
+            var jobservice = new TheaterJobService(dbcontext);
+            jobservice.DeleteTheaterJob(content);
+            theaterService.DeleteTheater(theater);
+            dbcontext.SaveChanges();
             ////Assert
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Content);
-            Assert.AreEqual("Theater Job Posting Created",content);
+            //Assert.AreEqual("Theater Job Posting Created",content);
             Assert.AreEqual((HttpStatusCode)201,response.StatusCode);
 
 
@@ -49,7 +53,7 @@ namespace BroadwayBuilder.Api.Tests
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
             theaterService.CreateTheater(theater);
             dbcontext.SaveChanges();
-            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements", "testType");
             theaterJobService.CreateTheaterJob(jobPosting);
             dbcontext.SaveChanges();
             var controller = new HelpWantedController();
@@ -82,7 +86,7 @@ namespace BroadwayBuilder.Api.Tests
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
             theaterService.CreateTheater(theater);
             dbcontext.SaveChanges();
-            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements", "testType");
             theaterJobService.CreateTheaterJob(jobPosting);
             dbcontext.SaveChanges();
             var controller = new HelpWantedController();
@@ -92,8 +96,10 @@ namespace BroadwayBuilder.Api.Tests
             var response = actionResult as NegotiatedContentResult<string>;
             var content = response.Content;
 
-            //theaterService.DeleteTheater(theater);
-            //dbcontext.SaveChanges();
+            var dbcontext2 = new BroadwayBuilderContext();
+            var theaterService2 = new TheaterService(dbcontext2);
+            theaterService2.DeleteTheater(theater);
+            dbcontext2.SaveChanges();
             //Assert
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Content);
@@ -114,7 +120,7 @@ namespace BroadwayBuilder.Api.Tests
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
             theaterService.CreateTheater(theater);
             dbcontext.SaveChanges();
-            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements", "testType");
             theaterJobService.CreateTheaterJob(jobPosting);
             dbcontext.SaveChanges();
             //Arrange

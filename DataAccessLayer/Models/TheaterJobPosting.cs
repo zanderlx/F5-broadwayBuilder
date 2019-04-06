@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,10 +27,14 @@ namespace DataAccessLayer
         public string Hours { get; set; }
         [Required]
         public string Requirements { get; set; }
+        [Required]
+        public string JobType { get; set; }
         public int TheaterID { get; set; }
         public Theater theater { get; set; }
 
-        public TheaterJobPosting( int theaterID, string position, string description, string title, string hour, string requirement)
+        ICollection<ResumeTheaterJob> resumeTheaterJobs { get; set; }
+
+        public TheaterJobPosting( int theaterID, string position, string description, string title, string hour, string requirement, string jobtype)
         {
             //this.HelpWantedID = Guid.NewGuid();
             this.TheaterID = theaterID;
@@ -38,6 +43,7 @@ namespace DataAccessLayer
             this.Title = title;
             this.Hours = hour;
             this.Requirements = requirement;
+            this.JobType = jobtype;
         }
         public TheaterJobPosting()
         {

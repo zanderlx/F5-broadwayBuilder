@@ -33,7 +33,7 @@ namespace BroadwayBuilder.Api.Controllers
                 // Todo: add proper error handling
                 catch (Exception e)
                 {
-                    return Content((HttpStatusCode)400, "Unable to add that Theater.");
+                    return Content((HttpStatusCode)400,e.Message);
                 }
 
             }
@@ -54,6 +54,28 @@ namespace BroadwayBuilder.Api.Controllers
                         throw new Exception();
                     }
                     return Content((HttpStatusCode)200,theater);
+                }
+                catch (Exception)
+                {
+                    return Content((HttpStatusCode)404, "The Theater could not be found");
+                }
+            }
+        }
+
+        [HttpGet,Route("theater/get/{theaterid}")]
+        public IHttpActionResult GetTheaterById(int theaterid)
+        {
+            using (var dbcontext = new BroadwayBuilderContext())
+            {
+                TheaterService service = new TheaterService(dbcontext);
+                try
+                {
+                    Theater theater = service.GetTheaterByID(theaterid);
+                    if (theater == null)
+                    {
+                        throw new Exception();
+                    }
+                    return Content((HttpStatusCode)200, theater);
                 }
                 catch (Exception)
                 {

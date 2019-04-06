@@ -21,7 +21,7 @@ namespace ServiceLayer.Test
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
             theaterService.CreateTheater(theater);
             dbcontext.SaveChanges();
-            var jobPosting = new TheaterJobPosting(theater.TheaterID,"intern","some decription","title","hours","some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID,"intern","some decription","title","hours","some requirements", "testType");
             //Act
             theaterJobService.CreateTheaterJob(jobPosting);
             var results = dbcontext.SaveChanges();
@@ -49,7 +49,7 @@ namespace ServiceLayer.Test
 
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
             
-            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements", "testType");
             //Act
             theaterService.CreateTheater(theater);
             //dbcontext.SaveChanges();
@@ -79,7 +79,7 @@ namespace ServiceLayer.Test
 
             var theater = new Theater("someTheater", "Regal", "theater st", "LA", "CA", "US", "323323");
 
-            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements");
+            var jobPosting = new TheaterJobPosting(theater.TheaterID, "intern", "some decription", "title", "hours", "some requirements", "testType");
             //Act
             theaterService.CreateTheater(theater);
             theaterJobService.CreateTheaterJob(jobPosting);

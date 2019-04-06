@@ -2,11 +2,6 @@
   <div id="app">
     <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item">
-          <router-link to="/">
-            <img src="@/assets/download.png">
-          </router-link>
-        </a>
         
         <a
           role="button"
