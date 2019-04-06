@@ -95,7 +95,7 @@ namespace ServiceLayer.Services
 
         public void UploadProgram(int productionId, string extension, HttpPostedFile postedFile)
         {
-            var filePath = HostingEnvironment.MapPath("~/Programs/Production/" + productionId + extension);
+            var filePath = HostingEnvironment.MapPath("~/Programs/Production" + productionId + "/" + productionId + extension);
             //check if prodid exists in database because we dont store data for things that don't exist by getting it and check if that variable is null. if it is null then it doesnt exist
             //
             var subdir = HostingEnvironment.MapPath("~/Programs/Production" + productionId);
