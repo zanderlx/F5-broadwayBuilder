@@ -124,7 +124,8 @@ export default {
           Title: job.Title,
           Description: job.Description,
           Hours: job.Hours,
-          Requirements: job.Requirements
+          Requirements: job.Requirements,
+          JobType: job.JobType
         })
         .then(response => console.log("Job Updated!", response));
 
