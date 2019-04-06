@@ -1,7 +1,8 @@
 <template>
   <div class="theaterprofile">
     <div class="hero-body">
-      <h1>CECS Dept |</h1>Broadway Builder
+      <h1>{{TheaterName}} |</h1>
+      {{theater.CompanyName}}
       <div class="container has-text-centered">
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
@@ -45,17 +46,22 @@
 
 <script>
 import axios from "axios";
+import { isObject } from "util";
 
 export default {
-  name: "TheaterProfile"
-  // data() {
-  //   return {
-  //     theatername: String,
-  //     companyname: String,
-  //     contactinfo: []
-  //   };
-  // },
-  // props: ["theater"]
+  name: "TheaterProfile",
+  data() {
+    return {
+      //TheaterID: this.$route.params.TheaterID,
+      TheaterName: this.$route.params.TheaterName,
+      theater: isObject
+    };
+  },
+  async loadProfile(TheaterName) {
+    await axios
+      .get("https://api.broadwaybuilder.xyz/theater/{theatername}")
+      .then(response => (this.theater = reponse.data));
+  }
 };
 </script>
 
