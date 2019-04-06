@@ -45,7 +45,7 @@ namespace BroadwayBuilder.Api.Controllers
         }
 
         [HttpPut,Route("edittheaterjob")]
-        public IHttpActionResult EditTheaterJob(TheaterJobPosting job) //only one not tested - dont know how to include datetime in JSON
+        public IHttpActionResult EditTheaterJob(TheaterJobPosting job) 
         {
             using(var dbcontext = new BroadwayBuilderContext())
             {
