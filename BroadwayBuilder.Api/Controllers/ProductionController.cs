@@ -85,7 +85,7 @@ namespace BroadwayBuilder.Api.Controllers
             catch (Exception ex) {
                 // Todo: add proper error handling
                 // Todo: log error
-                return BadRequest();
+                return BadRequest("Was not able to upload the image");
                
                 }
         }
