@@ -3,6 +3,7 @@
     <div class="hero-body">
       <h1>{{TheaterName}} |</h1>
       {{theater.CompanyName}}
+      {{theater}}
       <div class="container has-text-centered">
         <div class="columns is-vcentered">
           <div class="column is-6 is-half">
@@ -46,21 +47,19 @@
 
 <script>
 import axios from "axios";
-import { isObject } from "util";
 
 export default {
   name: "TheaterProfile",
   data() {
     return {
-      //TheaterID: this.$route.params.TheaterID,
       TheaterName: this.$route.params.TheaterName,
-      theater: isObject
+      theater: {}
     };
   },
-  async loadProfile(TheaterName) {
+  async mounted() {
     await axios
-      .get("https://api.broadwaybuilder.xyz/theater/{theatername}")
-      .then(response => (this.theater = reponse.data));
+      .get("https://api.broadwaybuilder.xyz/theater/" + this.TheaterName)
+      .then(response => (this.theater = response.data));
   }
 };
 </script>

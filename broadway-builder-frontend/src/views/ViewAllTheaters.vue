@@ -67,9 +67,6 @@ export default {
       .then(response => (this.theaters = response.data));
   }
 };
-
-
-
 </script>
 
 <style scoped>
