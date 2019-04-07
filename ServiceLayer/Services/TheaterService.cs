@@ -37,6 +37,7 @@ namespace ServiceLayer.Services
         {
             return _dbContext.Theaters.Select(theater => new
             {
+                TheaterID = theater.TheaterID,
                 TheaterName = theater.TheaterName,
                 CompanyName = theater.CompanyName,
                 StreetAddress = theater.StreetAddress,
