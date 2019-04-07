@@ -44,7 +44,8 @@ namespace ServiceLayer.Services
                 City = theater.City,
                 State = theater.State,
                 Country = theater.Country,
-                PhoneNumber = theater.PhoneNumber
+                PhoneNumber = theater.PhoneNumber,
+                Production = theater.Production
             }).ToList();
         }
 
