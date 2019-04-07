@@ -9,6 +9,7 @@
             <ul class="menu-list">
               <li>
                 <a v-on:click="performPublish">Publish Site</a>
+                <a v-on:click="createTheater"> Create Theater </a>
                 <a>Manage Users</a>
                 <ul>
                   <li>
@@ -48,6 +49,7 @@
           </section>
           <div class="column is-9">
             <PublishSite v-if="publish === true" @cancel="cancelPublish"/>
+            <CreateTheater v-if="theaterCreated === true" @cancelCreateTheater="cancelCreateTheater"/>
           </div>
         </div>
       </div>
@@ -58,22 +60,33 @@
 
 <script>
 import PublishSite from "@/components/SystemAdmin/PublishSite.vue";
+import CreateTheater from "@/components/SystemAdmin/CreateTheater.vue";
 export default {
   name: "SysAdminAccount",
   components: {
-    PublishSite
+    PublishSite,
+    CreateTheater
   },
   data() {
     return {
-      publish: false
+      publish: false,
+      theaterCreated: false,
     };
   },
   methods: {
     performPublish() {
       this.publish = !this.publish;
+      this.theaterCreated = false;
     },
     cancelPublish(cancel) {
       this.publish = cancel;
+    },
+    createTheater() {
+      this.publish = false;
+      this.theaterCreated = !this.theaterCreated;
+    },
+    cancelCreateTheater(cancel) {
+      this.theaterCreated = cancel;
     }
   }
 };
