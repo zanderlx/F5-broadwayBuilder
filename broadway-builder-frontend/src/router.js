@@ -48,8 +48,9 @@ export default new Router({
       component: () => import("./views/HelpWanted/UserHelpWanted.vue")
     },
     {
-      path: "/theater/{theaterid}/userproductioninfo",
+      path: "/theater/:TheaterID/userproductioninfo",
       name: "userproductioninfo",
+      props: true,
       component: () => import("./views/ProductionInfo/UserProductionInfo.vue")
     },
     {

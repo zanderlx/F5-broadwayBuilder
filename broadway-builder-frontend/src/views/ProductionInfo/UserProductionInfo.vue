@@ -1,17 +1,30 @@
 <template>
   <div class="UserProductionInfo">
-    <h1>CECS Theatre Dept. |</h1>The Fantastic 5 Ampitheatre
+    <h1>{{theater.TheaterName}} |</h1>
+    {{theater.CompanyName}}
     <PicGrid/>
   </div>
 </template>
 
 <script>
 import PicGrid from "@/components/ProductionInfo/PicGrid.vue";
+import axios from "axios";
 
 export default {
   name: "UserProductionInfo",
   components: {
     PicGrid
+  },
+  data() {
+    return {
+      TheaterID: this.$route.params.TheaterID,
+      theater: {}
+    };
+  },
+  async mounted() {
+    await axios
+      .get("https://api.broadwaybuilder.xyz/theater/get/" + this.TheaterID)
+      .then(response => (this.theater = response.data));
   }
 };
 </script>

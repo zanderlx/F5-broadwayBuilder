@@ -47,8 +47,7 @@ export default {
   },
   data() {
     return {
-      theaters: [],
-      Goto: false
+      theaters: []
     };
   },
   methods: {
