@@ -54,10 +54,6 @@ export default {
     await axios
       .get("https://api.broadwaybuilder.xyz/theater/all")
       .then(response => (this.theaters = response.data));
-
-    await axios
-    .get("https://api.broadwaybuilder.xyz/Programs/Production1/1.pdf")
-    .then(response => {console.log(response)})
   }
 };
 
