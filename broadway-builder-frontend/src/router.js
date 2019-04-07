@@ -19,6 +19,7 @@ export default new Router({
     {
       path: "/theater/:TheaterName",
       name: "theater",
+      props: true,
       component: () => import("./views/TheaterProfile.vue")
     },
     {
