@@ -34,7 +34,10 @@
     </div><div class="field">
       <div class="control">
         <label class="label">Phone Number</label>
-        <input class="input" v-model="theater.PhoneNumber">
+        <vue-tel-input v-model="theater.PhoneNumber"
+                        @onInput="onInput"
+                  :preferredCountries="['us', 'can']">
+   </vue-tel-input>            
       </div>
     </div>
     <div class="field">
@@ -66,6 +69,9 @@ export default {
     };
   },
   methods: {
+    number: '',
+    isValid: '',
+    country: '',
     async createTheater() {
       await axios
       .post("https://api.broadwaybuilder.xyz/theater/createtheater", this.theater)
@@ -73,7 +79,15 @@ export default {
     },
     cancelTheaterCreation() {
       this.$emit("cancelCreateTheater", false);
+    },
+    onInput({number, isValid, country}) {
+      //console.log(number, isValid, country);
     }
+
+    
+    
   }
 };
 </script>
+
+
