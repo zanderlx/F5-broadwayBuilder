@@ -55,7 +55,8 @@ export default {
       this.$router.push({
         name: "theater",
         params: {
-          TheaterName: theater.TheaterName
+          TheaterName: theater.TheaterName,
+          Theater: theater
         }
       });
     }
