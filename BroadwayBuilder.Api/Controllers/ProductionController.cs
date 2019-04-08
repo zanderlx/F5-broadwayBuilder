@@ -31,7 +31,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                 //A list in case we want to accept more than one file type
                 IList<string> AllowedFileExtension = new List<string> { ".pdf" };
-                
+
                 // Todo: Check if length of httpRequest.Files == 1 to ensure only 1 file is uploaded
 
                 // Max file size is 1MB
@@ -41,9 +41,9 @@ namespace BroadwayBuilder.Api.Controllers
                 {
                     // Grab current file of the request
                     var putFile = httpRequest.Files[filename];
-                    
+
                     // Continue if the file has content
-                    if (putFile != null && putFile.ContentLength > 0) 
+                    if (putFile != null && putFile.ContentLength > 0)
                     {
                         // Checks the current extension of the current file
                         var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
@@ -58,7 +58,7 @@ namespace BroadwayBuilder.Api.Controllers
                         }
                         // File size is too big
                         else if (putFile.ContentLength > MaxContentLength)
-                        {            
+                        {
                             //var message = string.Format("Please Upload a file upto 1 mb.");
                             // Todo: log the error that occurs
                             return BadRequest("File exceeds max limit of 1 MB");
@@ -71,7 +71,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                         }
                     }
-                    
+
                     // Todo: Create an ErrorMessage model
                     //var message1 = string.Format("Image Updated Successfully.");
                     //return Created(insert path);
@@ -87,15 +87,15 @@ namespace BroadwayBuilder.Api.Controllers
                 // Todo: add proper error handling
                 // Todo: log error
                 return BadRequest("Was not able to upload the image");
-               
-                }
+
+            }
         }
 
         [Route("create")]
         [HttpPost]
         public IHttpActionResult CreateProduction([FromBody] Production production)
         {
-            
+
             using (var dbcontext = new BroadwayBuilderContext())
             {
                 var productionService = new ProductionService(dbcontext);
@@ -158,7 +158,7 @@ namespace BroadwayBuilder.Api.Controllers
                         if (previousDate != null) {
 
                             // List of past productions
-                            var pastProductions  = productionService.GetProductionsByPreviousDate((DateTime)previousDate);
+                            var pastProductions = productionService.GetProductionsByPreviousDate((DateTime)previousDate);
 
                             // List to hold production responses
                             var productionResponses = new List<ProductionResponseModel>();
@@ -174,7 +174,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                                 /* Looping over the production date time entities,
                                  * Converting to production date time response models 
-                                 * and adding them to the production date time reponse model list
+                     /            * and adding them to the production date time reponse model list
                                  */
                                 foreach (var datetime in production.ProductionDateTime)
                                 {
@@ -204,7 +204,7 @@ namespace BroadwayBuilder.Api.Controllers
                         {
                             // List of productions
                             var currentAndFutureProductions = productionService.GetProductionsByCurrentAndFutureDate((DateTime)currentDate);
-                           
+
                             // List of production response models
                             var productionResponseModels = new List<ProductionResponseModel>();
 
@@ -251,7 +251,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                             return Ok(productionResponseModels);
                         }
-                        
+
                         // none of the if conditions were met therfore...
                         return BadRequest("PreviousDate and Current date were both null");
                     }
@@ -327,7 +327,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                     return Ok("Production deleted succesfully");
 
-                } 
+                }
                 // Hack: Need to add proper exception handling
                 catch (Exception e)
                 {
@@ -371,7 +371,7 @@ namespace BroadwayBuilder.Api.Controllers
                         // Checks the current extension of the current file
                         var ext = putFile.FileName.Substring(putFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
-                        
+
                         // File extension is not valid
                         if (!AllowedFileExtension.Contains(extension))
                         {
@@ -410,6 +410,13 @@ namespace BroadwayBuilder.Api.Controllers
 
             }
         }
+
+        //[Route("{productionId}/getPhotos")]
+        //[HttpGet]
+        //public IHttpActionResult getPhotos()
+        //{
+        //    //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
+        //}
 
         [Route("{productionId}/create")]
         [HttpPost]
