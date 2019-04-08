@@ -2,7 +2,7 @@
   <div class="UserProductionInfo">
     <h1>{{theater.TheaterName}} |</h1>
     {{theater.CompanyName}}
-    <PicGrid/>
+    <PicGrid :theater.TheaterID="TheaterID"/>
   </div>
 </template>
 
