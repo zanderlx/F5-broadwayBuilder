@@ -1,14 +1,15 @@
 <template>
   <div class="UserProductionInfo">
     <h1>{{theater.TheaterName}} |</h1>
-    {{theater.CompanyName}}
-    <PicGrid/>
+    {{theater.CompanyName}}.
+    <PicGrid v-bind:TheaterID="TheaterID" :today="today"/>
   </div>
 </template>
 
 <script>
 import PicGrid from "@/components/ProductionInfo/PicGrid.vue";
 import axios from "axios";
+import { isDate } from "util";
 
 export default {
   name: "UserProductionInfo",
@@ -18,7 +19,8 @@ export default {
   data() {
     return {
       TheaterID: this.$route.params.TheaterID,
-      theater: {}
+      theater: {},
+      today: new Date("2019-12-30T10:20:20Z")
     };
   },
   async mounted() {

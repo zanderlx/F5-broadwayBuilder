@@ -1,36 +1,52 @@
 <template>
-
-<div class = "PicGrid">
-<div class="columns is-multiline">
-  <div class="column is-one-quarter-desktop is-half-tablet">
-    <div class="card">
-        <div class="card-image">
-            <figure class="image isrounded is-3by2">
-              <img class= "isrounded" src="@/assets/download.png" alt="">
-              
-            </figure>
-            <div class="card-content is-overlay is-clipped">
-              <span class="tag is-info">
-                INSERT TITLE OF SHOW HERE
-              </span>       
+  <div class="PicGrid">
+    <v-container fluid grid-list-md>
+      <v-layout row wrap>
+        <v-flex v-for="(production, index) in productions" :key="index">
+          <div v-show="production.TheaterID == TheaterID" class="card">
+            <div class="card-image">
+              <figure class="image isrounded is-3by2">
+                <img class="isrounded" src="@/assets/download.png" alt>
+              </figure>
+              <div class="card-content is-overlay is-clipped">
+                <span class="tag is-info">{{production.ProductionName}}</span>
+              </div>
             </div>
-        </div>
-        <footer class="card-footer">
-            <div class="card-footer-item">
-              <a>Pictures</a> | <a>Program</a>
-            </div>
-        </footer>
-    </div>
+            <footer class="card-footer">
+              <div class="card-footer-item">
+                <a>Pictures.</a> |
+                <a>Program</a>
+              </div>
+            </footer>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
-  
-  
-</div>
-</div>
 </template>
 
 <script>
+import axios from "axios";
+import { isDate } from "util";
 export default {
-  name: "PicGrid"
+  name: "PicGrid",
+  data() {
+    return {
+      productions: [],
+      theaters: [],
+      TheaterID: this.$attrs.TheaterID
+    };
+  },
+  props: {
+    today: Date
+  },
+  async mounted() {
+    await axios
+      .get(
+        "https://api.broadwaybuilder.xyz/production/getProductions?previousDate=3%2F23%2F2019"
+      )
+      .then(response => (this.productions = response.data));
+  }
 };
 </script>
 
@@ -47,4 +63,5 @@ export default {
     color: black
 a
   color: black
+  margin: 1em
 </style>
