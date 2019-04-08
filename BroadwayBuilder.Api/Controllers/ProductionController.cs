@@ -417,14 +417,30 @@ namespace BroadwayBuilder.Api.Controllers
         [HttpGet]
         public IHttpActionResult getPhotos(int productionId)
         {
-            //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
+            var filenames = new List<string>();
+            string fileUrls = "";
+            
+            // Virtual Directory path
             var filepath = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
 
+            // Grabbing information about the directory at this path. Todo: Look into changing to using Directory rather than DirectoryInfo
             DirectoryInfo dir = new DirectoryInfo(filepath);
 
             FileInfo[] filepaths = dir.GetFiles();
+
+            // Grab each files name and put it into a list 
+            foreach (FileInfo fileTemp in filepaths)
+            {
+                filenames.Add(fileTemp.Name);
+            }
+
+            // Give each file name their approriate url in order to get photos
+            foreach (var fi in filenames)
+            {
+                fileUrls = "https://broadwaybuilder.xyz/Photos/Production" + productionId + fi;
+            }
         
-            return Ok(filepaths);
+            return Ok(fileUrls);
         }
 
         [Route("{productionId}/create")]
