@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using ServiceLayer;
 using DataAccessLayer;
@@ -411,12 +413,19 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
-        //[Route("{productionId}/getPhotos")]
-        //[HttpGet]
-        //public IHttpActionResult getPhotos()
-        //{
-        //    //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
-        //}
+        [Route("{productionId}/getPhotos")]
+        [HttpGet]
+        public IHttpActionResult getPhotos(int productionId)
+        {
+            //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
+            var filepath = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
+
+            DirectoryInfo dir = new DirectoryInfo(HostingEnvironment.MapPath(filepath));
+
+            FileInfo[] filepaths = dir.GetFiles();
+            Console.WriteLine(filepaths);
+            return Ok(filepaths);
+        }
 
         [Route("{productionId}/create")]
         [HttpPost]
