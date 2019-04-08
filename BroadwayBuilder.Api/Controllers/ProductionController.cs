@@ -437,7 +437,7 @@ namespace BroadwayBuilder.Api.Controllers
             // Give each file name their approriate url in order to get photos
             foreach (var fi in filenames)
             {
-                fileUrls.Add("https://broadwaybuilder.xyz/Photos/Production" + productionId + "/" + fi);
+                fileUrls.Add("https://api.broadwaybuilder.xyz/Photos/Production" + productionId + "/" + fi);
             }
         
             return Ok(fileUrls);
