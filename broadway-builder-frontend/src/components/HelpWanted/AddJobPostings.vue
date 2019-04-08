@@ -34,7 +34,7 @@
             <strong>Type of Job (This cannot be changed!)</strong>
             <br>
             <div class="filters" v-for="(type, index) in jobTypes" :key="index">
-              <input type="radio" :value="type" name="jobPosition" v-model="job.JobType">
+              <input type="radio" :value="type" name="jobType" v-model="job.JobType">
               <label>{{ type }}</label>
               <br>
             </div>
@@ -104,10 +104,7 @@ export default {
           "https://api.broadwaybuilder.xyz/helpwanted/createtheaterjob",
           this.job
         )
-        .then(
-          response => console.log(response.data),
-          this.$emit("add", this.job)
-        );
+        .then(response => this.$emit("add", this.job));
     },
     // Cancel the creation of a new job
     cancelNewJobPosting() {
