@@ -81,7 +81,7 @@ export default {
   methods: {
     async deleteTheater() {
       await axios
-        .delete("http://api.broadwaybuilder.xyz/theater/deleteTheater",{ data: this.theater })
+        .delete("https://api.broadwaybuilder.xyz/theater/deleteTheater",{data: this.theater})
         .then(response => {console.log(response)});
     },
     cancelDeleteTheater() {
