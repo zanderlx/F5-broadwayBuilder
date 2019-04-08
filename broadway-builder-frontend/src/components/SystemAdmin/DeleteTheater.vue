@@ -80,10 +80,9 @@ export default {
   },
   methods: {
     async deleteTheater() {
-      await axios.delete(
-        "http://api.broadwaybuilder.xyz/theater/deleteTheater",
-        { data: this.theater }
-      );
+      await axios
+        .delete("http://api.broadwaybuilder.xyz/theater/deleteTheater",{ data: this.theater })
+        .then(response => {console.log(response)});
     },
     cancelDeleteTheater() {
       this.$emit("cancelDeleteTheater", false);
