@@ -2,14 +2,14 @@
   <div class="PicGrid">
     <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <v-flex>
-          <div class="card">
+        <v-flex v-for="(production, index) in productions" :key="index">
+          <div v-show="production.TheaterID == TheaterID" class="card">
             <div class="card-image">
               <figure class="image isrounded is-3by2">
                 <img class="isrounded" src="@/assets/download.png" alt>
               </figure>
               <div class="card-content is-overlay is-clipped">
-                <span class="tag is-info">INSERT TITLE OF SHOW HERE</span>
+                <span class="tag is-info">{{production.ProductionName}}</span>
               </div>
             </div>
             <footer class="card-footer">
@@ -27,15 +27,25 @@
 
 <script>
 import axios from "axios";
+import { isDate } from "util";
 export default {
   name: "PicGrid",
   data() {
     return {
-      productions: []
+      productions: [],
+      theaters: [],
+      TheaterID: this.$attrs.TheaterID
     };
   },
+  props: {
+    today: Date
+  },
   async mounted() {
-    await axios.get();
+    await axios
+      .get(
+        "https://api.broadwaybuilder.xyz/production/getProductions?previousDate=3%2F23%2F2019"
+      )
+      .then(response => (this.productions = response.data));
   }
 };
 </script>
