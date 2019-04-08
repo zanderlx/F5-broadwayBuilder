@@ -440,7 +440,7 @@ namespace BroadwayBuilder.Api.Controllers
                 fileUrls = "https://broadwaybuilder.xyz/Photos/Production" + productionId + fi;
             }
         
-            return Ok(fileUrls);
+            return Ok(filenames);
         }
 
         [Route("{productionId}/create")]
