@@ -193,8 +193,17 @@ namespace BroadwayBuilder.Api.Controllers
                                 productionResponses.Add(new ProductionResponseModel() {
 
                                     ProductionID = production.ProductionID,
+                                    ProductionName = production.ProductionName,
                                     DirectorFirstName = production.DirectorFirstName,
                                     DirectorLastName = production.DirectorLastName,
+                                    Street = production.Street,
+                                    City = production.City,
+                                    StateProvince = production.StateProvince,
+                                    Zipcode = production.Zipcode,
+                                    Country = production.Country,
+                                    TheaterID = production.TheaterID,
+                                    DateTimes = productionDateTimeResponseModel
+
 
                                 });
                             }
