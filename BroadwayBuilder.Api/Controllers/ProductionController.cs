@@ -66,6 +66,7 @@ namespace BroadwayBuilder.Api.Controllers
                         // Send to production service where functinality to save the file is
                         else
                         {
+                            // check if id is null or not then proceed
                             productionService.UploadProgram(productionId, extension, putFile);
 
                         }
@@ -85,7 +86,7 @@ namespace BroadwayBuilder.Api.Controllers
             catch (Exception ex) {
                 // Todo: add proper error handling
                 // Todo: log error
-                return BadRequest();
+                return BadRequest("Was not able to upload the image");
                
                 }
         }
@@ -377,7 +378,7 @@ namespace BroadwayBuilder.Api.Controllers
 
                             //var message = string.Format("Please Upload image of type .jpg only");
                             // Todo: Log the error that occurs
-                            return BadRequest();
+                            return BadRequest("Please upload image of type .jpg only");
                         }
                         // File size is too big
                         else if (putFile.ContentLength > MaxContentLength)
@@ -386,7 +387,7 @@ namespace BroadwayBuilder.Api.Controllers
                             //var message = string.Format("Please Upload a file upto 1 mb.");
 
                             // Todo: log the error that occurs
-                            return BadRequest();
+                            return BadRequest("Please upload a file upto 1mb");
                         }
                         // Send to production service where functinality to save the file is
                         else
@@ -405,7 +406,7 @@ namespace BroadwayBuilder.Api.Controllers
             {
                 // Todo: add proper error handling
                 // Todo: log error
-                return BadRequest();
+                return BadRequest("Photo could not be uploaded...dont know why.find out and add detailed message here!");
 
             }
         }

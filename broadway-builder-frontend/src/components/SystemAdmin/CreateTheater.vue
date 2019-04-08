@@ -68,10 +68,9 @@ export default {
   },
   methods: {
     async createTheater() {
-      await axios.post(
-        "https://api.broadwaybuilder.xyz/theater/createtheater",
-        this.theater
-      );
+      await axios
+      .post("https://api.broadwaybuilder.xyz/theater/createtheater", this.theater)
+      .then(response => {console.log(response)});
     },
     cancelTheaterCreation() {
       this.$emit("cancelCreateTheater", false);
