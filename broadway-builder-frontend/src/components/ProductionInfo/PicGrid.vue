@@ -14,7 +14,7 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item">
-                <a>Pictures</a> |
+                <a>Pictures.</a> |
                 <a>Program</a>
               </div>
             </footer>

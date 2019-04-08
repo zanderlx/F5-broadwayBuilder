@@ -1,7 +1,7 @@
 <template>
   <div class="UserProductionInfo">
     <h1>{{theater.TheaterName}} |</h1>
-    {{theater.CompanyName}}
+    {{theater.CompanyName}}.
     <PicGrid v-bind:TheaterID="TheaterID" :today="today"/>
   </div>
 </template>
