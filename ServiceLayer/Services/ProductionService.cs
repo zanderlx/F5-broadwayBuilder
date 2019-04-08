@@ -110,7 +110,14 @@ namespace ServiceLayer.Services
 
         public void UploadPhoto(int productionId, int count, string extension, HttpPostedFile postedFile)
         {
-            var filePath = HostingEnvironment.MapPath("~/ProductionPhotos/" + productionId + "-" + count + extension);
+            var filePath = HostingEnvironment.MapPath("~/Photos/Production" + productionId + "/" + count + extension);
+
+            var subdir = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
+
+            if (!Directory.Exists(subdir))
+            {
+                Directory.CreateDirectory(subdir);
+            }
             postedFile.SaveAs(filePath);
         }
 
