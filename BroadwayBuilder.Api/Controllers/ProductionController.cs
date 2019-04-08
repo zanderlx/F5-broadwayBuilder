@@ -417,8 +417,6 @@ namespace BroadwayBuilder.Api.Controllers
         [HttpGet]
         public IHttpActionResult getPhotos(int productionId)
         {
-            var filenames = new List<string>();
-            string fileUrls = "";
             
             // Virtual Directory path
             var filepath = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
@@ -428,19 +426,21 @@ namespace BroadwayBuilder.Api.Controllers
 
             FileInfo[] filepaths = dir.GetFiles();
 
+            var filenames = new List<string>();
             // Grab each files name and put it into a list 
             foreach (FileInfo fileTemp in filepaths)
             {
                 filenames.Add(fileTemp.Name);
             }
 
+            var fileUrls = new List<string>();
             // Give each file name their approriate url in order to get photos
             foreach (var fi in filenames)
             {
-                fileUrls = "https://broadwaybuilder.xyz/Photos/Production" + productionId + fi;
+                fileUrls.Add("https://broadwaybuilder.xyz/Photos/Production" + productionId + "/" + fi);
             }
         
-            return Ok(filenames);
+            return Ok(fileUrls);
         }
 
         [Route("{productionId}/create")]
