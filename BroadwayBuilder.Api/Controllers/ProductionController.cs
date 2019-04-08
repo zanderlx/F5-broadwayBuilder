@@ -420,7 +420,7 @@ namespace BroadwayBuilder.Api.Controllers
             //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
             var filepath = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
 
-            DirectoryInfo dir = new DirectoryInfo(HostingEnvironment.MapPath(filepath));
+            DirectoryInfo dir = new DirectoryInfo(filepath);
 
             FileInfo[] filepaths = dir.GetFiles();
             Console.WriteLine(filepaths);
