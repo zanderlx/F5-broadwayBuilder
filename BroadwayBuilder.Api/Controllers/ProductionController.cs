@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using ServiceLayer;
 using DataAccessLayer;
@@ -411,12 +413,35 @@ namespace BroadwayBuilder.Api.Controllers
             }
         }
 
-        //[Route("{productionId}/getPhotos")]
-        //[HttpGet]
-        //public IHttpActionResult getPhotos()
-        //{
-        //    //based on the production id that is passed look inside that folder create a list of all filennames then foreach filename adding the https://producionid/photos in that folder create a url
-        //}
+        [Route("{productionId}/getPhotos")]
+        [HttpGet]
+        public IHttpActionResult getPhotos(int productionId)
+        {
+            
+            // Virtual Directory path
+            var filepath = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
+
+            // Grabbing information about the directory at this path. Todo: Look into changing to using Directory rather than DirectoryInfo
+            DirectoryInfo dir = new DirectoryInfo(filepath);
+
+            FileInfo[] filepaths = dir.GetFiles();
+
+            var filenames = new List<string>();
+            // Grab each files name and put it into a list 
+            foreach (FileInfo fileTemp in filepaths)
+            {
+                filenames.Add(fileTemp.Name);
+            }
+
+            var fileUrls = new List<string>();
+            // Give each file name their approriate url in order to get photos
+            foreach (var fi in filenames)
+            {
+                fileUrls.Add("https://api.broadwaybuilder.xyz/Photos/Production" + productionId + "/" + fi);
+            }
+        
+            return Ok(fileUrls);
+        }
 
         [Route("{productionId}/create")]
         [HttpPost]
