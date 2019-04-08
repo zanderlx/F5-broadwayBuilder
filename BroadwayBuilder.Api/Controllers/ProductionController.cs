@@ -422,8 +422,8 @@ namespace BroadwayBuilder.Api.Controllers
 
             DirectoryInfo dir = new DirectoryInfo(filepath);
 
-            FileInfo[] filepaths = dir.GetFiles();
-            Console.WriteLine(filepaths);
+            //FileInfo[] filepaths = dir.GetFiles();
+          var filepaths = Path.GetFileName(filepath);
             return Ok(filepaths);
         }
 
