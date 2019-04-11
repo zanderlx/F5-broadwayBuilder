@@ -359,6 +359,7 @@ namespace BroadwayBuilder.Api.Controllers
             {
                 //get the content, headers, etc the full request of the current http request
                 var httpRequest = HttpContext.Current.Request;
+               
 
                 // Todo: Check if length of httpRequest.Files <= 10 to ensure only 10 photos is uploaded
 
@@ -370,10 +371,11 @@ namespace BroadwayBuilder.Api.Controllers
 
                 var count = 0;
 
-                foreach (string filename in httpRequest.Files)
+                for (int i= 0; i < httpRequest.Files.Count; i++)
                 {
                     // Grab current file of the request
-                    var putFile = httpRequest.Files[filename];
+                    //var putFile = httpRequest.Files[filename];
+                    var putFile = httpRequest.Files[i];
 
                     // Continue if the file has content
                     if (putFile != null && putFile.ContentLength > 0)

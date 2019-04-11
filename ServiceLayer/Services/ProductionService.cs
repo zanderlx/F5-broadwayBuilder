@@ -112,6 +112,9 @@ namespace ServiceLayer.Services
         {
             var filePath = HostingEnvironment.MapPath("~/Photos/Production" + productionId + "/" + count + extension);
 
+            //var filePath = HostingEnvironment.MapPath("~/ProductionPhotos/" + productionId + "-" + count + extension);
+            //postedFile.SaveAs(filePath);
+
             var subdir = HostingEnvironment.MapPath("~/Photos/Production" + productionId);
 
             if (!Directory.Exists(subdir))
