@@ -8,9 +8,7 @@
 
 <script>
 import PicGrid from "@/components/ProductionInfo/PicGrid.vue";
-import AdminPictureWheel from "@/components/ProductionInfo/AdminPictureWheel.vue";
 import axios from "axios";
-import { isDate } from "util";
 
 export default {
   name: "UserProductionInfo",

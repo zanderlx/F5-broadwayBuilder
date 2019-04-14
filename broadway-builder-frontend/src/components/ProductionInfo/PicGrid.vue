@@ -14,7 +14,7 @@
             </div>
             <footer class="card-footer">
               <div class="card-footer-item">
-                <a v-on:click="viewPics(production.ProductionID)">Pictures</a> |
+                <a v-on:click="viewCarousel(production.ProductionID)">Pictures</a> |
                 <a>Program</a>
               </div>
             </footer>
@@ -22,33 +22,38 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <AdminPictureWheel
+    <!-- <AdminPictureWheel
       v-bind:TheaterID="this.TheaterID"
       v-bind:currentProd="currentProd"
       v-if="viewPix === true"
-    />
-    <a
-      v-on:click="goToPictures(TheaterID)"
-      class="button is-danger is-rounded is-medium"
-      v-if="viewPix=== true"
-    >Return</a>
+    />-->
+    <a v-if="viewPix === true" v-on:click="viewPix=false">Back</a>
+    <div class="Carousel" v-if="viewPix === true">
+      <v-carousel>
+        <v-carousel-item
+          v-for="(pic,i) in pics"
+          :key="i"
+          :src="pic"
+          reverse-transition="fade"
+          transition="fade"
+        ></v-carousel-item>
+      </v-carousel>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { isDate } from "util";
-import AdminPictureWheel from "@/components/ProductionInfo/AdminPictureWheel.vue";
+
 export default {
   name: "PicGrid",
-  components: { AdminPictureWheel },
   data() {
     return {
       productions: [],
       theaters: [],
       TheaterID: this.$attrs.TheaterID,
       viewPix: false,
-      currentProd: Number
+      pics: []
     };
   },
   props: {
@@ -62,17 +67,15 @@ export default {
       .then(response => (this.productions = response.data));
   },
   methods: {
-    viewPics(ProductionID) {
-      this.currentProd = ProductionID;
+    viewCarousel(ProductionID) {
+      axios
+        .get(
+          "https://api.broadwaybuilder.xyz/production/" +
+            ProductionID +
+            "/getPhotos"
+        )
+        .then(response => (this.pics = response.data));
       this.viewPix = !this.viewPix;
-    },
-    goToPictures(theater) {
-      this.$router.push({
-        name: "userproductioninfo",
-        params: {
-          TheaterID: theater.TheaterID
-        }
-      });
     }
   }
 };

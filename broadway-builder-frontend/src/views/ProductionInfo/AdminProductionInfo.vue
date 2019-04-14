@@ -8,15 +8,10 @@
 
 <script>
 import AdminPicGrid from "@/components/ProductionInfo/AdminPicGrid.vue";
-import AdminPictureWheel from "@/components/ProductionInfo/AdminPictureWheel.vue";
 import axios from "axios";
 
 export default {
-  name: "AdminProductionInfo",
-  components: {
-    AdminPicGrid,
-    AdminPictureWheel
-  }
+  name: "AdminProductionInfo"
 };
 </script>
 
