@@ -147,7 +147,7 @@ namespace BroadwayBuilder.Api.Controllers
 
         [Route("getProductions")]
         [HttpGet]
-        public IHttpActionResult GetProductions(DateTime? currentDate = null, DateTime? previousDate = null)
+        public IHttpActionResult GetProductions(DateTime? currentDate = null, DateTime? previousDate = null, int? theaterID = null)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace BroadwayBuilder.Api.Controllers
                         if (previousDate != null) {
 
                             // List of past productions
-                            var pastProductions = productionService.GetProductionsByPreviousDate((DateTime)previousDate);
+                            var pastProductions = productionService.GetProductionsByPreviousDate((DateTime)previousDate, theaterID);
 
                             // List to hold production responses
                             var productionResponses = new List<ProductionResponseModel>();
