@@ -22,13 +22,9 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <!-- <AdminPictureWheel
-      v-bind:TheaterID="this.TheaterID"
-      v-bind:currentProd="currentProd"
-      v-if="viewPix === true"
-    />-->
+
     <a v-if="viewPix === true" v-on:click="viewPix=false">Back</a>
-    <div class="Carousel" v-if="viewPix === true">
+    <!-- <div class="Carousel" v-if="viewPix === true">
       <v-carousel>
         <v-carousel-item
           v-for="(pic,i) in pics"
@@ -38,7 +34,8 @@
           transition="fade"
         ></v-carousel-item>
       </v-carousel>
-    </div>
+    </div>-->
+    <v-gallery v-if="viewPix === true" type="carousel" :images="pics"></v-gallery>
   </div>
 </template>
 
