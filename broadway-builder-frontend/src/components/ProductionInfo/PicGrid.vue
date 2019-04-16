@@ -22,23 +22,9 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <!-- <AdminPictureWheel
-      v-bind:TheaterID="this.TheaterID"
-      v-bind:currentProd="currentProd"
-      v-if="viewPix === true"
-    />-->
+
     <a v-if="viewPix === true" v-on:click="viewPix=false">Back</a>
-    <div class="Carousel" v-if="viewPix === true">
-      <v-carousel>
-        <v-carousel-item
-          v-for="(pic,i) in pics"
-          :key="i"
-          :src="pic"
-          reverse-transition="fade"
-          transition="fade"
-        ></v-carousel-item>
-      </v-carousel>
-    </div>
+    <v-gallery v-if="viewPix === true" type="carousel" :images="pics"></v-gallery>
   </div>
 </template>
 
@@ -53,6 +39,7 @@ export default {
       theaters: [],
       TheaterID: this.$attrs.TheaterID,
       viewPix: false,
+      picSrcs: [],
       pics: []
     };
   },
@@ -67,15 +54,19 @@ export default {
       .then(response => (this.productions = response.data));
   },
   methods: {
-    viewCarousel(ProductionID) {
-      axios
+    async viewCarousel(ProductionID) {
+      await axios
         .get(
           "https://api.broadwaybuilder.xyz/production/" +
             ProductionID +
             "/getPhotos"
         )
-        .then(response => (this.pics = response.data));
+        .then(response => (this.picSrcs = response.data));
       this.viewPix = !this.viewPix;
+      var aLength = this.picSrcs.length;
+      for (var i = 0; i < aLength; i++) {
+        this.pics[i] = { title: " ", url: this.picSrcs[i] };
+      }
     }
   }
 };
