@@ -39,12 +39,16 @@ namespace ServiceLayer.Test
 
             // Act
             productionService.CreateProduction(production);
-            var affectedRows = dbcontext.SaveChanges();
+            dbcontext.SaveChanges();
 
-            if (affectedRows > 0) 
+            if (production.ProductionID.HasValue)
                 actual = true;
 
             // Assert
+
+            var dbcontext_ = new BroadwayBuilderContext();
+            var productionService_ = new ProductionService(dbcontext_);
+
             productionService.DeleteProduction(production);
             dbcontext.SaveChanges();
             theaterService.DeleteTheater(theater);
