@@ -12,8 +12,8 @@ namespace BroadwayBuilder.Api.Controllers
     public class UserHelpWantedController : ApiController
     {
         [HttpPost]
-        [Route("helpwanted")]
-        public HttpResponseMessage UploadResume()
+        [Route("helpwanted/upload_resume")]
+        public IHttpActionResult UploadResume()
         {
             // Max file size is 1MB
             int MaxFileSize = 1024 * 1024 * 1;
@@ -41,12 +41,12 @@ namespace BroadwayBuilder.Api.Controllers
                     // File extension is not valid
                     if (!AllowedFileExtensions.Contains(extension))
                     {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid File Type!");
+                        return Content((HttpStatusCode)400, postedFile.FileName);
                     }
                     // File size is too big
                     else if (postedFile.ContentLength > MaxFileSize)
                     {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, "File Size Too Big!");
+                        return Content((HttpStatusCode)400, postedFile.ContentLength);
                     }
                     // Save file in the directory chosen
                     else
@@ -58,12 +58,12 @@ namespace BroadwayBuilder.Api.Controllers
                         // Directory of where the uploaded files will be stored
                         var filePath = HttpContext.Current.Server.MapPath("~/Resumes/" + postedFile.FileName);
                         postedFile.SaveAs(filePath);
-                        return Request.CreateResponse(HttpStatusCode.OK, "File Uploaded!");
+                        return Content((HttpStatusCode) 200, "File Uploaded!");
                     }
                 }
             }
             // File not uploaded to form
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Please upload a file!");
+            return Content((HttpStatusCode)200, "Please upload a file!");
         }
     }
 }

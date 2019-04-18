@@ -1,32 +1,35 @@
 <template>
   <div class="JobFilter">
     <div class="card">
-      <strong><u>Filters</u></strong>
+      <strong>
+        <u>Filters</u>
+      </strong>
 
       <!-- Filter For Job Types -->
       <div>
-        <h4><strong>Type</strong></h4>
+        <h4>
+          <strong>Type</strong>
+        </h4>
         <span v-for="(job, i) in jobTypes" :key="i">
-          <input type="checkbox" :value="job.jobType" v-model="selectedJobTypes">
-            {{job.jobType}} <br>
+          <input type="checkbox" :value="job.jobType" v-model="filters" @change="applyFilter">
+          {{job.jobType}}
+          <br>
         </span>
         <hr>
-        <span v-if="selectedJobTypes.length > 0">Selected Job Types: {{ selectedJobTypes }}</span>
       </div>
 
       <!-- Filter For Roles -->
       <div>
-        <h4><strong>Roles</strong></h4>
+        <h4>
+          <strong>Roles</strong>
+        </h4>
         <span v-for="(role, i) in roles" :key="i">
-          <input type="checkbox" :value="role.title" v-model="selectedRoles">
-            {{ role.title }} <br>
+          <input type="checkbox" :value="role.title" v-model="filters" @change="applyFilter">
+          {{ role.title }}
+          <br>
         </span>
         <hr>
-        <span v-if="selectedRoles.length > 0">
-          Selected Role Types: {{ selectedRoles }}
-        </span>
       </div>
-
     </div>
   </div>
 </template>
@@ -34,16 +37,16 @@
 <script>
 export default {
   name: "JobFilter",
+  props: ["jobPostings"],
   data() {
     return {
       jobTypes: [
         { jobType: "Full Time" },
         { jobType: "Part Time" },
-        { jobType: "Seasonal"}
+        { jobType: "Seasonal" }
       ],
-      selectedJobTypes: [],
       roles: [
-        { title: "Actors" },
+        { title: "Actor" },
         { title: "Stagehands" },
         { title: "Backstage" },
         { title: "Stage Manager" },
@@ -54,8 +57,13 @@ export default {
         { title: "Usher" },
         { title: "Dresser" }
       ],
-      selectedRoles: []
+      filters: []
     };
+  },
+  methods: {
+    applyFilter() {
+      this.$emit("filtered", this.filters);
+    }
   }
 };
 </script>

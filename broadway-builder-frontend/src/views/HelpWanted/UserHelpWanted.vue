@@ -5,11 +5,11 @@
     </h1>
     <div class="columns">
       <div class="column is-2 is-narrow">
-        <ResumeUpload/>
-        <JobFilter/>
+        <!-- <ResumeUpload/> -->
+        <JobFilter :jobPostings="jobs" @filtered="filterJobPostings"/>
       </div>
       <div class="column is-10">
-        <DisplayJobPostings :jobPostings="jobs" :hasPermission="false"/>
+        <DisplayJobPostings :jobPostings="jobs" :hasPermission="false" :filters="filters"/>
       </div>
     </div>
   </div>
@@ -31,14 +31,18 @@ export default {
   props: ["hasPermission"],
   data() {
     return {
-      jobs: []
+      jobs: [],
+      filters: []
     };
   },
   methods: {
+    filterJobPostings(JobFilters) {
+      this.filters = JobFilters;
+    },
     async getAllJobPostings() {
       // Obtain all jobs from the database
       await axios
-        .get("http://api.broadwaybuilder.xyz/helpwanted/1")
+        .get("https://api.broadwaybuilder.xyz/helpwanted/1")
         .then(response => (this.jobs = response.data));
 
       for (var i = 0; i < this.jobs.length; i++) {
@@ -46,6 +50,8 @@ export default {
         this.$set(this.jobs[i], "show", false);
         this.$set(this.jobs[i], "edit", false);
       }
+
+      this.jobs.reverse();
     }
   },
   async mounted() {

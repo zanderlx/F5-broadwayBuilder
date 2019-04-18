@@ -2,12 +2,6 @@
   <div id="app">
     <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item">
-          <router-link to="/">
-            <img src="@/assets/download.png">
-          </router-link>
-        </a>
-        
         <a
           role="button"
           class="navbar-burger burger"
@@ -28,9 +22,8 @@
 
         <div class="navbar-end">
           <router-link to="/" class="navbar-item">Home</router-link>
-          <router-link to="/theaterprofile/{theaterid}" class="navbar-item">Theatres</router-link>
+          <router-link to="/theaters" class="navbar-item">Theatres</router-link>
           <router-link to="/adminaccount/{userID}" class="navbar-item">Account</router-link>
-          <router-link to="/contactus" class="navbar-item">Contact Us</router-link>
           <div class="navbar-item">
             <div class="buttons">
               <a class="button is-light">Login / Register</a>

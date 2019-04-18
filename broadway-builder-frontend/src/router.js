@@ -12,8 +12,14 @@ export default new Router({
       component: Home
     },
     {
-      path: "/theaterprofile/{theaterid}",
-      name: "theaterprofile",
+      path: "/theaters",
+      name: "theaters",
+      component: () => import("./views/ViewAllTheaters.vue")
+    },
+    {
+      path: "/theater/:TheaterName",
+      name: "theater",
+      props: true,
       component: () => import("./views/TheaterProfile.vue")
     },
     {
@@ -22,9 +28,9 @@ export default new Router({
       component: () => import("./views/AdminAccount.vue")
     },
     {
-      path: "/contactus",
-      name: "contactus",
-      component: () => import("./views/ContactUs.vue")
+      path: "/sysadminaccount/{userID}",
+      name: "sysadminaccount",
+      component: () => import("./views/SysAdminAccount.vue")
     },
     {
       path: "/theater/{theaterid}/helpwanted",
@@ -37,8 +43,9 @@ export default new Router({
       component: () => import("./views/HelpWanted/UserHelpWanted.vue")
     },
     {
-      path: "/theater/{theaterid}/userproductioninfo",
+      path: "/theater/:TheaterID/userproductioninfo",
       name: "userproductioninfo",
+      props: true,
       component: () => import("./views/ProductionInfo/UserProductionInfo.vue")
     },
     {

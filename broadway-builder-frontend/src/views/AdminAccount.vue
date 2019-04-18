@@ -8,6 +8,22 @@
             <p style="padding-top: 15px" class="menu-label">Administration</p>
             <ul class="menu-list">
               <li>
+                <a v-on:click="editTheaterComp">Edit Profile</a>
+                <a>Manage Theater Productions</a>
+                <ul>
+                  <li>
+                    <a v-on:click="createProductionForTheater">Create Production</a>
+                  </li>
+                  <li>
+                    <a>Display Productions</a>
+                  </li>
+                  <li>
+                    <a>Edit Production</a>
+                  </li>
+                  <li>
+                    <a>Delete Production</a>
+                  </li>
+                </ul>
                 <a>Manage Users</a>
                 <ul>
                   <li>
@@ -184,56 +200,8 @@
                 </footer>
               </div>
             </div>
-            <div class="column is-6">
-              <div class="field">
-                <label class="label">Company Name</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Theater Name</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Phone Number</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="###-###-####">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">Street</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">State</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label">Country</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Previous Info">
-                </div>
-              </div>
-
-              <div class="field is-grouped">
-                <div class="control">
-                  <button class="button is-link">Submit</button>
-                </div>
-                <div class="control">
-                  <button class="button is-text">Cancel</button>
-                </div>
-              </div>
-            </div>
+            <EditTheater v-if="editTheater === true" v-bind:theater="theater"/>
+            <CreateProduction v-if="createProduction === true" v-bind:theater="theater"/>
           </div>
         </div>
       </div>
@@ -243,13 +211,38 @@
 </template>
 
 <script>
+import EditTheater from "@/components/Admin/EditTheater.vue";
+import CreateProduction from "@/components/Admin/CreateProduction.vue";
 export default {
   name: "AdminAccount",
+  components: {
+    EditTheater,
+    CreateProduction
+  },
   data() {
-    return {};
+    return {
+      editTheater: false,
+      createProduction: false,
+      theater: {
+        TheaterName: "Theater",
+        CompanyName: "Company",
+        StreetAddress: "123 Testfield Way",
+        City: "Long Beach",
+        State: "CA",
+        Country: "USA",
+        PhoneNumber: "5555555555"
+      }
+    };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    editTheaterComp() {
+      this.editTheater = !this.editTheater;
+    },
+    createProductionForTheater() {
+      this.createProduction = !this.createProduction;
+    }
+  }
 };
 </script>
 
@@ -266,4 +259,7 @@ export default {
     -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1)
     color: #4a4a4a
+
+a:hover
+  font-weight: bold
 </style>

@@ -1,36 +1,74 @@
 <template>
+  <div class="PicGrid">
+    <v-container v-if="viewPix === false" fluid grid-list-md>
+      <v-layout row wrap>
+        <v-flex v-for="(production, index) in productions" :key="index">
+          <div v-show="production.TheaterID == TheaterID" class="card">
+            <div class="card-image">
+              <figure class="image isrounded is-3by2">
+                <img class="isrounded" src="@/assets/download.png" alt>
+              </figure>
+              <div class="card-content is-overlay is-clipped">
+                <span class="tag is-info">{{production.ProductionName}}</span>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-item">
+                <a v-on:click="viewCarousel(production.ProductionID)">Pictures</a> |
+                <a>Program</a>
+              </div>
+            </footer>
+          </div>
+        </v-flex>
+      </v-layout>
+    </v-container>
 
-<div class = "PicGrid">
-<div class="columns is-multiline">
-  <div class="column is-one-quarter-desktop is-half-tablet">
-    <div class="card">
-        <div class="card-image">
-            <figure class="image isrounded is-3by2">
-              <img class= "isrounded" src="@/assets/download.png" alt="">
-              
-            </figure>
-            <div class="card-content is-overlay is-clipped">
-              <span class="tag is-info">
-                INSERT TITLE OF SHOW HERE
-              </span>       
-            </div>
-        </div>
-        <footer class="card-footer">
-            <div class="card-footer-item">
-              <a>Pictures</a> | <a>Program</a>
-            </div>
-        </footer>
-    </div>
+    <a v-if="viewPix === true" v-on:click="viewPix=false">Back</a>
+    <v-gallery v-if="viewPix === true" type="carousel" :images="pics"></v-gallery>
   </div>
-  
-  
-</div>
-</div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "PicGrid"
+  name: "PicGrid",
+  data() {
+    return {
+      productions: [],
+      theaters: [],
+      TheaterID: this.$attrs.TheaterID,
+      viewPix: false,
+      picSrcs: [],
+      pics: []
+    };
+  },
+  props: {
+    today: Date
+  },
+  async mounted() {
+    await axios
+      .get(
+        "https://api.broadwaybuilder.xyz/production/getProductions?previousDate=3%2F23%2F2019"
+      )
+      .then(response => (this.productions = response.data));
+  },
+  methods: {
+    async viewCarousel(ProductionID) {
+      await axios
+        .get(
+          "https://api.broadwaybuilder.xyz/production/" +
+            ProductionID +
+            "/getPhotos"
+        )
+        .then(response => (this.picSrcs = response.data));
+      this.viewPix = !this.viewPix;
+      var aLength = this.picSrcs.length;
+      for (var i = 0; i < aLength; i++) {
+        this.pics[i] = { title: " ", url: this.picSrcs[i] };
+      }
+    }
+  }
 };
 </script>
 
@@ -47,4 +85,5 @@ export default {
     color: black
 a
   color: black
+  margin: 1em
 </style>
